@@ -7,7 +7,7 @@ const MeetBrowTech = () => {
     <>
       <div className="w-full bg-[#fdf6ea] py-20">
         <div className="w-full mx-auto md:w-10/12">
-          <div className="grid grid-cols-2 items-center gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div>
               <Image
                 src="/images/female-hair-stylist.png"

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+@import "swiper/css/effect-coverflow";
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,10 +23,33 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+}
+
+.swiper-slide {
+  opacity: 0.6;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  background-color: #ddd !important;
+  opacity: 0.6;
+  width: 10px;
+  height: 10px;
+  margin: 5rem 6px 0 6px;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #f9a825 !important; /* e.g., golden */
+  opacity: 1;
+  transform: scale(1.3);
 }

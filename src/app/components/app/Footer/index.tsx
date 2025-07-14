@@ -13,6 +13,8 @@ const Footer: FC = () => {
         backgroundPosition: "center top",
         width: "100%",
         minHeight: "300px",
+        backgroundBlendMode: 'color',
+        backgroundColor: 'rgba(141, 123, 104, 0.4)'
     }
     return (
         <>

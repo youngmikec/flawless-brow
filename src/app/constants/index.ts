@@ -43,3 +43,62 @@ export const FooterLinks: {
         { path: "/linkedin", title: "Linkedin" },
     ]
 }
+
+export const Testimonials = [
+    {
+        name: "KYLE MERWIN",
+        role: "Co-owner",
+        image: "/images/male.png",
+        message:
+        "Aut nihil mollitia deserunt quia sed rem. Quibusdam enim veniam rerum id rerum beatae. Quae rerum iste necessitatibus...",
+    },
+    {
+        name: "LENA WILSON",
+        role: "Client",
+        image: "/images/female.png",
+        message:
+        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+    },
+    {
+        name: "TOMMY SANDERS",
+        role: "Client",
+        image: "/images/male.png",
+        message:
+        "Exercitationem delectus ut accusamus. Consequatur repellendus nulla error iste? Inventore reiciendis commodi ea velit nihil.",
+    },
+    {
+        name: "LENA WILSON",
+        role: "Client",
+        image: "/images/female.png",
+        message:
+        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+    },
+    {
+        name: "KYLE MERWIN",
+        role: "Co-owner",
+        image: "/images/male.png",
+        message:
+        "Aut nihil mollitia deserunt quia sed rem. Quibusdam enim veniam rerum id rerum beatae. Quae rerum iste necessitatibus...",
+    },
+    {
+        name: "LENA WILSON",
+        role: "Client",
+        image: "/images/female.png",
+        message:
+        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+    },
+    {
+        name: "TOMMY SANDERS",
+        role: "Client",
+        image: "/images/male.png",
+        message:
+        "Exercitationem delectus ut accusamus. Consequatur repellendus nulla error iste? Inventore reiciendis commodi ea velit nihil.",
+    },
+    {
+        name: "LENA WILSON",
+        role: "Client",
+        image: "/images/female.png",
+        message:
+        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+    },
+];
