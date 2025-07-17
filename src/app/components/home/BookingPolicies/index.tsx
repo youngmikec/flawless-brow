@@ -46,9 +46,9 @@ const BookingPolicies = () => {
       <div className="w-11/12 md:w-10/12 mx-auto py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* Left: Text */}
         <div className="text-white max-w-lg">
-          <h4 className="text-sm font-semibold uppercase tracking-wide">Booking Policies</h4>
+          <h4 className="text-sm font-semibold uppercase tracking-wide font-montserrat">Booking Policies</h4>
           <h2 className="text-4xl sm:text-5xl font-extrabold mt-2 leading-tight">A Few Things to Know</h2>
-          <p className="mt-6 text-gray-200 leading-relaxed">
+          <p className="mt-6 text-gray-200 leading-relaxed font-inter">
             Lorem ipsum dolor sit amet consectetur. Urna convallis malesuada et. Semper eget sed amet malesuada.
             Massa nunc leo tincidunt curabitur.
           </p>

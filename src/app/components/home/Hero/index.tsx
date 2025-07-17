@@ -21,29 +21,32 @@ const Hero: FC = () => {
 
     return (
         <div
-            className="h-[60vh] w-full bg-center bg-cover transition-all ease-linear duration-3000 font-montserrat"
-            style={{ backgroundImage: `url(${HeroBackgroundImages[currentIndex]})` }}
+            className="h-[65vh] w-full bg-center bg-cover transition-all ease-linear duration-3000 font-montserrat"
+            style={{ 
+                backgroundImage: `url(${HeroBackgroundImages[currentIndex]})`,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover'
+            }}
         >
             <div className="bg-black bg-opacity-50 h-full flex items-center justify-center relative">
                 <div className="w-full md:w-4/12 h-max absolute bottom-[5rem] md:bottom-[7rem] lg:bottom-[10rem] left-10">
-                    {
-                        currentIndex === 0 ? 
-                        <p className="text-white text-2xl md:text-2xl lg:text-4xl font-montserrat mb-4">
-                            Feel the Power <br /> of Stories at <span className="border-b-[2px] border-primary">Home</span>
-                        </p> :
-                        currentIndex === 1 ?
-                        <p className="text-white text-2xl md:text-2xl lg:text-4xl font-montserrat mb-4">
-                            Meeting and <br /> Collaboration <span className="border-b-[2px] border-primary">Space</span>
-                        </p> :
-                        <p className="text-white text-2xl md:text-2xl lg:text-4xl font-montserrat mb-4">
-                            Elevate Your <span className="border-b-[2px] border-primary">Home</span><br /> with The Best 
-                        </p>
-                    }
+                    <p className="text-3xl md:text-7xl text-black font-extrabold font-source-sans">
+                        Fearfully <span className="font-style-script font-normal">made,</span>
+                    </p>
+                    <p className="text-3xl md:text-7xl text-black font-extrabold font-source-sans mb-4">
+                        Beautifully <span className="font-style-script font-normal">browed.</span>
+                    </p>
+                    <p className="text-lg sm:text-xl text-[#52525B] font-inter mb-8 w-11/12">
+                        One line clarifying the service or promise. Example: 
+                        “Specializing in precision microblading & 
+                        permanent makeup that enhances your natural beauty.”
+                    </p>
                     
                     
 
                     <AppButton
-                        btnText={'Get a Quote'}
+                        btnText={'Book Now'}
                         fill={'fill'}
                         bgColor={'primary'}
                         width={"max"}

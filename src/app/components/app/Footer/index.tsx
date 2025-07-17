@@ -10,11 +10,11 @@ const Footer: FC = () => {
         background: "Url(/images/Column.png)",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center top",
+        backgroundPosition: "center",
         width: "100%",
         minHeight: "300px",
         backgroundBlendMode: 'color',
-        backgroundColor: 'rgba(141, 123, 104, 0.4)'
+        backgroundColor: 'rgba(0, 0, 0, 0.4)'
     }
     return (
         <>
@@ -22,9 +22,9 @@ const Footer: FC = () => {
                 className="bg-black-gray text-white py-20 px-12 md:px-20"
                 style={style}
             >
-                <p className="text-white text-lg font-semibold my-12 text-center">Let's Connect</p>
+                <p className="text-white text-lg font-semibold my-12 text-center font-montserrat">Let's Connect</p>
                 <div className="flex justify-center">
-                    <p className="text-white text-4xl font-semibold my-12 text-center w-5/12">Find us, follow us, stay connected.</p>
+                    <p className="text-white text-6xl my-12 text-center w-5/12 font-style-script">Find us, follow us, stay <br /> connected.</p>
                 </div>
 
                 <div className="flex justify-center items-center gap-8 my-10">
@@ -33,8 +33,8 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/email-white.svg"
                                 alt="email"
-                                width={50}
-                                height={50}
+                                width={103}
+                                height={103}
                             />
                         </Link>
                     </div>
@@ -43,8 +43,8 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/instagram-white.svg"
                                 alt="instagram"
-                                width={50}
-                                height={50}
+                                width={103}
+                                height={103}
                             />
                         </Link>
                     </div>

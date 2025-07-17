@@ -44,18 +44,18 @@ const AppButton: FC<Props> = ({
             fill === 'fill' && 
             ` 
               ${bgColor === 'blue' && `bg-textBlue text-white hover:bg-white hover:text-textBlue border-textBlue border-[1px]`}
-              ${bgColor === 'primary' && `bg-primary text-white hover:bg-white hover:text-primary border-primary border-[1px]`}
+              ${bgColor === 'primary' && `bg-[#C5A46D] text-white hover:bg-white hover:text-[#C5A46D] border-[#C5A46D] border-[1px]`}
               ${bgColor === 'gray' && `bg-lightGray text-darkGray hover:bg-darkGray hover:text-lightGray border-lighterGray border-[1px]`}
             `
           }
           ${ fill === 'outline' && 
             ` bg-transparent 
-              ${bgColor === 'primary' && `border-primary text-primary border-[1px] hover:bg-primary hover:text-[white]`} 
+              ${bgColor === 'primary' && `border-[#C5A46D] text-[#C5A46D] border-[1px] hover:bg-[#C5A46D] hover:text-[white]`} 
               ${bgColor === 'blue' && `border-textBlue text-textBlue border-[1px] hover:bg-textBlue hover:text-[white]`} 
               ${bgColor === 'gray' && `border-darkGray text-darkGray border-[1px] hover:bg-lightGray hover:text-darkGray`} 
             `
           } 
-          flex justify-center items-center py-4 px-10 rounded-[50px] font-montserrat
+          flex justify-center items-center py-4 px-10 rounded-[8px] font-montserrat
         `
       }
       onClick={handleOnClick}

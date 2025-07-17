@@ -26,6 +26,13 @@ const config: Config = {
         accent: '#10b981',
         danger: '#ef4444',
       },
+      fontFamily: {
+        "montserrat": ["Montserrat", "sans-serif"],
+        "inter": ["Inter", "sans-serif"],
+        "style-script": ["Style-Script", "sans-serif"],
+        "source-sans": ["Source-Sans", "sans-serif"],
+        "source-serif": ["Source-Serif", "sans-serif"],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

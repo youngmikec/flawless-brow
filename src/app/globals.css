@@ -21,20 +21,112 @@
   }
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Inter Font */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Style-Script";
+  src: url("/fonts/Inter/Inter-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Style_Script font */
+@font-face {
+  font-family: "Style-Script";
+  src: url("/fonts/Style_Script/StyleScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Source Sans font */
+@font-face {
+  font-family: "Source-Sans";
+  src: url("/fonts/Source_Sans/SourceSans3-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Source Serif font */
+@font-face {
+  font-family: "Source-Sans";
+  src: url("/fonts/Source_Serif/SourceSerif4_18pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source-Sans";
+  src: url("/fonts/Source_Serif/SourceSerif4_18pt-ExtraBold.ttf")
+    format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: "Inter", "Montserrat", "Style-Script", "Source-Sans",
+    "Source-Serif" sans-serif;
 }
 
 .swiper-slide {
   opacity: 0.6;
   transform: scale(0.95);
   transition: all 0.3s ease;
+  padding: 3rem 0 3rem 0;
 }
 
 .swiper-slide.swiper-slide-active {
   opacity: 1 !important;
   transform: scale(1.05) !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); */
   z-index: 10;
 }
 
