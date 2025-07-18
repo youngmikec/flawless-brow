@@ -34,7 +34,7 @@ const Faq: FC = () => {
 
             <div className="bg-[#f9f1e7] rounded-lg p-4 text-sm">
               <p className="font-semibold text-[#525252] mb-8 font-inter">Can I get my brows wet after my appointment?</p>
-              <p className="text-[#525252]font-inter">
+              <p className="text-[#525252] font-inter">
                 Avoid getting your brows wet for at least 24 hours after treatments like brow lamination, tinting, or henna. This helps the product set properly and ensures longer lasting results.
               </p>
             </div>
