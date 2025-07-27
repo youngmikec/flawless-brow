@@ -73,7 +73,7 @@ const Navbar: FC = () => {
                     </div>
 
                     <div className="flex justify-start items-center -ml-10 min-w-[4/12]">
-                        <Link className="navbar-brand flex items-center rounded-full border-2 border-primary" href="/">
+                        <Link className="navbar-brand flex items-center" href="/">
                             <Image 
                                 src={'/images/logo.png'}
                                 width={70}
