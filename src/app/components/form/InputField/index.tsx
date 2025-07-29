@@ -94,7 +94,7 @@ const InputField: FC<Props> = ({
             </label>
           </div>
         }
-        <div className={`${isError ? 'border-[#DD584F]' : 'border-lighterGray'} ${showBorder ? 'border-[1px]' : 'border-0'} rounded-[5px] bg-white`}>
+        <div className={`${isError ? 'border-[#DD584F]' : 'border-lighterGray'} ${showBorder ? 'border-[1px]' : 'border-0'} rounded-[10px] bg-white`}>
           {
             (label && labelPosition === 'in') && 
             <div className={`w-full ${!isChild && 'px-4 pt-2'}`}>
@@ -119,7 +119,7 @@ const InputField: FC<Props> = ({
                 onClick={() => selectOptions.length > 0 && setShowOptions(prev => !prev)}
                 onChange={(e) => handleChange(e.target.value, name)} 
                 // className={`w-full border-0 bg-transparent focus:outline-none focus:ring-0 focus:border-0 px-4 ${labelPosition === 'out' ? 'py-3' : 'pt-1 pb-2'} lato-regular flex-1`}
-                className={`w-full border-0 bg-inputGray focus:outline-none focus:ring-0 focus:border-0 ${isChild ? 'px-0': 'px-4'} ${labelPosition === 'out' ? 'py-2' : 'pt-2 pb-2'} lato-regular flex-1`}
+                className={`w-full border-0 bg-inputGray rounded-[10px] focus:outline-none focus:ring-0 focus:border-0 ${isChild ? 'px-0': 'px-4'} ${labelPosition === 'out' ? 'py-2' : 'pt-2 pb-2'} lato-regular flex-1`}
               />
             </div>
             

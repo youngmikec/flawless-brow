@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.525.0",
     "mongodb": "^6.18.0",
@@ -20,6 +23,7 @@
     "swiper": "^11.2.10"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/react": "^18",

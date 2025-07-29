@@ -31,13 +31,13 @@ const Hero: FC = () => {
         >
             <div className="bg-black bg-opacity-50 h-full flex items-center justify-center relative">
                 <div className="w-full md:w-4/12 h-max absolute bottom-[5rem] md:bottom-[7rem] lg:bottom-[10rem] left-10">
-                    <p className="text-3xl md:text-7xl text-black font-extrabold font-source-sans">
+                    <p className="text-2xl md:text-4xl text-black font-extrabold font-source-sans">
                         Fearfully <span className="font-style-script font-normal">made,</span>
                     </p>
-                    <p className="text-3xl md:text-7xl text-black font-extrabold font-source-sans mb-4">
+                    <p className="text-2xl md:text-4xl text-black font-extrabold font-source-sans mb-4">
                         Beautifully <span className="font-style-script font-normal">browed.</span>
                     </p>
-                    <p className="text-lg sm:text-xl text-[#52525B] font-inter mb-8 w-11/12">
+                    <p className="text-sm sm:text-lg text-[#52525B] font-inter mb-8 w-11/12">
                         One line clarifying the service or promise. Example: 
                         “Specializing in precision microblading & 
                         permanent makeup that enhances your natural beauty.”

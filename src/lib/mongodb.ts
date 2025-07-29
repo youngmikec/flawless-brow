@@ -1,36 +1,9 @@
-// import { MongoClient } from "mongodb";
-
-// const uri = process.env.MONGODB_URI!;
-// const options = {};
-
-// let client: MongoClient;
-// let clientPromise: Promise<MongoClient>;
-
-// if (!process.env.MONGODB_URI) {
-//   throw new Error("Please add your Mongo URI to .env.local");
-// }
-
-// if (process.env.NODE_ENV === "development") {
-//   // Use a global variable during dev to avoid many connections
-//   if (!(global as any)._mongoClientPromise) {
-//     client = new MongoClient(uri, options);
-//     (global as any)._mongoClientPromise = client.connect();
-//   }
-//   clientPromise = (global as any)._mongoClientPromise;
-// } else {
-//   client = new MongoClient(uri, options);
-//   clientPromise = client.connect();
-// }
-
-// export default clientPromise;
-
-// lib/mongoose.ts
-
 import mongoose from "mongoose";
 const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_DB_NAME = process.env.DB_NAME;
 
 if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable in .env.local");
+  throw new Error("Connection Error");
 }
 
 /**
@@ -38,29 +11,38 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API route usage.
  */
-let cached = (global as any).mongoose;
+// let cached = (global as any).mongoose;
 
-if (!cached) {
-  cached = (global as any).mongoose = { conn: null, promise: null };
-}
+// if (!cached) {
+//   cached = (global as any).mongoose = { conn: null, promise: null };
+// }
+
+let isConnected = false;
 
 async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
-  }
+  if (isConnected) return;
 
-  if (!cached.promise) {
+  const uri = process.env.MONGODB_URI as string;
+
+  if (!uri) throw new Error('MongoDB URI not defined in env');
+
+  try {
     const opts = {
       bufferCommands: false,
+      dbName: MONGODB_DB_NAME,
+      serverSelectionTimeoutMS: 5000, // shorter timeout
+      ssl: true,
+      tlsAllowInvalidCertificates: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
+    const db = await mongoose.connect(uri, opts);
+    isConnected = db.connections[0].readyState === 1;
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
 }
 
 export default dbConnect;

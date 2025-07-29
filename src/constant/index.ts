@@ -1,0 +1,13 @@
+
+export const JWT = {
+    saltRounds: 3,
+    jwtSecret: "flawless_brow_app",
+    tokenExpireTime: "1h",
+    adminTokenExpirationTime: '3h',
+    frontendAuth: "flawless_brow_frontend_auth",
+};
+
+export const USER_TYPE = {
+    ADMIN: "admin",
+    USER: "user",
+}

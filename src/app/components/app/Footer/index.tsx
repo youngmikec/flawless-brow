@@ -22,7 +22,7 @@ const Footer: FC = () => {
                 className="bg-black-gray text-white py-20 px-12 md:px-20"
                 style={style}
             >
-                <p className="text-white text-lg font-semibold my-12 text-center font-montserrat">Let's Connect</p>
+                <p className="text-white text-lg font-semibold my-12 text-center font-montserrat">Let&lsquo;s Connect</p>
                 <div className="flex justify-center">
                     <p className="text-white text-6xl my-12 text-center w-5/12 font-style-script">Find us, follow us, stay <br /> connected.</p>
                 </div>
@@ -33,8 +33,8 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/email-white.svg"
                                 alt="email"
-                                width={103}
-                                height={103}
+                                width={80}
+                                height={80}
                             />
                         </Link>
                     </div>
@@ -43,8 +43,8 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/instagram-white.svg"
                                 alt="instagram"
-                                width={103}
-                                height={103}
+                                width={80}
+                                height={80}
                             />
                         </Link>
                     </div>

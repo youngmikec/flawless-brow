@@ -13,6 +13,11 @@ const config: Config = {
         primary: '#5A4A3F',
         secondary: '#8D7B68',
         warning: '#F48804',
+        textBlue: {
+          DEFAULT: '#4763E4',
+          light: '#5C73DB',
+          dark: '#1E3A8A',
+        },
         black: {
           DEFAULT: '#18181B',
           gray: '#070400'

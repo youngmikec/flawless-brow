@@ -8,67 +8,34 @@ import { FC } from "react";
 
 const Navbar: FC = () => {
     // const { toggleSideMenu } = useStore();
+    const links: { name: string; href: string }[] = [
+        { name: "Home", href: "/" },
+        { name: "About", href: "#about" },
+        { name: "Services", href: "#services" },
+        { name: "Gallery", href: "#gallery" },
+        { name: "Polices", href: "#policies" },
+        { name: "Contact", href: "#contact" }
+    ];
     return (
         <>
             {/* fixed top-0 z-20 */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-4 px-10  w-full bg-white">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 px-10  w-full bg-white">
                 <div className="flex justify-between items-center gap-4">
                     <div className="hidden sm:block lg:block">
                         <ul className="flex justify-between gap-5">
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"/"}
-                                >
-                                    Home
-                                </Link>
-                            </li>
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"#about"}
-                                >
-                                    About
-                                </Link>
-                            </li>
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"#services"}
-                                >
-                                    Services
-                                </Link>
-                            </li>
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"#gallery"}
-                                >
-                                    Gallery
-                                </Link>
-                            </li>
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"#policies"}
-                                >
-                                    Polices
-                                </Link>
-                            </li>
-                            <li className="">
-                                <Link 
-                                    className="text-sm md:text-lg font-montserrat text-primary font-semibold active" 
-                                    aria-current="page" 
-                                    href={"#contact"}
-                                >
-                                    Contact
-                                </Link>
-                            </li>
+                            {
+                                links.map((link) => (
+                                    <li key={link.name}>
+                                        <Link 
+                                            className="text-xs md:text-[14px] font-montserrat text-primary font-semibold active" 
+                                            aria-current="page" 
+                                            href={link.href}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
 
@@ -76,8 +43,8 @@ const Navbar: FC = () => {
                         <Link className="navbar-brand flex items-center" href="/">
                             <Image 
                                 src={'/images/logo.png'}
-                                width={70}
-                                height={70}
+                                width={60}
+                                height={60}
                                 alt={'logo'}
                             />
                         </Link>
@@ -90,8 +57,8 @@ const Navbar: FC = () => {
                                     <Image 
                                         src="/svgs/email-primary.svg"
                                         alt="email"
-                                        width={30}
-                                        height={30}
+                                        width={25}
+                                        height={25}
                                     />
                                 </Link>
                             </div>
@@ -100,8 +67,8 @@ const Navbar: FC = () => {
                                     <Image 
                                         src="/svgs/instagram-primary.svg"
                                         alt="instagram"
-                                        width={30}
-                                        height={30}
+                                        width={25}
+                                        height={25}
                                     />
                                 </Link>
                             </div>

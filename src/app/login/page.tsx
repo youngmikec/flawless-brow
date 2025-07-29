@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     // e.preventDefault();
-
+    setIsLoading(true);
     const res = await fetch('http://localhost:3000/api/auth', {
       method: 'POST',
       headers: {
@@ -34,6 +34,8 @@ const LoginPage = () => {
       ),
     });
 
+    setIsLoading(false);
+    console.log('res', res);
     const data = await res.json();
 
     if (res.ok) {
@@ -47,16 +49,16 @@ const LoginPage = () => {
   return (
     <>
       <div className="w-full h-screen bg-[#fff9ef] flex justify-center items-center">
-        <div className="w-full md:w-5/12 min-h-[60vh] flex flex-col gap-4">
-          <div className="flex items-center">
+        <div className="w-full md:w-5/12 min-h-[60vh] flex flex-col gap-6">
+          <div className="flex justify-center items-center">
             <Image 
               src="/images/logo.png"
               alt="logo"
-              width={100}
-              height={100}
+              width={80}
+              height={80}
             />
           </div>
-          <p className="text-center text-black text-2xl">Login Details</p>
+          <p className="text-center text-black text-lg md:text-xl">Login Details</p>
 
           <div>
             <form>
@@ -85,7 +87,7 @@ const LoginPage = () => {
                 />
               </div>
               
-              <div className="flex justify-center text-black">
+              <div className="flex justify-center text-black my-4">
                 <Link href="/forgot-password">Forgot Password?</Link>
               </div>
 
