@@ -34,7 +34,7 @@ export const ValidateUpdateUserProfile = Joi.object({
 
 const UserSchema = new Schema<IUser>({
   email: { type: String, unique: true },
-  password: { type: String, select: false },
+  password: { type: String, select: true },
   role: { type: String, required: true },
   bio: { type: String, default: '' },
   firstName: { type: String, default: '' },

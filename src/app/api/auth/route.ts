@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       return FailureResponse(401, 'User not found');
     }
 
-    if (admin.password !== body.password) {
+    if (admin.password !== password) {
       return FailureResponse(401, 'Invalid credentials');
     }
 

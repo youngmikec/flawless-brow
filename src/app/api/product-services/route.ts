@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   try {
     await dbConnect(); // Connect to MongoDB
 
-    const isAuthenticated = IsValidAdmin(req);
+    const { isAuthenticated } = IsValidAdmin(req);
     if (!isAuthenticated) {
       return FailureResponse(403, 'Unauthorized');
     }
@@ -40,7 +40,11 @@ export async function POST(req: Request) {
     }
 
     if(body.serviceImage && typeof body.serviceImage === 'string') {
-      body.serviceImage = await UploadImageService(body.serviceImage);
+      const { secure_url } = await UploadImageService(body.serviceImage);
+      if (!secure_url) {
+        return FailureResponse(400, 'Image upload failed');
+      }
+      body.serviceImage = secure_url;
     }
 
     

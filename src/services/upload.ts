@@ -15,8 +15,8 @@ export const UploadImageService = async (imagePath: string) => {
         // Upload the image
         const result = await cloudinary.uploader.upload(imagePath, options);
         return result;
-    } catch (error) {
-        throw new Error(`${entity} Error! Try uploading another image`);
+    } catch (error: any) {
+        throw new Error(`${entity} Error! Try uploading another image ${error.message}`);
     }
 
 }

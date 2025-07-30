@@ -27,6 +27,15 @@ export const IsAuthenticated = (req: Request): { isAuthenticated: boolean, data:
     return { isAuthenticated, data: decodedToken };
 }
 
+function isTokenValid(token: string, secret: string): boolean {
+  try {
+    jwt.verify(token, secret); // throws error if expired or invalid
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
 export const IsValidAdmin = (req: Request): { isAuthenticated: boolean, data: any } => {
     const authHeader: any = req.headers.get('Authorization');
     let isAuthenticated: boolean = true;
@@ -37,6 +46,10 @@ export const IsValidAdmin = (req: Request): { isAuthenticated: boolean, data: an
 
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
+        isAuthenticated = false;
+    }
+
+    if(!isTokenValid(token, JWT.jwtSecret)) {
         isAuthenticated = false;
     }
 
