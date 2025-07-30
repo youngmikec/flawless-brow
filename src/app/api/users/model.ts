@@ -8,6 +8,9 @@ export interface IUser extends Document {
   role: string;
   bio?: string;
   firstName: string;
+  age?: number;
+  gender?: string;
+  address?: string;
   lastName: string;
   fullName: string;
   profileImage?: string;
@@ -17,6 +20,20 @@ export interface IUser extends Document {
   createdBy?: mongoose.Types.ObjectId;
   updatedBy?: mongoose.Types.ObjectId;
 }
+
+export const ValidateCreateCustomerProfile = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).optional(),
+  role: Joi.string().valid('admin', 'user').required(),
+  fullName: Joi.string().optional(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  phone: Joi.string().required(),
+  address: Joi.string().required(),
+  gender: Joi.string().valid('male', 'female', 'other').required(),
+  updatedBy: Joi.string().optional(),
+  updatedAt: Joi.date().optional(),
+});
 
 export const ValidateUpdateUserProfile = Joi.object({
   email: Joi.string().email().optional(),
@@ -41,6 +58,9 @@ const UserSchema = new Schema<IUser>({
   lastName: { type: String, default: '' },
   fullName: { type: String, default: '' },
   profileImage: { type: String, default: '' },
+  age: { type: Number, default: 0 },
+  address: { type: String, default: '' },
+  gender: { type: String, default: '' },
   phone: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now(), select: true },
   updatedAt: { type: Date, default: Date.now(), select: true },
