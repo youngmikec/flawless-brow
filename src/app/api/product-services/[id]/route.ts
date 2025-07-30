@@ -1,8 +1,9 @@
 // app/api/auth/route.ts
 import dbConnect from '@/lib/mongodb';
-import BankAccount, { ValidateUpdateBankAccount } from '../model';
-import { FailureResponse, response, SuccessResponse } from '@/utils/api-response';
+import ProductService, { ValidateUpdateProductService } from '../model';
+import { FailureResponse, SuccessResponse } from '@/utils/api-response';
 import { IsAuthenticated, IsValidAdmin } from '@/utils';
+import { UploadImageService } from '@/services';
 
 
 export async function PUT(
@@ -18,22 +19,26 @@ export async function PUT(
     }
 
     const body = await req.json();
-    const error = ValidateUpdateBankAccount.validate(body);
+    const error = ValidateUpdateProductService.validate(body);
 
     if(error.error) {
         return FailureResponse(400, error.error.details[0].message);
     }
 
+    if(body.serviceImage && typeof body.serviceImage === 'string') {
+        body.serviceImage = await UploadImageService(body.serviceImage);
+    }
+
     body.updatedBy = data.id; // Set the updatedBy field to the admin's ID;
     body.updatedAt = new Date(); // Set the updatedAt field to the current date
 
-    const result = await BankAccount.findByIdAndUpdate(params.id, {...body}, { new: true }).exec();
+    const result = await ProductService.findByIdAndUpdate(params.id, {...body}, { new: true }).exec();
 
     if (!result) {
-        return FailureResponse(500, 'Failed to create bank account');
+        return FailureResponse(500, 'Failed to update service');
     }
 
-    return response(201, 'Bank account updated successfully', result);
+    return SuccessResponse(result, 'Service updated successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);
   }
@@ -53,12 +58,12 @@ export async function DELETE(
 
     const { id } = params;
 
-    const result = await BankAccount.deleteOne({ id }).exec();
+    const result = await ProductService.deleteOne({ id }).exec();
 
     if (!result) {
-        return FailureResponse(500, 'Failed to delete bank account');
+        return FailureResponse(500, 'Failed to delete service');
     }
-    return SuccessResponse(result, 'Bank account deleted successfully');
+    return SuccessResponse(result, 'Service deleted successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);
   }

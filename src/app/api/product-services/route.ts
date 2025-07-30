@@ -1,9 +1,9 @@
 // app/api/auth/route.ts
 import dbConnect from '@/lib/mongodb';
-import BankAccount from './model';
-import { ValidateCreateBankAccount } from './model';
-import { FailureResponse, response } from '@/utils/api-response';
+import ProductService, { ValidateCreateProductService } from './model';
+import { FailureResponse, response, SuccessResponse } from '@/utils/api-response';
 import { IsValidAdmin } from '@/utils';
+import { UploadImageService } from '@/services';
 
 export async function GET(req: Request) {
   try {
@@ -14,10 +14,10 @@ export async function GET(req: Request) {
       return FailureResponse(403, 'Unauthorized');
     }
 
-    const bankAccounts = await BankAccount.find()
+    const services = await ProductService.find()
                                 // .populate('user', 'createdBy')
                                 .exec(); // Populate user field with email
-    return response(200, 'Bank accounts retrieved successfully', bankAccounts);
+    return SuccessResponse(services, 'Services retrieved successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);
   }
@@ -33,15 +33,21 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const error = ValidateCreateBankAccount.validate(body);
+    const error = ValidateCreateProductService.validate(body);
 
     if(error.error) {
         return FailureResponse(400, error.error.details[0].message);
     }
 
+    if(body.serviceImage && typeof body.serviceImage === 'string') {
+      body.serviceImage = await UploadImageService(body.serviceImage);
+    }
+
+    
+
     body.createdBy = data.id; // Set the createdBy field to the admin's ID;
-    const newBankAccount = new BankAccount(body);
-    const result = await newBankAccount.save();
+    const newRecord = new ProductService(body);
+    const result = await newRecord.save();
 
     if (!result) {
         return FailureResponse(500, 'Failed to create bank account');
