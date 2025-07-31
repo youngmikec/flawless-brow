@@ -4,6 +4,8 @@ import { useState, FC } from "react";
 import { FaBars } from "react-icons/fa";
 import Sidebar from "./components/SideBar";
 import Breadcrumb from "./components/Breadcrumb";
+import Link from "next/link";
+import Image from "next/image";
 
 export interface AdminLayoutProps {
   children: React.ReactNode;
@@ -24,8 +26,23 @@ const Topbar: FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
           currentPage="Dashboard"
         />
       </div>
-      <div className="text-xl">
-        <span className="material-icons">notifications</span>
+      <div className="flex justify-between items-center gap-20 min-w-[6/12]">
+        <div>
+          <Link 
+            href="/admin/schedule"
+            className="text-[#B3261E] text-sm font-inter"
+          >
+            Edit available date
+          </Link>
+        </div>
+        <div>
+            <Image
+              src="/svgs/notification-bell.svg"
+              alt="logo"
+              width={15}
+              height={15}
+            />
+        </div>
       </div>
     </header>
   );

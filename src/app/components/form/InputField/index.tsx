@@ -34,6 +34,7 @@ const InputField: FC<Props> = ({
   label,
   name,
   // bgColor = 'white',
+
   placeholder,
   rightIcon,
   leftIcon,
@@ -88,17 +89,20 @@ const InputField: FC<Props> = ({
       <div className={`w-full relative ${!isChild && 'my-2'}`}>
         {
           (label && labelPosition === 'out') && 
-          <div className="w-full">
-            <label htmlFor={name} className={`block w-full lato-regular font-semibold text-sm ${labelAlign === 'left' ? 'text-left' : 'text-right'}`}>
+          <div className="w-full mb-2">
+            <label 
+              htmlFor={name} 
+              className={`block w-full font-montserrat text-[#263238] font-[500] text-sm ${labelAlign === 'left' ? 'text-left' : 'text-right'}`}
+            >
               {label}
             </label>
           </div>
         }
-        <div className={`${isError ? 'border-[#DD584F]' : 'border-lighterGray'} ${showBorder ? 'border-[1px]' : 'border-0'} rounded-[10px] bg-white`}>
+        <div className={`${isError ? 'border-[#DD584F]' : 'border-lighterGray'} ${showBorder ? 'border-[1px]' : 'border-0'} rounded-[9px] bg-white`}>
           {
             (label && labelPosition === 'in') && 
             <div className={`w-full ${!isChild && 'px-4 pt-2'}`}>
-              <label htmlFor={name} className="block w-full lato-regular font-semibold text-sm">
+              <label htmlFor={name} className="block w-full font-montserrat text-[#263238] font-[500] text-sm">
                 {label}
               </label>
             </div>
@@ -119,7 +123,7 @@ const InputField: FC<Props> = ({
                 onClick={() => selectOptions.length > 0 && setShowOptions(prev => !prev)}
                 onChange={(e) => handleChange(e.target.value, name)} 
                 // className={`w-full border-0 bg-transparent focus:outline-none focus:ring-0 focus:border-0 px-4 ${labelPosition === 'out' ? 'py-3' : 'pt-1 pb-2'} lato-regular flex-1`}
-                className={`w-full border-0 bg-inputGray rounded-[10px] focus:outline-none focus:ring-0 focus:border-0 ${isChild ? 'px-0': 'px-4'} ${labelPosition === 'out' ? 'py-2' : 'pt-2 pb-2'} lato-regular flex-1`}
+                className={`w-full border-0 bg-inputGray rounded-[9px] font-montserrat placeholder:text-[#9FA6B2] focus:outline-none focus:ring-0 focus:border-0 ${isChild ? 'px-0': 'px-4'} ${labelPosition === 'out' ? 'py-2' : 'pt-2 pb-2'} lato-regular flex-1`}
               />
             </div>
             

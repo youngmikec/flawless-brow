@@ -12,7 +12,7 @@ type Props = {
   label?: string;
   bgColor?: string;
   border?: 'border' | 'no-border';
-  labelPosition?: 'right' | 'left'
+  labelPosition?: 'right' | 'left';
   textPosition?: 'right' | 'left'
   name: string;
   isLoading?: boolean;

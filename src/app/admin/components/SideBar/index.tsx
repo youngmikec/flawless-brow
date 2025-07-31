@@ -9,8 +9,15 @@ import {
   MdPayment,
   MdSettings,
 } from "react-icons/md";
+import { TbSettings } from "react-icons/tb";
+import { FiFolder } from "react-icons/fi";
+import { FiFileText } from "react-icons/fi";
+import { GoDeviceDesktop } from "react-icons/go";
+import { PiShieldCheckBold } from "react-icons/pi";
+
+
+
 import NavItem from "../NavItem";
-import path from "path";
 
 
 export interface SidebarProps {
@@ -20,12 +27,12 @@ export interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, toggle }) => {
   const navItems = [
-    { icon: <MdDashboard />, label: "Overview", path: "/admin" },
-    { icon: <MdCalendarToday />, label: "Appointments", path: "/admin/appointments" },
-    { icon: <MdPeople />, label: "Clients", path: "/admin/clients" },
-    { icon: <MdMiscellaneousServices />, label: "Services", path: "/admin/services" },
-    { icon: <MdPayment />, label: "Payments", path: "/admin/payments" },
-    { icon: <MdSettings />, label: "Settings", path: "/admin/settings" },
+    { icon: <TbSettings />, label: "Overview", path: "/admin" },
+    { icon: <FiFolder />, label: "Appointments", path: "/admin/appointments" },
+    { icon: <FiFileText />, label: "Clients", path: "/admin/clients" },
+    { icon: <GoDeviceDesktop />, label: "Services", path: "/admin/services" },
+    { icon: <PiShieldCheckBold />, label: "Payments", path: "/admin/payments" },
+    { icon: <PiShieldCheckBold />, label: "Settings", path: "/admin/settings" },
   ];
 
   
