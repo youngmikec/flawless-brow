@@ -1,6 +1,6 @@
 
 export const JWT = {
-    saltRounds: 3,
+    saltRounds: 10,
     jwtSecret: "flawless_brow_app",
     tokenExpireTime: "1h",
     adminTokenExpirationTime: '3h',

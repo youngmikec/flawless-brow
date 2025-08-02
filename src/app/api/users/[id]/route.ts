@@ -1,7 +1,7 @@
-import { FailureResponse, response, IsValidAdmin, SuccessResponse } from "@/utils";
 import dbConnect from '@/lib/mongodb';
+import { FailureResponse, response, IsValidAdmin, SuccessResponse } from "@/utils";
 import User, { ValidateUpdateUserProfile } from "../model";
-
+import { hash } from '@/utils/helpers';
 
 export async function PUT(
     req: Request,
@@ -21,6 +21,10 @@ export async function PUT(
     if(error.error) {
         return FailureResponse(400, error.error.details[0].message);
     }
+
+    console.log('body =>', body.password);
+
+    if (body.password) body.password = hash(body.password);
 
     body.updatedBy = data.id; // Set the updatedBy field to the admin's ID;
     body.updatedAt = new Date(); // Set the updatedAt field to the current date

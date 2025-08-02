@@ -1,8 +1,7 @@
-// app/api/auth/route.ts
 import { NextResponse } from 'next/server';
 import jwt from "jsonwebtoken";
-import bycriptjs from "bcryptjs";
 import dbConnect from '@/lib/mongodb';
+import bcryptjs from "bcryptjs";
 import User from '../users/model';
 import { FailureResponse, SuccessResponse } from '@/utils';
 import { JWT, USER_TYPE } from '@/constant';
@@ -25,13 +24,15 @@ export async function POST(req: Request) {
       return FailureResponse(401, 'User not found');
     }
 
-    if (admin.password !== password) {
-      return FailureResponse(401, 'Invalid credentials');
-    }
-
-    // if(bycriptjs.compareSync(password, admin.password) !== true) {
+    // if (admin.password !== password) {
     //   return FailureResponse(401, 'Invalid credentials');
     // }
+
+    const isValid = bcryptjs.compareSync(password, admin.password);
+
+    if(!isValid) {
+      return FailureResponse(401, 'Invalid credentials');
+    }
 
     // check if the last login ip address is the same as the current login ip address
     // if the same then login or refresh token
