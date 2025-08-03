@@ -1,6 +1,5 @@
 "use client";
 
-// import { useStore } from "@/app/Store";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";

@@ -2,13 +2,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Testimonials } from "@/app/constants";
-import Image from "next/image";
+import { Testimonials } from "../../../constants";
 
 
 const TestimonialSlider = () => {

@@ -1,6 +1,6 @@
 'use client'
 import { FC } from "react";
-import { HeroBackgroundImages } from "@/app/constants";
+import { HeroBackgroundImages } from "../../../constants";
 
 import { useEffect, useState } from 'react'
 import AppButton from "../../app/AppButton";

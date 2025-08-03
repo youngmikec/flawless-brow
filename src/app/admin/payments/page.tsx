@@ -1,8 +1,8 @@
 "use client";
 
-import AppButton from "@/app/components/app/AppButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import AppButton from "../../components/app/AppButton";
 
 const BankPropertyItem = ({ label, value }: { label: string; value: string }) => (
     <div className="flex justify-between items-center mb-3">

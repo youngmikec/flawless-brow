@@ -1,9 +1,9 @@
 "use client";
 
 // components/ServiceCard.tsx
-import AppButton from "@/app/components/app/AppButton";
-import Image from "next/image";
 import { FC } from "react";
+import Image from "next/image";
+import AppButton from "../../../app/AppButton";
 
 interface ServiceCardProps {
   title: string;

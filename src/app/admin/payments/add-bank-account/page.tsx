@@ -1,8 +1,8 @@
 "use client";
 
-import AppButton from "@/app/components/app/AppButton";
-import InputField from "@/app/components/form/InputField";
-import SelectField from "@/app/components/form/SelectField";
+import AppButton from "../../../components/app/AppButton";
+import InputField from "../../../components/form/InputField";
+// import SelectField from "../../../components/form/SelectField";
 
 
 const AddBankAccountPage = () => {
