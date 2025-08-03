@@ -1,9 +1,9 @@
 // app/api/auth/route.ts
-import dbConnect from '@/lib/mongodb';
+import dbConnect from '../../../lib/mongodb';
 import Appointment, { AppointStatusEnum, ValidateCreateAppointment } from './model';
-import { FailureResponse, response, SuccessResponse } from '@/utils/api-response';
-import { IsValidAdmin, getSearchParams } from '@/utils';
-import { UploadImageService } from '@/services';
+import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
+import { IsValidAdmin, getSearchParams } from '../../../utils';
+import { UploadImageService } from '../../../services';
 import ProductService from '../product-services/model';
 
 

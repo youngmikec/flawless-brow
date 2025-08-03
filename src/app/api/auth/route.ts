@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import jwt from "jsonwebtoken";
-import dbConnect from '@/lib/mongodb';
+import dbConnect from '../../../lib/mongodb';
 import bcryptjs from "bcryptjs";
 import User from '../users/model';
-import { FailureResponse, SuccessResponse } from '@/utils';
-import { JWT, USER_TYPE } from '@/constant';
+import { FailureResponse, SuccessResponse } from '../../../utils';
+import { JWT, USER_TYPE } from '../../../constant';
 
 export async function GET(req: Request) {
   return NextResponse.json({ message: 'Auth GET route' });

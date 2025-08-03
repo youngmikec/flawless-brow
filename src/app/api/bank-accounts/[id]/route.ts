@@ -1,8 +1,8 @@
 // app/api/auth/route.ts
-import dbConnect from '@/lib/mongodb';
+import dbConnect from '../../../../lib/mongodb';
 import BankAccount, { ValidateUpdateBankAccount } from '../model';
-import { FailureResponse, response, SuccessResponse } from '@/utils/api-response';
-import { IsAuthenticated, IsValidAdmin } from '@/utils';
+import { FailureResponse, response, SuccessResponse } from '../../../../utils/api-response';
+import { IsAuthenticated, IsValidAdmin } from '../../../../utils';
 
 
 export async function PUT(

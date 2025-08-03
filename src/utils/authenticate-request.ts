@@ -1,4 +1,4 @@
-import { JWT, USER_TYPE } from '@/constant';
+import { JWT, USER_TYPE } from '../constant';
 import jwt from 'jsonwebtoken';
 
 export const IsAuthenticated = (req: Request): { isAuthenticated: boolean, data: any } => {

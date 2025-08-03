@@ -1,7 +1,7 @@
-import dbConnect from '@/lib/mongodb';
-import { FailureResponse, response, IsValidAdmin, SuccessResponse } from "@/utils";
+import dbConnect from '../../../../lib/mongodb';
+import { FailureResponse, response, IsValidAdmin, SuccessResponse } from "../../../../utils";
 import User, { ValidateUpdateUserProfile } from "../model";
-import { hash } from '@/utils/helpers';
+import { hash } from '../../../../utils/helpers';
 
 export async function PUT(
     req: Request,

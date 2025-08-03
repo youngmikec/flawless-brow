@@ -1,6 +1,6 @@
-import { FailureResponse, IsValidAdmin, SuccessResponse } from "@/utils";
-import dbConnect from '@/lib/mongodb';
-import { hash, getSearchParams } from '@/utils/helpers';
+import { FailureResponse, IsValidAdmin, SuccessResponse } from "../../../utils";
+import dbConnect from '../../../lib/mongodb';
+import { hash, getSearchParams } from '../../../utils/helpers';
 import User, { ValidateCreateCustomerProfile } from "./model";
 
 export const GET = async (req: Request) => {

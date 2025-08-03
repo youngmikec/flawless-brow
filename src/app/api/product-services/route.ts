@@ -1,9 +1,9 @@
 // app/api/auth/route.ts
-import dbConnect from '@/lib/mongodb';
+import dbConnect from '../../../lib/mongodb';
 import ProductService, { ValidateCreateProductService } from './model';
-import { FailureResponse, response, SuccessResponse } from '@/utils/api-response';
-import { IsValidAdmin } from '@/utils';
-import { UploadImageService } from '@/services';
+import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
+import { IsValidAdmin } from '../../../utils';
+import { UploadImageService } from '../../../services';
 
 export async function GET(req: Request) {
   try {

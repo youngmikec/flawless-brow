@@ -1,9 +1,9 @@
 // app/api/auth/route.ts
-import dbConnect from '@/lib/mongodb';
+import dbConnect from '../../../lib/mongodb';
 import BankAccount from './model';
 import { ValidateCreateBankAccount } from './model';
-import { FailureResponse, response } from '@/utils/api-response';
-import { IsValidAdmin } from '@/utils';
+import { FailureResponse, response } from '../../../utils/api-response';
+import { IsValidAdmin } from '../../../utils';
 
 export async function GET(req: Request) {
   try {
