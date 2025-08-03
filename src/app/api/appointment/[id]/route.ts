@@ -1,6 +1,5 @@
 // app/api/auth/route.ts
 import dbConnect from '../../../../lib/mongodb';
-import mongoose from 'mongoose';
 import OrderAppointment, { ValidateUpdateAppointment } from '../model';
 import { FailureResponse, SuccessResponse } from '../../../../utils/api-response';
 import { IsAuthenticated, IsValidAdmin } from '../../../../utils';
@@ -33,9 +32,7 @@ export async function PUT(
     body.updatedBy = data.id; // Set the updatedBy field to the admin's ID;
     body.updatedAt = new Date(); // Set the updatedAt field to the current date
 
-    // const result = await OrderAppointment.findOneAndUpdate({_id: params.id}, {...body}, { new: true });
-
-    const result = {};
+    const result = await OrderAppointment.findOneAndUpdate({  _id: params.id}, {...body}, { new: true });
 
     if (!result) {
         return FailureResponse(500, 'Failed to update service');
@@ -61,8 +58,7 @@ export async function DELETE(
 
     const { id } = params;
 
-    // const result = await OrderAppointment.deleteOne({ _id: id });
-    const result = await OrderAppointment.deleteOne({ _id: new mongoose.Types.ObjectId(id) });
+    const result = await OrderAppointment.deleteOne({ _id: id });
 
     if (!result) {
         return FailureResponse(500, 'Failed to delete service');
