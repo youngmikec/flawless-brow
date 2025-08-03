@@ -42,7 +42,7 @@ export async function GET(req: Request) {
     
     const services = await Appointment.find({ ...paramsObject })
                                 // .populate('user', 'createdBy')
-                                .exec(); // Populate user field with email
+                                ; // Populate user field with email
     return SuccessResponse(services, 'Services retrieved successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
     const { productService, amountPaid } = body;
 
-    const serviceRes = await ProductService.findOne({ _id: productService }).exec();
+    const serviceRes = await ProductService.findOne({ _id: productService });
 
     if(!serviceRes) {
         return FailureResponse(400, "Service not found!");

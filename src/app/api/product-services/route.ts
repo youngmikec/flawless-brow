@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
     const services = await ProductService.find()
                                 // .populate('user', 'createdBy')
-                                .exec(); // Populate user field with email
+                                ; // Populate user field with email
     return SuccessResponse(services, 'Services retrieved successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);

@@ -14,7 +14,7 @@ export const GET = async (req: Request) => {
 
         const paramsObject = getSearchParams(req);
 
-        const resutl = await User.find({ ...paramsObject }).exec(); // Populate user field with email
+        const resutl = await User.find({ ...paramsObject }); // Populate user field with email
         return SuccessResponse(resutl, 'Users retrieved successfully');
 
     } catch (error: any) {
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     }
 
     //Check for duplicate user email
-    const existingUser = await User.findOne({ email: body.email }).exec();
+    const existingUser = await User.findOne({ email: body.email });
     if (existingUser) {
         return FailureResponse(400, 'User with this email already exists');
     }

@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const { password } = body;
 
     const email = body.email.trim().toLowerCase();
-    const admin = await User.findOne({ email }).exec();
+    const admin = await User.findOne({ email });
 
     //Logic to check for when the user is an admin.
     if(!admin) {

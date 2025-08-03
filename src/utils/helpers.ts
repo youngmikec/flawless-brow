@@ -236,10 +236,10 @@ export function generateCode(len = 10) {
 
 export async function generateModelCode(Model: any) {
   let code = generateCode(10);
-  let duplicate = await Model.findOne({ code }).exec();
+  let duplicate = await Model.findOne({ code });
   if (duplicate) {
     code = generateCode(10);
-    duplicate = await Model.findOne({ code }).exec();
+    duplicate = await Model.findOne({ code });
     if (duplicate) {
       throw new Error(`${Model} record code ${code} exists.`);
     }

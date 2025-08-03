@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
     const bankAccounts = await BankAccount.find()
                                 // .populate('user', 'createdBy')
-                                .exec(); // Populate user field with email
+                                ; // Populate user field with email
     return response(200, 'Bank accounts retrieved successfully', bankAccounts);
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);
