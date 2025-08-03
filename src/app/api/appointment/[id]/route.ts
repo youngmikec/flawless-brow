@@ -32,7 +32,12 @@ export async function PUT(
     body.updatedBy = data.id; // Set the updatedBy field to the admin's ID;
     body.updatedAt = new Date(); // Set the updatedAt field to the current date
 
-    const result = await Appointment.findByIdAndUpdate(params.id, {...body}, { new: true }).exec();
+    // const result = await Appointment.findByIdAndUpdate(params.id, {...body}, { new: true }).exec();
+    const result = await Appointment.findByIdAndUpdate(
+      params.id,
+      { ...body, updatedAt: new Date() },
+      { new: true }
+    );
 
     if (!result) {
         return FailureResponse(500, 'Failed to update service');
