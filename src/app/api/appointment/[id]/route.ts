@@ -1,6 +1,6 @@
 // app/api/auth/route.ts
 import dbConnect from '../../../../lib/mongodb';
-import Appointment, { ValidateUpdateAppointment } from '../model';
+import OrderAppointment, { ValidateUpdateAppointment } from '../model';
 import { FailureResponse, SuccessResponse } from '../../../../utils/api-response';
 import { IsAuthenticated, IsValidAdmin } from '../../../../utils';
 import { UploadImageService } from '../../../../services';
@@ -33,7 +33,7 @@ export async function PUT(
     body.updatedAt = new Date(); // Set the updatedAt field to the current date
 
     // const result = await Appointment.findByIdAndUpdate(params.id, {...body}, { new: true }).exec();
-    const result = await Appointment.findByIdAndUpdate(
+    const result = await OrderAppointment.findByIdAndUpdate(
       params.id,
       { ...body, updatedAt: new Date() },
       { new: true }
@@ -63,7 +63,7 @@ export async function DELETE(
 
     const { id } = params;
 
-    const result = await Appointment.deleteOne({ id }).exec();
+    const result = await OrderAppointment.deleteOne({ id }).exec();
 
     if (!result) {
         return FailureResponse(500, 'Failed to delete service');
