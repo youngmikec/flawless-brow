@@ -14,6 +14,7 @@ export interface IProductService extends Document {
     duration: string;
     currencySymbol: string;
     serviceImage: string;
+    isFree: boolean;
     addOnServices: IAddOnService[];
     createdAt?: Date;
     updatedAt?: Date;
@@ -27,6 +28,7 @@ export const ValidateCreateProductService = Joi.object({
     price: Joi.string().required(),
     duration: Joi.string().required(),
     currencySymbol: Joi.string().required(),
+    isFree: Joi.bool().optional(),
     serviceImage: Joi.string().uri().optional(),
     addOnServices: Joi.array().items(
         Joi.object({
@@ -44,6 +46,7 @@ export const ValidateUpdateProductService = Joi.object({
     duration: Joi.string().required(),
     currencySymbol: Joi.string().required(),
     serviceImage: Joi.string().uri().optional(),
+    isFree: Joi.bool().optional(),
     addOnServices: Joi.array().items(
         Joi.object({
             title: Joi.string().required(),
@@ -59,6 +62,7 @@ const ProductServiceSchema = new Schema<IProductService>({
     price: { type: String, required: true },
     duration: { type: String, required: true },
     currencySymbol: { type: String, required: true },
+    isFree: { type: Boolean, default: false, select: true, required: true},
     serviceImage: { type: String, required: true },
     addOnServices: [{
         title: { type: String, required: true },

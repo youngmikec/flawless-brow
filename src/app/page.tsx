@@ -6,12 +6,14 @@ import Faq from './components/home/faq';
 import BookingPolicies from './components/home/BookingPolicies';
 import Gallery from './components/home/Gallery';
 import TestimonialSlider from './components/home/TestimonialSlider';
+import FreeService from './components/home/FreeService';
 
 export default function Home() {
   return (
     <HomeLayout>
       <Hero />
       <MeetBrowTech />
+      <FreeService />
       <MyServicesComp />
       <BookingPolicies />
       <Gallery />

@@ -1,26 +1,18 @@
 import { FailureResponse, IsValidAdmin, SuccessResponse } from "@/utils";
 import dbConnect from '@/lib/mongodb';
-import { hash } from '@/utils/helpers';
+import { hash, getSearchParams } from '@/utils/helpers';
 import User, { ValidateCreateCustomerProfile } from "./model";
 
 export const GET = async (req: Request) => {
     try {
         await dbConnect(); // Connect to MongoDB
 
-        const { isAuthenticated, data } = IsValidAdmin(req);
+        const { isAuthenticated } = IsValidAdmin(req);
         if (!isAuthenticated) {
             return FailureResponse(403, 'Unauthorized');
         }
 
-         const url = new URL(req.url);
-        const searchParams: any = url.searchParams;
-
-        const paramsObject: Record<string, string> = {};
-
-        // Convert searchParams to object
-        for (const [key, value] of searchParams.entries()) {
-            paramsObject[key] = value;
-        }
+        const paramsObject = getSearchParams(req);
 
         const resutl = await User.find({ ...paramsObject }).exec(); // Populate user field with email
         return SuccessResponse(resutl, 'Users retrieved successfully');

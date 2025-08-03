@@ -160,6 +160,20 @@ export function cleanDeepObject(obj: any) {
   return obj;
 }
 
+export const getSearchParams = (req: Request): Record<string, string> => {
+  const url = new URL(req.url);
+  const searchParams: any = url.searchParams;
+
+  const paramsObject: Record<string, string> = {};
+
+  // Convert searchParams to object
+  for (const [key, value] of searchParams.entries()) {
+      paramsObject[key] = value;
+  }
+  
+  return paramsObject;
+} 
+
 /**
  * @description a function that removes duplicates from an array of objects
  * @param {Array} arrayOfObj an array of objects with duplicate value for
