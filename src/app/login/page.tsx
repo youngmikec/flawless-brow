@@ -9,14 +9,16 @@ import { useRouter } from 'next/navigation';
 
 import { setItem } from '../helpers';
 import { LoginService } from '../providers';
-import { ApiResponse } from '../interfaces';
+import { ApiResponse } from '../../interfaces';
 import AppButton from "../components/app/AppButton";
 import InputField from "../components/form/InputField";
+import { useUser } from '../../store/user';
 
 
 
 const LoginPage = () => {
   const router = useRouter();
+  const userStore = useUser();
 
     const validateForm = () => Yup.object({
         email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -34,12 +36,12 @@ const LoginPage = () => {
           setSubmitting(true);
           LoginService(payload)
           .then((res: AxiosResponse<ApiResponse>) => {
-            console.log('res =>', res);
               const { success, message, data } = res.data;
               if(success){
                   setSubmitting(false);
                   setItem('clientToken', data.token);
                   setItem('clientD', data.user);
+                  userStore.setLoggedInUser(data.user);
                   router.push('/admin');
               }
           })

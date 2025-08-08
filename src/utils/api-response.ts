@@ -5,7 +5,7 @@ export const response = (status: number = 200, message: string, data?: any) => {
         status,
         message,
         data: data || null,
-        success: status === 200 ? true : false
+        success: (status >= 200 && status < 300) ? true : false
     }, { status });
 }
 

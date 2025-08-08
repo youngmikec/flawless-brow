@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ServiceCard from "./ServiceCard";
+import { useProductService } from "../../../hooks";
+import { IService } from "../../../../interfaces";
 
 const services = [
   {
@@ -55,6 +57,16 @@ const services = [
 
 const MyServicesComp = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [productServices, setProductServices] = useState<IService[]>([]);
+
+  const { data } = useProductService();
+
+  console.log('services =>', data);
+
+  useEffect(() => {
+      setProductServices(data || []);
+  }, [data]);
+
   return (
     <section className="w-full px-4 py-12 text-center bg-white">
       <div className="w-full mx-auto md:w-11/12">
@@ -73,31 +85,39 @@ const MyServicesComp = () => {
         </div> */}
 
         <div className="mt-10">
-        <Swiper
-          // modules={[Pagination, Navigation]}
-          modules={[Pagination]}
-          spaceBetween={30}
-          slidesPerView={4}
-          // centeredSlides
-          loop={true}
-          pagination={{ clickable: true }}
-          className="mt-10"
-          breakpoints={{
-            768: {
-              slidesPerView: 2.3,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-          }}
-          onSlideChange={(slide) => setActiveIndex(slide.realIndex)}
-        >
-          {services.map((service, index) => (
-            <SwiperSlide key={index}>
-              <ServiceCard key={index} title={service.title} price={service.price} description={service.description} imageUrl={service.imageUrl} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          {
+            productServices.length > 0 && (
+              <Swiper
+                // modules={[Pagination, Navigation]}
+                modules={[Pagination]}
+                spaceBetween={30}
+                slidesPerView={4}
+                // centeredSlides
+                loop={true}
+                pagination={{ clickable: true }}
+                className="mt-10"
+                breakpoints={{
+                  768: {
+                    slidesPerView: 2.3,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                  },
+                }}
+                onSlideChange={(slide) => setActiveIndex(slide.realIndex)}
+              >
+                {productServices.map((service: IService, index: number) => (
+                  <SwiperSlide key={index}>
+                    <ServiceCard 
+                      key={index} 
+                      service={service}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )
+          }
+        
       </div>
       </div>
     </section>

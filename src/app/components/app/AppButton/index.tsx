@@ -1,6 +1,6 @@
 "use client";
 import { FC } from "react";
-// import LoadSpinner from "../Loaders/LoadSpinner";
+import LoadSpinner from "../Loaders/LoadSpinner";
 
 type Props = {
   width?: 'full' | 'max' ;
@@ -9,6 +9,7 @@ type Props = {
   bgColor: 'primary' | 'gray' | 'blue';
   textColor?: string;
   disabled?: boolean;
+  btnSize?: 'sm' | 'md' | 'lg';
   fill?: 'fill' | 'outline'
   iconPosition?: 'left' | 'right',
   onClick?: () => void,
@@ -21,6 +22,7 @@ const AppButton: FC<Props> = ({
   loading = false,
   btnText, 
   btnIcon, 
+  btnSize = 'md',
   bgColor = 'primary', 
   fill = 'fill', 
   iconPosition, 
@@ -39,7 +41,7 @@ const AppButton: FC<Props> = ({
       disabled={disabled}
       className={
         `
-          ${width === 'full' ? 'w-full' : 'min-w-[100px] max-w-fit'} min-h-[35px] max-h-[45px] text-sm lato-regular delay-200 ease-in ${ disabled ? 'cursor-not-allowed' : 'cursor-pointer' }
+          ${width === 'full' ? 'w-full' : 'max-w-fit'} ${btnSize === 'sm' ? 'min-h-[28px] max-h-[32px]' : 'min-h-[35px] max-h-[45px]'} text-sm lato-regular delay-200 ease-in ${ disabled ? 'cursor-not-allowed' : 'cursor-pointer' }
           ${
             fill === 'fill' && 
             ` 
@@ -54,8 +56,11 @@ const AppButton: FC<Props> = ({
               ${bgColor === 'blue' && `border-textBlue text-textBlue border-[1px] hover:bg-textBlue hover:text-[white]`} 
               ${bgColor === 'gray' && `border-darkGray text-darkGray border-[1px] hover:bg-lightGray hover:text-darkGray`} 
             `
-          } 
-          flex justify-center items-center py-4 px-10 rounded-[8px] font-montserrat
+          }
+          ${btnSize === 'sm' && 'py-2 px-4'}
+          ${btnSize === 'md' && 'py-4 px-10'}
+          ${btnSize === 'lg' && 'py-6 px-16'}
+          flex justify-center items-center rounded-[8px] font-montserrat
         `
       }
       onClick={handleOnClick}
@@ -68,12 +73,12 @@ const AppButton: FC<Props> = ({
       (
         <div className="flex justify-center items-center gap-4">
             <div>
-                {/* <LoadSpinner /> */}
+                <LoadSpinner />
             </div>
-            <p>loading...</p>
+            {/* <p className={`text-[14px] font-montserrat ${btnSize === 'sm' && 'text-xs'}`}>loading...</p> */}
         </div>
       )
-      : <p className="text-[14px] font-montserrat">{btnText}</p> }
+      : <p className={`text-[14px] font-montserrat ${btnSize === 'sm' && 'text-xs'}`}>{btnText}</p> }
       { 
         (iconPosition === 'right' && btnIcon) && 
         <div className="mx-2">{ btnIcon }</div>

@@ -1,14 +1,6 @@
 "use client";
 import { FC } from "react";
 import Image from "next/image";
-import {
-  MdDashboard,
-  MdCalendarToday,
-  MdPeople,
-  MdMiscellaneousServices,
-  MdPayment,
-  MdSettings,
-} from "react-icons/md";
 import { TbSettings } from "react-icons/tb";
 import { FiFolder } from "react-icons/fi";
 import { FiFileText } from "react-icons/fi";
@@ -18,6 +10,7 @@ import { PiShieldCheckBold } from "react-icons/pi";
 
 
 import NavItem from "../NavItem";
+import AppAvatar from "../../../components/app/AppAvatar";
 
 
 export interface SidebarProps {
@@ -72,18 +65,10 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, toggle }) => {
             />
         ))}
       </nav>
-      <div className="absolute bottom-6 left-4 p-4 flex items-center space-x-2">
-        <Image
-          src="/images/male.png"
-          alt="User"
-          width={40}
-          height={40}
-          className="rounded-full"
+      <div className="absolute bottom-6 left-4 p-4">
+        <AppAvatar 
+          userProfile={undefined}
         />
-        <div>
-          <p className="text-sm font-medium">John Doe</p>
-          <p className="text-xs">abcdef@gmail.com</p>
-        </div>
       </div>
     </aside>
   );

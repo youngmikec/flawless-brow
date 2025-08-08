@@ -1,18 +1,5 @@
 import { create } from 'zustand';
-
-interface BankAccount {
-    accountName: string;
-    accountNumber: string;
-    bankName: string;
-    branch: string;
-    bankCountry: string;
-    currency: string;
-    user: any; // Reference to the User model
-    createdAt?: Date;
-    updatedAt?: Date;
-    createdBy?: string;
-    updatedBy?: string;
-}
+import { BankAccount } from '../interfaces/bank-account';
 
 interface BankAccountStore {
     isLoading: boolean;
