@@ -7,6 +7,11 @@ export const GetBankAccounts = async (query: string = '') => {
   return await axios.get(url);
 }
 
+export const GetPublicBankAccounts = async (query: string = '') => {
+  const url: string = `${BASE_URL}/api/bank-accounts/public${query}`;
+  return await axios.get(url);
+}
+
 export const CreateBankAccount = async (data: {[key: string]: any}) => {
   return axios.post(`${BASE_URL}/api/bank-accounts`, data);
 };

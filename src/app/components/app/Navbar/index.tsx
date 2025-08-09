@@ -18,7 +18,7 @@ const Navbar: FC = () => {
     return (
         <>
             {/* fixed top-0 z-20 */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 px-10  w-full bg-white">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3 px-10 z-30  w-full bg-white">
                 <div className="flex justify-between items-center gap-4">
                     <div className="hidden sm:block lg:block">
                         <ul className="flex justify-between gap-5">

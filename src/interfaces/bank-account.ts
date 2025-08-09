@@ -7,6 +7,8 @@ export interface BankAccount {
     bankName: string;
     branch: string;
     bankCountry: string;
+    sortCode: string;
+    iban: string;
     currency: string;
     user: User; // Reference to the User model
     createdAt?: Date;

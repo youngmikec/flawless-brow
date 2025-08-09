@@ -11,35 +11,38 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API route usage.
  */
-// let cached = (global as any).mongoose;
+let cached = (global as any).mongoose;
 
-// if (!cached) {
-//   cached = (global as any).mongoose = { conn: null, promise: null };
-// }
-
-let isConnected = false;
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
+}
 
 async function dbConnect() {
-  if (isConnected) return;
+  if (cached.conn) return cached.conn;
 
-  const uri = process.env.MONGODB_URI as string;
+  if (!cached.promise) {
+    const uri = process.env.MONGODB_URI as string;
+    if (!uri) throw new Error('MongoDB URI not defined in env');
 
-  if (!uri) throw new Error('MongoDB URI not defined in env');
-
-  try {
     const opts = {
-      bufferCommands: false,
+      bufferCommands: true, // Changed to true to allow buffering
       dbName: MONGODB_DB_NAME,
-      serverSelectionTimeoutMS: 5000, // shorter timeout
+      serverSelectionTimeoutMS: 5000,
       ssl: true,
       tlsAllowInvalidCertificates: false,
     };
 
-    const db = await mongoose.connect(uri, opts);
-    isConnected = db.connections[0].readyState === 1;
+    cached.promise = mongoose.connect(uri, opts).then((mongoose) => {
+      console.log('MongoDB connected');
+      return mongoose;
+    });
+  }
 
-    console.log('MongoDB connected');
+  try {
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
+    cached.promise = null;
     console.error('MongoDB connection error:', error);
     throw error;
   }

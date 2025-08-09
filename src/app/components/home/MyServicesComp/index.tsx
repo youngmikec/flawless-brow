@@ -61,7 +61,6 @@ const MyServicesComp = () => {
 
   const { data } = useProductService();
 
-  console.log('services =>', data);
 
   useEffect(() => {
       setProductServices(data || []);

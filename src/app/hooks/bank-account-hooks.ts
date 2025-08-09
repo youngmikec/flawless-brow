@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { GetBankAccounts } from '../providers/bank-account';
+import { GetBankAccounts, GetPublicBankAccounts } from '../providers/bank-account';
 import { BankAccount } from '../../interfaces/bank-account';
 import { ApiResponse, IUseHookResponse } from '../../interfaces';
 
 
 
-export const useBankAccounts = (initialQuery: string = ''): IUseHookResponse => {
+export const useBankAccounts = (initialQuery: string = '', isPublic: boolean = false): IUseHookResponse => {
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<BankAccount[] | null>(null);
   const [message, setMessage] = useState<string>('');
@@ -16,7 +17,8 @@ export const useBankAccounts = (initialQuery: string = ''): IUseHookResponse => 
   const fetchBankAccounts = async (query: string = '') => {
     setIsLoading(true);
     try {
-      const response = await GetBankAccounts(query);
+      const response = await (isPublic ? GetPublicBankAccounts(query) : GetBankAccounts(query));
+
       const responseData = response.data as ApiResponse;
       
       setData(responseData.data || null);

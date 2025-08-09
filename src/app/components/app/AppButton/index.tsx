@@ -6,7 +6,7 @@ type Props = {
   width?: 'full' | 'max' ;
   btnText: string,
   btnIcon?: JSX.Element,
-  bgColor: 'primary' | 'gray' | 'blue';
+  bgColor: 'primary' | 'gray' | 'blue' | 'black';
   textColor?: string;
   disabled?: boolean;
   btnSize?: 'sm' | 'md' | 'lg';
@@ -47,7 +47,9 @@ const AppButton: FC<Props> = ({
             ` 
               ${bgColor === 'blue' && `bg-textBlue text-white hover:bg-white hover:text-textBlue border-textBlue border-[1px]`}
               ${bgColor === 'primary' && `bg-[#C5A46D] text-white hover:bg-white hover:text-[#C5A46D] border-[#C5A46D] border-[1px]`}
-              ${bgColor === 'gray' && `bg-lightGray text-darkGray hover:bg-darkGray hover:text-lightGray border-lighterGray border-[1px]`}
+              ${bgColor === 'gray' && `bg-gray text-darkGray hover:bg-darkGray hover:text-lightGray border-lighterGray border-[1px]`}
+              ${bgColor === 'black' && `bg-black text-white hover:bg-white hover:text-black border-black border-[1px]`}
+
             `
           }
           ${ fill === 'outline' && 
@@ -55,6 +57,7 @@ const AppButton: FC<Props> = ({
               ${bgColor === 'primary' && `border-[#C5A46D] text-[#C5A46D] border-[1px] hover:bg-[#C5A46D] hover:text-[white]`} 
               ${bgColor === 'blue' && `border-textBlue text-textBlue border-[1px] hover:bg-textBlue hover:text-[white]`} 
               ${bgColor === 'gray' && `border-darkGray text-darkGray border-[1px] hover:bg-lightGray hover:text-darkGray`} 
+              ${bgColor === 'black' && `border-black text-black border-[1px] hover:bg-lightGray hover:text-darkGray`} 
             `
           }
           ${btnSize === 'sm' && 'py-2 px-4'}

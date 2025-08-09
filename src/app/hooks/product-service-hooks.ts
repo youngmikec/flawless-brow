@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { ApiResponse, IService, IUseHookResponse } from '../../interfaces';
-import { GetProductServices } from '../providers';
+import { GetProductServices, GetPublicProductServices } from '../providers';
 
-export const useProductService = (initialQuery: string = ''): IUseHookResponse => {
+export const useProductService = (initialQuery: string = '', isPublic: boolean = false): IUseHookResponse => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [data, setData] = useState<IService[] | null>(null);
     const [message, setMessage] = useState<string>('');
@@ -13,7 +13,8 @@ export const useProductService = (initialQuery: string = ''): IUseHookResponse =
     const fetchAppointments = async (query: string = '') => {
         setIsLoading(true);
         try {
-            const response = await GetProductServices(query);
+            const response = await (isPublic ? GetPublicProductServices(query) : GetProductServices(query));
+
             const responseData = response.data as ApiResponse;
             setData(responseData.data || null);
             setMessage(responseData.message || '');

@@ -2,7 +2,7 @@
 import dbConnect from '../../../lib/mongodb';
 import ProductService, { ValidateCreateProductService } from './model';
 import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
-import { IsValidAdmin } from '../../../utils';
+import { getSearchParams, IsValidAdmin } from '../../../utils';
 import { UploadImageService } from '../../../services';
 
 export async function GET(req: Request) {
@@ -14,8 +14,9 @@ export async function GET(req: Request) {
       return FailureResponse(403, 'Unauthorized');
     }
 
-    const services = await ProductService.find()
-                                // .populate('user', 'createdBy')
+     const paramsObject = getSearchParams(req);
+    const services = await ProductService.find({ ...paramsObject })
+                                .populate('createdBy');
                                 ; // Populate user field with email
     return SuccessResponse(services, 'Services retrieved successfully');
   } catch (error: any) {
