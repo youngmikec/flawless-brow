@@ -3,7 +3,22 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './public/**/*.html',
+  ],
+  safelist: [
+    'bg-primary',
+    'text-primary',
+    'bg-secondary',
+    'text-secondary',
+    'bg-warning',
+    'text-warning',
+    'bg-accent',
+    'text-accent',
+    'bg-danger',
+    'text-danger',
   ],
   theme: {
     extend: {
