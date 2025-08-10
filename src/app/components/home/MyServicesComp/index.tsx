@@ -59,7 +59,7 @@ const MyServicesComp = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [productServices, setProductServices] = useState<IService[]>([]);
 
-  const { data } = useProductService();
+  const { data } = useProductService('', true);
 
 
   useEffect(() => {
