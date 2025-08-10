@@ -1,12 +1,11 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import TimePickerComp from "./steps/time-picker-comp";
-import AppButton from "../../components/app/AppButton";
 import AddOnStep from "./steps/add-on-step";
 import { useBankAccounts, useProductService } from "../../hooks";
-import { useParams } from "next/navigation";
-import { BankAccount, IService } from "@/interfaces";
+import { BankAccount, IService } from "../../../interfaces";
 import ContactForm from "./steps/contact-form";
 import PaymentStep from "./steps/payment-step";
 

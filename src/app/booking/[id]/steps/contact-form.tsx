@@ -1,5 +1,6 @@
 "use client"
 
+import { FC } from 'react';
 import * as Yup from 'yup'
 import { useFormik } from "formik";
 import { AxiosResponse } from 'axios';
@@ -8,8 +9,8 @@ import { ApiResponse } from '../../../../interfaces';
 
 import { CreateUser } from "../../../providers";
 import ContactInputField from "../../../components/form/ContactInputField";
-import AppButton from '@/app/components/app/AppButton';
-import { FC } from 'react';
+import AppButton from '../../../components/app/AppButton';
+
 
 type Props = {
   toggleStep: (type: 'prev' | 'next') => void
