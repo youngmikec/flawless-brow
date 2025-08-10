@@ -6,10 +6,11 @@ import AppButton from "../../../components/app/AppButton";
 
 
 type Props = {
+  step: number;
   toggleStep: (step: "prev" | "next") => void;
 }
 
-const TimePickerComp: FC<Props> = ({ toggleStep }) => {
+const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
   const availableDates = [
     new Date(2025, 7, 10),
     new Date(2025, 7, 15),
@@ -45,13 +46,18 @@ const TimePickerComp: FC<Props> = ({ toggleStep }) => {
       </div>
 
       <div className="my-4 flex gap-4 items-center">
-        <AppButton
-          btnText={'Back'}
-          fill={'outline'}
-          bgColor={"black"}
-          width={"max"}
-          onClick={() => toggleStep('prev')}
-        />
+        {
+          step > 1 && (
+            <AppButton
+              btnText={'Back'}
+              fill={'outline'}
+              bgColor={"black"}
+              width={"max"}
+              onClick={() => toggleStep('prev')}
+            />
+          )
+        }
+        
         <AppButton
           btnText={'Book Now'}
           fill={'fill'}

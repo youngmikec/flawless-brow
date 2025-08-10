@@ -19,8 +19,12 @@ type Props = {
 const ContactForm: FC<Props> = ({ toggleStep }) => {
 
     const validateForm = () => Yup.object({
+      fullName: Yup.string().required('Name is required'),
+      phone: Yup.string().required('Phone is required'),
       email: Yup.string().email('Invalid email address').required('Email is required'),
-      password: Yup.string().required('Password is required'),
+      address: Yup.string().required('Address is required'),
+      gender: Yup.string().required('Gender is required'),
+      age: Yup.number().required('Age is required'),
     });
 
     const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
