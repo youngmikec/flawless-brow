@@ -1,18 +1,29 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface TimeSlotProps {
   time: string;
+  selectedTime?: any;
+  isSelected?: boolean;
+  onClick: (time: string) => void;
 }
 
-const TimeSlot: React.FC<TimeSlotProps> = ({ time }) => {
-  const [isSelected, setIsSelected ] = useState<boolean>(false);
+const TimeSlot: React.FC<TimeSlotProps> = ({ time, isSelected = false, selectedTime, onClick }) => {
+  const [active, setActive] = useState<boolean>(false);
+  console.log('isSelected', isSelected);
+  console.log('selectedTime', selectedTime);
+  console.log('time', time);
+  console.log('active', active);
+  useEffect(() => {
+    setActive(selectedTime === time);
+  }, [selectedTime, time]);
+
   return (
     <div 
-      onClick={() => setIsSelected(!isSelected)}
-      className={`border-[1px] cursor-pointer bg-white border-[#5A4A3F] w-full px-4 py-2 rounded-md flex justify-center items-center ${isSelected ? 'bg-[#5A4A3F]' : ''}`}>
-      <p className={`${isSelected ? 'text-white' : 'text-[#5A4A3F]'}`}>{time}</p>
+      onClick={() => onClick(time)}
+      className={`border-[1px] cursor-pointer border-[#5A4A3F] w-full px-4 py-2 rounded-md flex justify-center items-center ${active ? 'bg-[#5A4A3F]' : 'bg-white'}`}>
+      <p className={`${active ? 'text-white' : 'text-[#5A4A3F]'}`}>{time}</p>
     </div>
   );
 };

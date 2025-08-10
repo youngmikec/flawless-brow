@@ -58,6 +58,22 @@ const services = [
 const MyServicesComp = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [productServices, setProductServices] = useState<IService[]>([]);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const { data } = useProductService('', true);
 
@@ -90,19 +106,19 @@ const MyServicesComp = () => {
                 // modules={[Pagination, Navigation]}
                 modules={[Pagination]}
                 spaceBetween={30}
-                slidesPerView={4}
-                // centeredSlides
+                slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
+                centeredSlides
                 loop={true}
                 pagination={{ clickable: true }}
                 className="mt-10"
-                breakpoints={{
-                  768: {
-                    slidesPerView: 2.3,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                  },
-                }}
+                // breakpoints={{
+                //   768: {
+                //     slidesPerView: 2.3,
+                //   },
+                //   1024: {
+                //     slidesPerView: 3,
+                //   },
+                // }}
                 onSlideChange={(slide) => setActiveIndex(slide.realIndex)}
               >
                 {productServices.map((service: IService, index: number) => (

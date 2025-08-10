@@ -9,12 +9,15 @@ import { useBankAccounts, useProductService } from "../../hooks";
 import { BankAccount, IService } from "../../../interfaces";
 import ContactForm from "./steps/contact-form";
 import PaymentStep from "./steps/payment-step";
-import AppButton from "@/app/components/app/AppButton";
+import AppButton from "../../components/app/AppButton";
+import { useAppointmentStore } from "../../../store/appointment";
 
 
 const BookingPage: FC = () => {
   const router = useRouter();
   const params = useParams();
+  const { appendAppointData, appointmentData } = useAppointmentStore();
+
 
   const [step, setStep] = useState<number>(1);
   const [productService, setProductService] = useState<IService | null>(null);
@@ -56,6 +59,7 @@ const BookingPage: FC = () => {
   useEffect(() => {
     if (data) {
       const service: IService = data[0];
+      appendAppointData({ productService: service._id });
       setProductService(service);
       setAddOnServices(service.addOnServices);
     }
@@ -94,7 +98,7 @@ const BookingPage: FC = () => {
                       />
                     </div>
                     <div>
-                      <p>18 Set, 2025</p>
+                      <p>{ appointmentData?.appointmentDay || "--" }</p>
                     </div>
                   </div>
                   <div className="flex justify-start items-center gap-2">
@@ -107,7 +111,7 @@ const BookingPage: FC = () => {
                       />
                     </div>
                     <div>
-                      <p>5:30 PM- 5:55 PM</p>
+                      <p>{ appointmentData?.appointmentTime || "--" }</p>
                     </div>
                   </div>
                 </div>

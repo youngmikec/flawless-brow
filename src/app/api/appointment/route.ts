@@ -83,18 +83,27 @@ export async function POST(req: Request) {
     }
 
     if(amountPaid > 0 && !serviceRes.isFree && amountPaid !== parseInt(serviceRes.price)) {
-        body.status = AppointStatusEnum.PARTLY_PAID;
-        body.statusDesc = getAppointmentStatusDescription(AppointStatusEnum.PARTLY_PAID);
-        body.balance = parseInt(serviceRes.price) - amountPaid;
+      body.status = AppointStatusEnum.PARTLY_PAID;
+      body.statusDesc = getAppointmentStatusDescription(AppointStatusEnum.PARTLY_PAID);
+      body.balance = parseInt(serviceRes.price) - amountPaid;
     }
 
-    if(body.proofOfPaymentImage && typeof body.proofOfPaymentImage === 'string') {
-      const { secure_url } = await UploadImageService(body.proofOfPaymentImage);
-      if (!secure_url) {
-        return FailureResponse(400, 'Proof of Payment upload failed');
-      }
-      body.proofOfPaymentImage = secure_url;
+    if(body.addOnServices) {
+      body.addOnServices = body.addOnServices.map((item: string) => {
+        return {
+          title: item,
+          description: ''
+        }
+      })
     }
+
+    // if(body.proofOfPaymentImage && typeof body.proofOfPaymentImage === 'string') {
+    //   const { secure_url } = await UploadImageService(body.proofOfPaymentImage);
+    //   if (!secure_url) {
+    //     return FailureResponse(400, 'Proof of Payment upload failed');
+    //   }
+    //   body.proofOfPaymentImage = secure_url;
+    // }
 
     
 

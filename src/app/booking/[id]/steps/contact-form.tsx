@@ -7,9 +7,11 @@ import { AxiosResponse } from 'axios';
 import { ApiResponse } from '../../../../interfaces';
 
 
-import { CreateUser } from "../../../providers";
+import { CreateUserContact } from "../../../providers";
 import ContactInputField from "../../../components/form/ContactInputField";
 import AppButton from '../../../components/app/AppButton';
+import { useAppointmentStore } from '../../../../store/appointment';
+
 
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 }
 
 const ContactForm: FC<Props> = ({ toggleStep }) => {
-
+    const { appendAppointData, createAppointment } = useAppointmentStore();
     const validateForm = () => Yup.object({
       fullName: Yup.string().required('Name is required'),
       phone: Yup.string().required('Phone is required'),
@@ -40,12 +42,18 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
       validationSchema: validateForm(),
       onSubmit: (values) => {
           const payload = {...values}
+          payload.age = Number(payload.age);
+
           setSubmitting(true);
-          CreateUser(payload)
+          CreateUserContact(payload)
           .then((res: AxiosResponse<ApiResponse>) => {
               const { success, message, data } = res.data;
               if(success){
                 setSubmitting(false);
+                appendAppointData({
+                  customer: data._id,
+                });
+
                 toggleStep('next');
               }
           })
@@ -148,6 +156,8 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
             btnText={'Book Now'}
             fill={'fill'}
             bgColor={'primary'}
+            disabled={!createAppointment?.productService || isSubmitting}
+            loading={isSubmitting}
             width={"max"}
             type={'submit'}
           />

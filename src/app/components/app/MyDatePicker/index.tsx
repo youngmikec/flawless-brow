@@ -6,20 +6,26 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
 type Props = {
-  availableDates?: any[]
+  availableDates?: any[];
+  onDateSelect?: (date: any) => void
 }
 
-const MyDatePicker: FC<Props> = ({ availableDates }) => {
+const MyDatePicker: FC<Props> = ({ availableDates, onDateSelect }) => {
 
 
   const [selected, setSelected] = useState<Date>();
+
+  const handleSelect = (data: any) => {
+    setSelected(data);
+    onDateSelect && onDateSelect(data);
+  }
 
   return (
     <DayPicker
       animate
       mode="single"
       selected={selected}
-      onSelect={setSelected}
+      onSelect={handleSelect}
       modifiers={{
         available: availableDates,
       }}

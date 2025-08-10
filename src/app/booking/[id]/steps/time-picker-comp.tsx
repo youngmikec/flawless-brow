@@ -1,8 +1,10 @@
 "use client"
-import { FC } from "react";
+import { FC, useState } from "react";
 import MyDatePicker from "../../../components/app/MyDatePicker";
 import TimeSlot from "../../../components/app/TimeSlot";
 import AppButton from "../../../components/app/AppButton";
+import { useAppointmentStore } from "../../../../store/appointment";
+
 
 
 type Props = {
@@ -11,11 +13,36 @@ type Props = {
 }
 
 const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
+
+  const [selectedDate, setSelectedDate] = useState<any | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+
+  const { appendAppointData, createAppointment } = useAppointmentStore();
+
   const availableDates = [
     new Date(2025, 7, 10),
     new Date(2025, 7, 15),
     new Date(2025, 7, 20),
   ];
+
+  console.log('createAppointment', createAppointment);
+  console.log('selectedDate', selectedDate);
+  console.log('selectedTime', selectedTime);
+  console.log('availableDates', availableDates);
+
+
+
+
+  const handleSeletTime = (data: string, type: 'time' | 'date') => {
+    if(type === 'time') {
+      setSelectedTime(data);
+      appendAppointData({ appointmentTime: data });
+    } else {
+      setSelectedDate(data);
+      appendAppointData({ appointmentDay: data });
+    }
+  }
 
 
   return (
@@ -23,7 +50,12 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
       <div className="w-full flex flex-col md:flex-row gap-8">
 
         <div className="flex justify-center md:justify-start">
-          <MyDatePicker availableDates={availableDates} />
+          <MyDatePicker 
+            availableDates={availableDates} 
+            onDateSelect={(data) => handleSeletTime(data, 'date')}
+
+            // selectedDate={selectedDate}
+          />
 
 
         </div>
@@ -31,16 +63,40 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
           <p className="text-sm text-[#192020] font-[300] text-center">Montag, 18. September</p>
 
           <div className="my-4">
-            <TimeSlot time="5:30 PM" />
+            <TimeSlot 
+              isSelected={selectedTime === '5:30 PM'}
+              selectedTime={selectedTime}
+              time="5:30 PM" 
+              onClick={() => handleSeletTime('5:30 PM', 'time')} 
+
+            />
           </div>
           <div className="my-4">
-            <TimeSlot time="5:30 PM" />
+            <TimeSlot 
+              selectedTime={selectedTime}
+              isSelected={selectedTime === '6:00 PM'} 
+              time="6:00 PM" 
+              onClick={() => handleSeletTime('6:00 PM', 'time')} 
+
+            />
           </div>
           <div className="my-4">
-            <TimeSlot time="5:30 PM" />
+            <TimeSlot 
+              selectedTime={selectedTime}
+              isSelected={selectedTime === '6:30 PM'}
+              time="6:30 PM" 
+              onClick={() => handleSeletTime('6:30 PM', 'time')} 
+
+            />
           </div>
           <div className="my-4">
-            <TimeSlot time="5:30 PM" />
+            <TimeSlot 
+              selectedTime={selectedTime}
+              isSelected={selectedTime === '7:00 PM'}
+              time="7:00 PM" 
+              onClick={() => handleSeletTime('7:00 PM', 'time')} 
+
+            />
           </div>
         </div>
       </div>
@@ -57,7 +113,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
             />
           )
         }
-        
+
         <AppButton
           btnText={'Book Now'}
           fill={'fill'}

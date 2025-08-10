@@ -1,7 +1,8 @@
 // components/TestimonialSlider.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -13,6 +14,21 @@ import { Testimonials } from "../../../constants";
 
 const TestimonialSlider = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <section className="bg-[#5A4B3D] text-white py-16 px-4 sm:px-8">
       <div className="max-w-5xl mx-auto text-center mb-10">
@@ -26,7 +42,7 @@ const TestimonialSlider = () => {
         <Swiper
           modules={[Pagination, Navigation]}
           spaceBetween={30}
-          slidesPerView={3}
+          slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
           centeredSlides
           loop={true}
           pagination={{ clickable: true }}

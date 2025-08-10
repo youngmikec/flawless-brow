@@ -8,8 +8,9 @@ import { AxiosResponse } from "axios";
 import ImageUploadComp from "../../../components/app/ImageUploadComp";
 import InputField from "../../../components/form/InputField";
 import AppButton from "../../../components/app/AppButton";
-import { CreateUser } from "../../../providers";
+import { CreateAppointment, CreateUser } from "../../../providers";
 import { ApiResponse } from "../../../../interfaces";
+import { useAppointmentStore } from '../../../../store/appointment';
 
 
 interface Props {
@@ -17,6 +18,11 @@ interface Props {
 }
 
 const PaymentStep: FC<Props> = ({ toggleStep }) => {
+  const { 
+    createAppointment,
+    setAppointmentData,
+    clearCreateAppointment 
+  } = useAppointmentStore();
 
   const [paymentProof, setPaymentProof] = useState<string>('');
 
@@ -30,14 +36,24 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
       },
       validationSchema: validateForm(),
       onSubmit: (values) => {
-        const payload = {...values}
+        console.log('createAppointment', createAppointment)
+
+        const payload = {
+          ...values, 
+          ...createAppointment,
+          proofOfPaymentImage: paymentProof,
+          currencySymbol: 'EUR',
+        }
+
         setSubmitting(true);
-        CreateUser(payload)
+        CreateAppointment(payload)
         .then((res: AxiosResponse<ApiResponse>) => {
           const { success, message, data } = res.data;
           if(success){
             setSubmitting(false);
             toggleStep('next');
+            setAppointmentData(data);
+            clearCreateAppointment();
           }
         })
         .catch((err: any) => {
@@ -87,13 +103,12 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
                 onClick={() => toggleStep('prev')}
               />
               <AppButton
+                type="submit"
                 btnText={'Book Now'}
                 fill={'fill'}
                 bgColor={'primary'}
                 width={"max"}
                 loading={isSubmitting}
-                onClick={() => toggleStep('next')}
-
               />
             </div>
           </form>

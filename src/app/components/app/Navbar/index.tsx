@@ -42,34 +42,36 @@ const Navbar: FC = () => {
                         <Link className="navbar-brand flex items-center" href="/">
                             <Image 
                                 src={'/images/logo.png'}
-                                width={60}
-                                height={60}
+                                width={50}
+                                height={50}
                                 alt={'logo'}
                             />
                         </Link>
                     </div>
 
                     <div>
-                        <div className="flex justify-start gap-4">
-                            <div>
-                                <Link href="https://www.gmail.com/">
-                                    <Image 
-                                        src="/svgs/email-primary.svg"
-                                        alt="email"
-                                        width={25}
-                                        height={25}
-                                    />
-                                </Link>
-                            </div>
-                            <div>
-                                <Link href="https://www.instagram.com/">
-                                    <Image 
-                                        src="/svgs/instagram-primary.svg"
-                                        alt="instagram"
-                                        width={25}
-                                        height={25}
-                                    />
-                                </Link>
+                        <div className="hidden md:block">
+                            <div className="flex justify-start gap-4">
+                                <div>
+                                    <Link href="https://www.gmail.com/">
+                                        <Image 
+                                            src="/svgs/email-primary.svg"
+                                            alt="email"
+                                            width={25}
+                                            height={25}
+                                        />
+                                    </Link>
+                                </div>
+                                <div>
+                                    <Link href="https://www.instagram.com/">
+                                        <Image 
+                                            src="/svgs/instagram-primary.svg"
+                                            alt="instagram"
+                                            width={25}
+                                            height={25}
+                                        />
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <button 
@@ -83,9 +85,9 @@ const Navbar: FC = () => {
                             // onClick={toggleSideMenu}
                         >
                             <Image 
-                                src={'/images/ham-menu.svg'}
-                                width={30}
-                                height={30}
+                                src={'/svgs/ham-menu.svg'}
+                                width={20}
+                                height={20}
                                 alt={'menu'}
                             />
                         </button>

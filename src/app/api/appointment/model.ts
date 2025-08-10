@@ -46,10 +46,7 @@ export const ValidateCreateAppointment = Joi.object({
     proofOfPaymentImage: Joi.string().uri().required(),
     status: Joi.string().valid(AppointStatusEnum).optional(),
     addOnServices: Joi.array().items(
-        Joi.object({
-            title: Joi.string().required(),
-            description: Joi.string().optional()
-        })
+        Joi.string().optional()
     ).optional(),
     createdBy: Joi.string().optional()
 });

@@ -19,12 +19,12 @@ const Footer: FC = () => {
     return (
         <>
             <div 
-                className="bg-black-gray text-white py-20 px-12 md:px-20"
+                className="bg-black-gray text-white py-20 px-6 md:px-20"
                 style={style}
             >
                 <p className="text-white text-lg font-semibold my-12 text-center font-montserrat">Let&lsquo;s Connect</p>
                 <div className="flex justify-center">
-                    <p className="text-white text-6xl my-12 text-center w-5/12 font-style-script">Find us, follow us, stay <br /> connected.</p>
+                    <p className="text-white text-6xl my-12 text-center w-11/12 md:w-5/12 font-style-script">Find us, follow us, stay <br /> connected.</p>
                 </div>
 
                 <div className="flex justify-center items-center gap-8 my-10">
@@ -33,8 +33,8 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/email-white.svg"
                                 alt="email"
-                                width={80}
-                                height={80}
+                                width={60}
+                                height={60}
                             />
                         </Link>
                     </div>
@@ -43,36 +43,36 @@ const Footer: FC = () => {
                             <Image 
                                 src="/svgs/instagram-white.svg"
                                 alt="instagram"
-                                width={80}
-                                height={80}
+                                width={60}
+                                height={60}
                             />
                         </Link>
                     </div>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
                     <div className="flex justify-start items-center gap-6">
                         <div>
                             <Link href="/">
                                 <Image 
                                     src="/images/logo-white.png"
                                     alt="logo"
-                                    width={60}
-                                    height={60}
+                                    width={50}
+                                    height={50}
                                 />
                             </Link>
                         </div>
                         <div className="flex flex-row gap-4">
-                            <Link href="/" className="text-white">About</Link>
-                            <Link href="/" className="text-white">Services</Link>
-                            <Link href="/" className="text-white">Gallery</Link>
-                            <Link href="/" className="text-white">Policies</Link>
+                            <Link href="/" className="text-white text-xs md:text-sm">About</Link>
+                            <Link href="/" className="text-white text-xs md:text-sm">Services</Link>
+                            <Link href="/" className="text-white text-xs md:text-sm">Gallery</Link>
+                            <Link href="/" className="text-white text-xs md:text-sm">Policies</Link>
                         </div>
                     </div>
 
                     <div className="flex gap-4">
-                        <p className="text-white text-[13px] font-light">term of service</p>
-                        <p className="text-white text-sm font-semibold">© 2023 synthex ai. All rights reserved.</p>
+                        <p className="text-white text-[11px] md:text-[13px] font-light text-nowrap">term of service</p>
+                        <p className="text-white text-xs md:text-sm font-semibold">© 2023 synthex ai. All rights reserved.</p>
                     </div>
                 </div>
             </div>
