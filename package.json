@@ -2,6 +2,9 @@
   "name": "flawless-brows",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "rm -rf .next && next dev",
     "build": "next build",
@@ -40,6 +43,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
+    "cssnano": "^7.1.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.11",
     "typescript": "^5"
