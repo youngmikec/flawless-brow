@@ -63,10 +63,12 @@ const Footer: FC = () => {
                             </Link>
                         </div>
                         <div className="flex flex-row gap-4">
-                            <Link href="/" className="text-white text-xs md:text-sm">About</Link>
-                            <Link href="/" className="text-white text-xs md:text-sm">Services</Link>
-                            <Link href="/" className="text-white text-xs md:text-sm">Gallery</Link>
-                            <Link href="/" className="text-white text-xs md:text-sm">Policies</Link>
+                            <Link href="#tech-brow" className="text-white text-xs md:text-sm">About</Link>
+                            <Link href="#services" className="text-white text-xs md:text-sm">Services</Link>
+                            <Link href="#gallery" className="text-white text-xs md:text-sm">Gallery</Link>
+                            <Link href="#booking-policies" className="text-white text-xs md:text-sm">Policies</Link>
+                            <Link href="#faq" className="text-white text-xs md:text-sm">FAQ</Link>
+
                         </div>
                     </div>
 

@@ -32,15 +32,15 @@ const AppAvatar: FC<Props> = ({ userProfile, showProfileName = true }) => {
                     (user && user.profileImage) ? 
                     (
                         <Image
-                        src={user.profileImage}
-                        alt="User"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
+                            src={user.profileImage}
+                            alt="User"
+                            width={40}
+                            height={40}
+                            className="rounded-full"
                         />
                     ) : (
-                        <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-                            <span className="text-white text-2xl font-bold">
+                        <div className="w-10 h-10 rounded-full p-2 bg-black flex items-center justify-center">
+                            <span className="text-white text-xl font-bold">
                                 { user ? getInitials(user as User) : 'JD' }
                             </span>
                         </div>

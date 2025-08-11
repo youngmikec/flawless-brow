@@ -9,7 +9,7 @@ type Props = {
 const AppointmentListView: FC<Props> = ({ appointments }) => {
     return (
         <>
-            <div className="w-full">
+            <div className="w-full overflow-scroll">
                 <table className="w-full border-none border-collapse">
                     <thead>
                         <tr className="border-b-[1px] border-[#0000001F]">

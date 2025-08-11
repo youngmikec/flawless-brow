@@ -153,7 +153,7 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
             onClick={() => toggleStep('prev')}
           />
           <AppButton
-            btnText={'Book Now'}
+            btnText={'Continue'}
             fill={'fill'}
             bgColor={'primary'}
             disabled={!createAppointment?.productService || isSubmitting}

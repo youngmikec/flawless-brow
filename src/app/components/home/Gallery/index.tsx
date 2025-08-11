@@ -4,7 +4,7 @@ import Image from "next/image";
 const Gallery = () => {
   return (
     <>
-      <div className="w-11/12 md:w-10/12 mx-auto py-12 bg-white">
+      <div id="gallery" className="w-11/12 md:w-10/12 mx-auto py-12 bg-white">
         <div className="flex justify-end">
           <h4 className="text-xl font-bold text-[#525252] uppercase tracking-wide mb-4 font-montserrat">My Portfolio</h4>
         </div>

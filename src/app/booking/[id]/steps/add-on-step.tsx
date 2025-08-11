@@ -70,7 +70,7 @@ const AddOnStep: FC<Props> = ({ addOnServices = [], toggleStep }) => {
           onClick={() => toggleStep('prev')}
         />
         <AppButton
-          btnText={'Book Now'}
+          btnText={'Continue'}
           fill={'fill'}
           bgColor={'primary'}
           disabled={!selectedServices.length}

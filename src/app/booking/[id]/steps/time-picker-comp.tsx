@@ -115,7 +115,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
         }
 
         <AppButton
-          btnText={'Book Now'}
+          btnText={'Continue'}
           fill={'fill'}
           bgColor={'primary'}
           width={"max"}

@@ -83,7 +83,7 @@ const MyServicesComp = () => {
   }, [data]);
 
   return (
-    <section className="w-full px-4 py-12 text-center bg-white">
+    <section id="services" className="w-full px-4 py-12 text-center bg-white">
       <div className="w-full mx-auto md:w-11/12">
         <p className="text-lg sm:text-xl font-bold mb-2 text-black text-center font-montserrat">My services</p>
         <p className="text-4xl sm:text-5xl text-[#8D7B68] mb-4 font-style-script">

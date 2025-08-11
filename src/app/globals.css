@@ -110,7 +110,8 @@
   /* Source Serif font */
   @font-face {
     font-family: "Source-Sans";
-    src: url("/fonts/Source_Serif/SourceSerif4_18pt-Bold.ttf") format("truetype");
+    src: url("/fonts/Source_Serif/SourceSerif4_18pt-Bold.ttf")
+      format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -133,7 +134,7 @@
 }
 
 /* Component styles */
-@layer components {
+/* @layer components {
   .swiper-slide {
     @apply opacity-60 scale-95 transition-all duration-300 py-12;
   }
@@ -149,4 +150,49 @@
   .swiper-pagination-bullet-active {
     @apply bg-[#f9a825] opacity-100 scale-130;
   }
+} */
+
+.swiper-slide {
+  opacity: 0.6;
+  transform: scale(0.95);
+  transition: all 0.3s;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.swiper-slide.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.swiper-button-prev {
+  color: #f9a825 !important;
+  width: 2rem;
+  height: 2rem;
+  background-color: #f9a825 !important;
+}
+
+.swiper-button-next {
+  color: #f9a825 !important;
+  width: 2rem;
+  height: 2rem;
+  background-color: #f9a825 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: #d1d5db !important;
+  opacity: 0.6;
+  width: 10px;
+  height: 10px;
+  margin: 5rem 0.375rem;
+  transition: all 0.3s;
+  border-radius: 9999px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #f9a825 !important;
+
+  opacity: 1;
+  transform: scale(1.3);
 }

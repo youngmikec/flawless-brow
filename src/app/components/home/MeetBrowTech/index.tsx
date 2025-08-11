@@ -5,7 +5,7 @@ import Image from "next/image";
 const MeetBrowTech = () => {
   return (
     <>
-      <div className="w-full bg-[#fff9ef] py-20">
+      <div id="tech-brow" className="w-full bg-[#fff9ef] py-20">
         <div className="mx-auto w-11/12 md:w-10/12">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div>

@@ -4,7 +4,7 @@ import { FC } from "react";
 const Faq: FC = () => {
   return (
     <>
-      <section className="bg-[#fffcfa] py-24 ">
+      <section id="faq" className="bg-[#fffcfa] py-24 ">
         <div className="w-11/12 md:w-10/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
           
           {/* <!-- Left Section: Title and Description --> */}

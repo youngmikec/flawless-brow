@@ -4,12 +4,20 @@ import { HeroBackgroundImages } from "../../../constants";
 
 import { useEffect, useState } from 'react'
 import AppButton from "../../app/AppButton";
+import { useRouter } from "next/navigation";
 
 
 
 
 const Hero: FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const router = useRouter();
+
+    const goToServices = () => {
+        router.push('/#services');
+    }
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -37,7 +45,7 @@ const Hero: FC = () => {
                     <p className="text-2xl md:text-4xl text-black font-extrabold font-source-sans mb-4">
                         Beautifully <span className="font-style-script font-normal">browed.</span>
                     </p>
-                    <p className="text-sm sm:text-lg text-[#52525B] font-inter mb-8 w-11/12">
+                    <p className="text-sm sm:text-lg text-white font-inter mb-8 w-11/12">
                         One line clarifying the service or promise. Example: 
                         “Specializing in precision microblading & 
                         permanent makeup that enhances your natural beauty.”
@@ -50,6 +58,7 @@ const Hero: FC = () => {
                         fill={'fill'}
                         bgColor={'primary'}
                         width={"max"}
+                        onClick={goToServices}
                     />
                 </div>
             </div>

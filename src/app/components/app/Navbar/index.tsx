@@ -9,10 +9,10 @@ const Navbar: FC = () => {
     // const { toggleSideMenu } = useStore();
     const links: { name: string; href: string }[] = [
         { name: "Home", href: "/" },
-        { name: "About", href: "#about" },
+        { name: "About", href: "#tech-brow" },
         { name: "Services", href: "#services" },
         { name: "Gallery", href: "#gallery" },
-        { name: "Polices", href: "#policies" },
+        { name: "Policies", href: "#booking-policies" },
         { name: "Contact", href: "#contact" }
     ];
     return (
@@ -86,8 +86,8 @@ const Navbar: FC = () => {
                         >
                             <Image 
                                 src={'/svgs/ham-menu.svg'}
-                                width={20}
-                                height={20}
+                                width={30}
+                                height={30}
                                 alt={'menu'}
                             />
                         </button>

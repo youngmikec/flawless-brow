@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import { useSwiper } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -15,6 +16,9 @@ import { Testimonials } from "../../../constants";
 const TestimonialSlider = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [windowWidth, setWindowWidth] = useState<number>(0);
+  const swiper = useSwiper();
+
+
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
@@ -38,15 +42,20 @@ const TestimonialSlider = () => {
         </p>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 relative">
+        {/* <div className="absolute text-[#F48804] font-bold -bottom-3 left-80 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slidePrev()}>{'<'}</div>
+        <div className="absolute text-[#F48804] font-bold -bottom-3 right-28 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slideNext()}>{'>'}</div> */}
+
         <Swiper
           modules={[Pagination, Navigation]}
+          navigation
+          slideNextClass="text-[#F48804]"
+          slidePrevClass="text-[#F48804]"
           spaceBetween={30}
           slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
           centeredSlides
           loop={true}
           pagination={{ clickable: true }}
-          navigation
           className="mt-10"
           breakpoints={{
             768: {
