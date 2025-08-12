@@ -14,7 +14,7 @@ export interface AdminLayoutProps {
 const Topbar: FC<{ toggleSidebar: (isOpen?: boolean) => void }> = ({ toggleSidebar }) => {
   return (
     <header className="flex justify-between items-center px-4 py-2 bg-white border-b shadow-md sticky top-0 z-40">
-      <button className="lg:hidden text-2xl" onClick={() => toggleSidebar(true)}>
+      <button className="lg:hidden text-2xl" onClick={() => toggleSidebar()}>
         <Image 
           src={'/svgs/ham-menu.svg'}
           width={30}
@@ -86,10 +86,8 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
 
 
   return (
-    <div className="flex justify-start h-screen bg-[#FAF8F3]">
-      <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
-        <Sidebar isOpen={sidebarOpen} toggle={toggleSidebar} />
-      </div>
+    <div className="flex justify-start h-screen bg-[#FAF8F3] w-full">
+      <Sidebar isOpen={sidebarOpen} toggle={toggleSidebar} />
       <div className="w-full flex flex-col">
         <Topbar toggleSidebar={toggleSidebar} />
         <main className="p-4">{children}</main>

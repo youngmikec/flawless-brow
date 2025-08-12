@@ -1,10 +1,12 @@
-// app/api/auth/route.ts
+// app/api/auth/route.tsimport aqp from "api-query-params";
+import aqp from "api-query-params";
+import { SortOrder } from "mongoose";
+
 import dbConnect from '../../../lib/mongodb';
+import ProductService from '../product-services/model';
+import { IsValidAdmin, getSearchParams, setLimit } from '../../../utils';
 import Appointment, { AppointStatusEnum, ValidateCreateAppointment } from './model';
 import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
-import { IsValidAdmin, getSearchParams } from '../../../utils';
-import { UploadImageService } from '../../../services';
-import ProductService from '../product-services/model';
 
 
 const getAppointmentStatusDescription = (value: AppointStatusEnum): string => {
@@ -37,10 +39,34 @@ export async function GET(req: Request) {
     if (!isAuthenticated) {
       return FailureResponse(403, 'Unauthorized');
     }
-
-     const paramsObject = getSearchParams(req);
     
-    const services = await Appointment.find({ ...paramsObject })
+    const { filter, projection, population, skip, sort } = aqp(req.url);
+    let { limit } = aqp(req.url);
+    limit = setLimit(limit);
+    const searchQuery = filter.q ? filter.q : false;
+    if (searchQuery) {
+      const escaped = searchQuery.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+      filter.$or = [
+        { name: { $regex: new RegExp(searchQuery, "i") } },
+        { shortName: { $regex: new RegExp(searchQuery, "i") } },
+        { $text: { $search: escaped, $caseSensitive: false } },
+      ];
+      delete filter.q;
+    }
+
+    if (!filter.deleted) filter.deleted = 0;
+
+    const paramsObject = getSearchParams(req);
+    const filters = paramsObject.filter ? JSON.parse(paramsObject.filter) : {};
+
+
+    const services = await Appointment.find({ ...filters })
+      .populate(paramsObject.populate.split(','))
+      .sort(paramsObject.sort)
+      .limit(setLimit(paramsObject.limit))
+      .skip(skip)
+      .select(projection)
+      .exec();
                                 // .populate('user', 'createdBy')
                                 ; // Populate user field with email
     return SuccessResponse(services, 'Services retrieved successfully');

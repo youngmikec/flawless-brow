@@ -7,7 +7,8 @@ import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import { Appointment } from "../../../interfaces";
 import AppointmentListView from "./views/appointment-list-view";
-import { useUser } from "../../hooks/users-hooks";
+import { useAppointment } from "../../hooks/appointment-hooks";
+
 
 
 const AppointmentsPage: FC = () => {
@@ -23,7 +24,9 @@ const AppointmentsPage: FC = () => {
         setPageView(view);
     }
 
-    const { isLoading, data, refetch } = useUser("?role=user");
+    
+
+    const { isLoading, data, refetch } = useAppointment(`?filter=${JSON.stringify({ balance: 25 })}&populate=productService,customer&sort=-1&limit=5`);
 
     useEffect(() => {
         setAppointments(data || []);
