@@ -42,7 +42,6 @@ const AddBankAccountPage = () => {
       onSubmit: (values) => {
         setSubmitting(true);
         const payload = {...values};
-        console.log(userStore.loggedInUser);
         (userStore.loggedInUser) ? 
         payload.user = userStore.loggedInUser?._id :
         payload.user = getItem('clientD')?.id;

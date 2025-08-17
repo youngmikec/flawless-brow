@@ -13,6 +13,7 @@ import { useAppointment } from "../../hooks/appointment-hooks";
 
 const AppointmentsPage: FC = () => {
     const router = useRouter();
+    const queryParams: string = `?filter=${JSON.stringify({ balance: 25 })}&populate=productService&sort=-1&limit=5`;
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [appointments, setAppointments] = useState<Appointment[]>([]);
 
@@ -26,7 +27,7 @@ const AppointmentsPage: FC = () => {
 
     
 
-    const { isLoading, data, refetch } = useAppointment(`?filter=${JSON.stringify({ balance: 25 })}&populate=productService,customer&sort=-1&limit=5`);
+    const { isLoading, data, refetch } = useAppointment(queryParams);
 
     useEffect(() => {
         setAppointments(data || []);

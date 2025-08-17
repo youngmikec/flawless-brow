@@ -8,6 +8,7 @@ import ListGridComp from "../../components/app/ListGridComp";
 import { User } from "../../../interfaces";
 import ClientsListView from "./views/client-list-view";
 import { useUser } from "../../hooks/users-hooks";
+import AppModalComp from "../components/AppModal";
 
 
 const ClientPage: FC = () => {
@@ -84,6 +85,22 @@ const ClientPage: FC = () => {
                 </div>
                 
             </div>
+
+            <AppModalComp title=''>
+                <h1></h1>
+                {/* {
+                    modalMode === 'create' && <AirtimeForm />
+                }
+                {
+                    modalMode === 'view' && <AirtimeDetailComp airtime={selectedAirtime} />
+                }
+                {
+                    modalMode === 'update' && <AirtimeUpdateForm airtime={selectedAirtime}  />
+                }
+                {
+                    modalMode === 'delete' && <DeleteComp id={selectedAirtime?.id} action={handleDeleteRecord} deleting={deleting} />
+                } */}
+            </AppModalComp>
         </div>
     )
 }

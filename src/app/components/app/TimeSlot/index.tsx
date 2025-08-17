@@ -11,10 +11,6 @@ interface TimeSlotProps {
 
 const TimeSlot: React.FC<TimeSlotProps> = ({ time, isSelected = false, selectedTime, onClick }) => {
   const [active, setActive] = useState<boolean>(false);
-  console.log('isSelected', isSelected);
-  console.log('selectedTime', selectedTime);
-  console.log('time', time);
-  console.log('active', active);
   useEffect(() => {
     setActive(selectedTime === time);
   }, [selectedTime, time]);

@@ -36,7 +36,6 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
       },
       validationSchema: validateForm(),
       onSubmit: (values) => {
-        console.log('createAppointment', createAppointment)
 
         const payload = {
           ...values, 

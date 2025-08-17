@@ -2,28 +2,41 @@
 
 import { FC, useEffect, useState, } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import AppButton from "../../components/app/AppButton";
-import ListGridComp from "../../components/app/ListGridComp";
+
+
 import ListView from "./views/list-view";
 import { IService } from "../../../interfaces";
 import { useProductService } from "../../hooks";
+import AppModalComp from "../components/AppModal";
+import { useAppStore } from "../../../store/app-store";
+import AppButton from "../../components/app/AppButton";
+import ListGridComp from "../../components/app/ListGridComp";
+import AddProductService from "./views/add-service";
 
 
 const SettingsPage: FC = () => {
-    const router = useRouter();
+    const { toggleAppModal } = useAppStore();
+    const [formMode, setFormMode] = useState<"create" | 'update'>('create');
+    const [selectedRecord, setSelectedRecord] = useState<IService | null>(null);
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [productServices, setProductServices] = useState<IService[]>([]);
 
-    const goToAddPage = () => {
-        router.push('/admin/services/add');
+    const goToAddPage = (formMode: 'create' | 'update' = 'create') => {
+        toggleAppModal(true);
+        setFormMode(formMode);
     }
 
     const setView = (view: 'list' | 'grid' ) => {
         setPageView(view);
     }
 
-    const { isLoading, data, refetch } = useProductService();
+    const onViewEditRecord = (record: IService) => {
+        toggleAppModal(true);
+        setFormMode('update');
+        setSelectedRecord(record);
+    }
+
+    const { data } = useProductService();
 
     useEffect(() => {
         setProductServices(data || []);
@@ -78,12 +91,39 @@ const SettingsPage: FC = () => {
                 <div className="my-4">
                     {
                         pageView === 'list' && (
-                            <ListView services={productServices} />
+                            <ListView 
+                                services={productServices}
+                                onViewEditRecord={onViewEditRecord}
+                            />
                         )
                     }
                 </div>
-                
             </div>
+
+            <AppModalComp 
+                title={
+                    (formMode === 'update' && selectedRecord) 
+                        ? selectedRecord.title 
+                        : 'Add a Service'
+                }
+            >
+                <AddProductService 
+                    formMode={formMode}
+                    selectedRecord={selectedRecord}
+                />
+                {/* {
+                    modalMode === 'create' && <AirtimeForm />
+                }
+                {
+                    modalMode === 'view' && <AirtimeDetailComp airtime={selectedAirtime} />
+                }
+                {
+                    modalMode === 'update' && <AirtimeUpdateForm airtime={selectedAirtime}  />
+                }
+                {
+                    modalMode === 'delete' && <DeleteComp id={selectedAirtime?.id} action={handleDeleteRecord} deleting={deleting} />
+                } */}
+            </AppModalComp>
         </div>
     )
 }

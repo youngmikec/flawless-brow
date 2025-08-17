@@ -26,13 +26,6 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
     new Date(2025, 7, 20),
   ];
 
-  console.log('createAppointment', createAppointment);
-  console.log('selectedDate', selectedDate);
-  console.log('selectedTime', selectedTime);
-  console.log('availableDates', availableDates);
-
-
-
 
   const handleSeletTime = (data: string, type: 'time' | 'date') => {
     if(type === 'time') {

@@ -1,9 +1,15 @@
 "use client"
-import { useRef, useState } from "react";
+import { useRef, useState, FC, useEffect } from "react";
 import Image from "next/image";
+import { FaTimes } from "react-icons/fa";
 import { UploadImageToServer } from "../../../providers";
 
-const ImageUploadComp = ({ onImageUploadComplete }: { onImageUploadComplete: (imageUrl: string) => void }) => {
+type Props = {
+  onImageUploadComplete: (imageUrl: string) => void,
+  imgUrl?: string; 
+}
+
+const ImageUploadComp: FC<Props> = ({ onImageUploadComplete, imgUrl = '' }) => {
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
   const [imageString, setImageString] = useState<string>('');
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -54,6 +60,10 @@ const ImageUploadComp = ({ onImageUploadComplete }: { onImageUploadComplete: (im
     }
   }
 
+  useEffect(() => {
+    setImageString(imgUrl);
+  }, [imgUrl])
+
   return (
     <div className="w-full flex flex-col items-center justify-center p-4 min-h-[200px] bg-white rounded-md border-dashed border-[1px] border-[#384EB74D]">
       {imageString ? (
@@ -68,7 +78,7 @@ const ImageUploadComp = ({ onImageUploadComplete }: { onImageUploadComplete: (im
             onClick={() => setImageString('')}
             className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100"
           >
-            ×
+            <FaTimes size={20} className="text-[#1D1C1DB2]" />
           </button>
         </div>
       ) : (

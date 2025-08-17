@@ -1,11 +1,10 @@
 'use client'
 import { FC } from "react";
-import { HeroBackgroundImages } from "../../../constants";
-
-import { useEffect, useState } from 'react'
-import AppButton from "../../app/AppButton";
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 
+import AppButton from "../../app/AppButton";
+import { HeroBackgroundImages } from "../../../constants/index";
 
 
 

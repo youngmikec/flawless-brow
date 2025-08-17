@@ -170,7 +170,6 @@ export const getSearchParams = (req: Request): Record<string, string> => {
   for (const [key, value] of searchParams.entries()) {
       paramsObject[key] = value;
   }
-  console.log('ParamsObject =>', paramsObject);
   return paramsObject;
 } 
 

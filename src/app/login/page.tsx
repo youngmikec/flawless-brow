@@ -20,46 +20,46 @@ const LoginPage = () => {
   const router = useRouter();
   const userStore = useUser();
 
-    const validateForm = () => Yup.object({
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        password: Yup.string().required('Password is required'),
-    });
+  const validateForm = () => Yup.object({
+      email: Yup.string().email('Invalid email address').required('Email is required'),
+      password: Yup.string().required('Password is required'),
+  });
 
-    const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      validationSchema: validateForm(),
-      onSubmit: (values) => {
-          const payload = {...values}
-          setSubmitting(true);
-          LoginService(payload)
-          .then((res: AxiosResponse<ApiResponse>) => {
-              const { success, message, data } = res.data;
-              if(success){
-                  setSubmitting(false);
-                  setItem('clientToken', data.token);
-                  setItem('clientD', data.user);
-                  userStore.setLoggedInUser(data.user);
-                  router.push('/admin');
-              }
-          })
-          .catch((err: any) => {
-              setSubmitting(false);
-              // const { message } = err.response.data;
-              // notify err
-              // notify('error', message);
-          })
-      }
-    });
+  const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validateForm(),
+    onSubmit: (values) => {
+        const payload = {...values}
+        setSubmitting(true);
+        LoginService(payload)
+        .then((res: AxiosResponse<ApiResponse>) => {
+            const { success, message, data } = res.data;
+            if(success){
+                setSubmitting(false);
+                setItem('clientToken', data.token);
+                setItem('clientD', data.user);
+                userStore.setLoggedInUser(data.user);
+                router.push('/admin/overview');
+            }
+        })
+        .catch((err: any) => {
+            setSubmitting(false);
+            // const { message } = err.response.data;
+            // notify err
+            // notify('error', message);
+        })
+    }
+  });
 
-    const handleInputChange = (value: any, name: string) => {
-        const event = {
-          target: { name, value }
-        };
-        handleChange(event);
+  const handleInputChange = (value: any, name: string) => {
+    const event = {
+      target: { name, value }
     };
+    handleChange(event);
+  };
 
   return (
     <>

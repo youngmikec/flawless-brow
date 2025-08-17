@@ -75,13 +75,18 @@ const UserSchema = new Schema<IUser>({
   address: { type: String, default: '' },
   gender: { type: String, default: '' },
   phone: { type: String, default: '' },
-  createdAt: { type: Date, default: Date.now(), select: true },
-  updatedAt: { type: Date, default: Date.now(), select: true },
+  createdAt: { type: Date, default: Date.now, select: true },
+  updatedAt: { type: Date, default: Date.now, select: true },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: false },
   updatedBy: { type: Schema.Types.ObjectId, ref: 'User', required: false },
 });
 
 UserSchema.set("collection", "users");
 
-export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+// Delete the model if it exists to prevent OverwriteModelError
+delete mongoose.models.User;
+
+// Create and export the model
+const User = mongoose.model<IUser>('User', UserSchema);
+export default User;
 

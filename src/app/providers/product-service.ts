@@ -17,7 +17,7 @@ export const CreateProductService = async (data: {[key: string]: any}) => {
 };
 
 export const UpdateProductService = async (id: string, data: {[key: string]: any}) => {
-  return axios.post(`${BASE_URL}/api/product-services/${id}`, data);
+  return axios.put(`${BASE_URL}/api/product-services/${id}`, data);
 };
 
 export const DeleteProductService = async (id: string = '') => {
