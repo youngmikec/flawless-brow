@@ -2,6 +2,8 @@
 
 import { FC, useEffect, useState, } from "react";
 import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 import ListView from "./views/list-view";
@@ -12,11 +14,14 @@ import { useAppStore } from "../../../store/app-store";
 import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import AddProductService from "./views/add-service";
+import DeleteComp from "../components/DeleteComp";
+import { DeleteProductService } from "@/app/providers";
 
 
 const SettingsPage: FC = () => {
     const { toggleAppModal } = useAppStore();
     const [formMode, setFormMode] = useState<"create" | 'update'>('create');
+    const [modalMode, setModalMode] = useState<string>('');
     const [selectedRecord, setSelectedRecord] = useState<IService | null>(null);
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [productServices, setProductServices] = useState<IService[]>([]);
@@ -36,7 +41,27 @@ const SettingsPage: FC = () => {
         setSelectedRecord(record);
     }
 
-    const { data } = useProductService();
+    const { data, refetch } = useProductService();
+
+    const notify = (type: string, msg: string) => {
+        if (type === "success") {
+            toast.success(msg, {
+            // position: toast.POSITION.TOP_RIGHT
+            });
+        }else if (type === "error") {
+            toast.error(msg, {
+                // position: toast.POSITION.TOP_RIGHT,
+            });
+        } else {
+            toast.info(msg);
+        }
+    };
+
+    const onDeleteSuccess = (msg: string, data: any) => {
+        setSelectedRecord(null);
+        notify('info', msg);
+        refetch && refetch("");
+    }
 
     useEffect(() => {
         setProductServices(data || []);
@@ -107,23 +132,21 @@ const SettingsPage: FC = () => {
                         : 'Add a Service'
                 }
             >
-                <AddProductService 
-                    formMode={formMode}
-                    selectedRecord={selectedRecord}
-                />
-                {/* {
-                    modalMode === 'create' && <AirtimeForm />
-                }
                 {
-                    modalMode === 'view' && <AirtimeDetailComp airtime={selectedAirtime} />
+                    (formMode === 'create' || formMode === 'update') && (
+                        <AddProductService 
+                            formMode={formMode}
+                            selectedRecord={selectedRecord}
+                            onSuccess={() => refetch && refetch('')}
+                        />
+                    )
                 }
-                {
-                    modalMode === 'update' && <AirtimeUpdateForm airtime={selectedAirtime}  />
-                }
-                {
-                    modalMode === 'delete' && <DeleteComp id={selectedAirtime?.id} action={handleDeleteRecord} deleting={deleting} />
-                } */}
             </AppModalComp>
+            <DeleteComp 
+                id={selectedRecord?._id} 
+                action={DeleteProductService}
+                onDeleteSuccess={onDeleteSuccess}
+            />
         </div>
     )
 }

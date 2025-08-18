@@ -37,6 +37,7 @@ const AddBankAccountPage = () => {
         bankCountry: "",
         currency: "",
         user: "",
+        isActive: true,
       },
       validationSchema: validateForm(),
       onSubmit: (values) => {

@@ -1,40 +1,34 @@
 "use client";
 
 import StatCard from "../components/StatCard";
+import { useReportStatistics } from "../../hooks/report-statistics-hooks";
 
 
 const AdminPage = () => {
-  const reportStats = [
-    {
-      title: "TOTAL AMOUNT",
-      value: 3456,
-      icon: "/images/cart.png"
-    },
-    {
-      title: "NO OF APPOINTMENTS",
-      value: 20,
-      icon: "/images/box.png"
-    },
-    {
-      title: "TRANSACTIONS",
-      value: 45,
-      icon: "/images/money.png"
-    }
-  ]
+
+  const { data, isLoading } = useReportStatistics("");
   return (
       <div className="">
         <h1 className="text-2xl font-semibold font-inter text-primary">Report</h1>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
-            reportStats.map((stat, index) => (
-              <StatCard
-                key={index}
-                title={stat.title}
-                value={stat.value}
-                icon={stat.icon}
-              />
-            ))
-          }
+          <StatCard
+            title={"TOTAL AMOUNT"}
+            value={data?.totalAmount || 0}
+            icon={"/images/cart.png"}
+            isLoading={isLoading}
+          />
+          <StatCard
+            title={"NO OF APPOINTMENTS"}
+            value={data?.numOfAppointments || 0}
+            icon={"/images/box.png"}
+            isLoading={isLoading}
+          />
+          <StatCard
+            title={"TOTAL CLIENTS"}
+            value={data?.numOfClients || 0}
+            icon={"/images/money.png"}
+            isLoading={isLoading}
+          />
         </div>
       </div>
   )

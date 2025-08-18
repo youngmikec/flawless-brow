@@ -13,17 +13,18 @@ import TextAreaField from "../../../components/form/TextAreaField";
 import AppButton from "../../../components/app/AppButton";
 import { useAppStore } from "../../../../store/app-store";
 import { IAddOnService } from "@/app/api/product-services/model";
-import { title } from "process";
+import Image from "next/image";
 
 
 type Props = {
   formMode: 'create' | 'update';
-  selectedRecord: IService | null
+  selectedRecord: IService | null;
+  onSuccess?: () => any;
 }
 
 
-const AddProductService: FC<Props> = ({ formMode, selectedRecord }) => {
-  const { toggleAppModal } = useAppStore();
+const AddProductService: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
+  const { toggleAppModal, toggleDeleteModal } = useAppStore();
   const [productServiceImg, setProductServiceImg] = useState<string>('');
   const [productServices, setProductServices] = useState<any[]>([]);
 
@@ -68,8 +69,10 @@ const AddProductService: FC<Props> = ({ formMode, selectedRecord }) => {
         if(response) {
           const { success, message, data } = response.data;
           if(success){
+            onSuccess && onSuccess();
             setSubmitting(false);
             notify('success', message);
+            toggleAppModal(false);
           }
         }
       } catch (err: any) {
@@ -87,6 +90,10 @@ const AddProductService: FC<Props> = ({ formMode, selectedRecord }) => {
     handleChange(event);
   };
 
+  const handleDeleteService = () => {
+    toggleDeleteModal(true);
+  }
+
   useEffect(() => {
     if(selectedRecord){
       setProductServiceImg(selectedRecord?.serviceImage);
@@ -97,6 +104,24 @@ const AddProductService: FC<Props> = ({ formMode, selectedRecord }) => {
   return (
     <>
       <div className="px-4 my-4">
+        {
+          (formMode === 'update' && selectedRecord) && (
+            <div className="flex justify-end mb-4">
+              <div 
+                className="flex justify-start gap-2 items-center cursor-pointer"
+                onClick={handleDeleteService}
+              >
+                <Image  
+                  src="/svgs/delete-icon.svg"
+                  alt="delete icon"
+                  width={15}
+                  height={15}
+                />
+                <p className="text-[#B3261E] font-inter font-[500] text-sm">Delete Service</p>
+              </div>
+            </div>
+          )
+        }
         <div className="my-2">
           <ImageUploadComp
             imgUrl={productServiceImg}

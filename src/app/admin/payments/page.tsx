@@ -54,6 +54,18 @@ const BankDetail: FC<{ bankAccount: BankAccount }> = ({ bankAccount }) => {
                 </div>                    
 
             </div>
+
+            <div className="mt-8">
+                <div className="bg-[#EAEAEA] w-full rounded-lg p-4">
+                    <div className="flex justify-between mb-4">
+                        <h1 className="text-sm font-semibold font-inter text-primary">Additional Note</h1>
+                    </div>
+
+                    <div>
+                        <p className="text-black">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
+                    </div>   
+                </div>
+            </div>
         </div>
     )
 }
@@ -65,7 +77,7 @@ const PaymentsPage = () => {
         router.push('/admin/payments/add-bank-account');
     }
 
-    const { isLoading, data, message } = useBankAccounts();
+    const { isLoading, data } = useBankAccounts("?isActive=true");
     
     return (
         <div className="">

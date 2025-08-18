@@ -4,4 +4,5 @@ export * from './product-service';
 export * from './user';
 export * from './appointments';
 export * from './upload-image';
+export * from './reports';
 

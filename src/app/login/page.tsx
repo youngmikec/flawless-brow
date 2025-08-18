@@ -38,11 +38,11 @@ const LoginPage = () => {
         .then((res: AxiosResponse<ApiResponse>) => {
             const { success, message, data } = res.data;
             if(success){
-                setSubmitting(false);
-                setItem('clientToken', data.token);
-                setItem('clientD', data.user);
-                userStore.setLoggedInUser(data.user);
-                router.push('/admin/overview');
+              setSubmitting(false);
+              setItem('clientToken', data.token);
+              setItem('clientD', data.user);
+              userStore.setLoggedInUser(data.user);
+              window.location.href = '/admin/overview';
             }
         })
         .catch((err: any) => {
