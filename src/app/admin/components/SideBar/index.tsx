@@ -123,7 +123,7 @@ const Sidebar: FC = () => {
                 
             </ul>
 
-            <div className="absolute bottom-6 left-4 p-4">
+            <div className="absolute bottom-6 left-4">
               <AppAvatar 
                 userProfile={undefined}
               />
