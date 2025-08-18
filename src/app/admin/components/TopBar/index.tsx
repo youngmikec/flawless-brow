@@ -9,8 +9,11 @@ import Breadcrumb from "../Breadcrumb";
 import { AdminSidebarItems } from "../../../constants/admin-sidebar";
 import { useAppStore } from '../../../../store/app-store';
 
+type Props = {
+  openScheduleModal: () => any;
+}
 
-const Topbar: FC<{ toggleSidebar: (isOpen?: boolean) => void }> = () => {
+const Topbar: FC<Props> = ({ openScheduleModal }) => {
   const { showSideBar, toggleLogoutModal, setShowSideBar } = useAppStore()
   const pathname = usePathname();
   const customeStyle = {
@@ -54,20 +57,20 @@ const Topbar: FC<{ toggleSidebar: (isOpen?: boolean) => void }> = () => {
       </div>
       <div className="flex justify-between items-center gap-20 min-w-[6/12]">
         <div>
-          <Link
-            href="/admin/schedule"
-            className="text-[#B3261E] text-sm font-inter"
+          <div
+            className="text-[#B3261E] text-sm font-inter cursor-pointer"
+            onClick={openScheduleModal}
           >
             Edit available date
-          </Link>
+          </div>
         </div>
         <div>
-            <Image
-              src="/svgs/notification-bell.svg"
-              alt="logo"
-              width={15}
-              height={15}
-            />
+          <Image
+            src="/svgs/notification-bell.svg"
+            alt="logo"
+            width={15}
+            height={15}
+          />
         </div>
       </div>
 
