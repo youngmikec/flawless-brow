@@ -2,28 +2,66 @@
 
 import { FC, useEffect, useState, } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import AppButton from "../../components/app/AppButton";
-import ListGridComp from "../../components/app/ListGridComp";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 import ListView from "./views/list-view";
 import { IService } from "../../../interfaces";
 import { useProductService } from "../../hooks";
+import AppModalComp from "../components/AppModal";
+import { useAppStore } from "../../../store/app-store";
+import AppButton from "../../components/app/AppButton";
+import ListGridComp from "../../components/app/ListGridComp";
+import AddProductService from "./views/add-service";
+import DeleteComp from "../components/DeleteComp";
+import { DeleteProductService } from "@/app/providers";
 
 
 const SettingsPage: FC = () => {
-    const router = useRouter();
+    const { toggleAppModal } = useAppStore();
+    const [formMode, setFormMode] = useState<"create" | 'update'>('create');
+    const [modalMode, setModalMode] = useState<string>('');
+    const [selectedRecord, setSelectedRecord] = useState<IService | null>(null);
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [productServices, setProductServices] = useState<IService[]>([]);
 
-    const goToAddPage = () => {
-        router.push('/admin/services/add');
+    const goToAddPage = (formMode: 'create' | 'update' = 'create') => {
+        toggleAppModal(true);
+        setFormMode(formMode);
     }
 
     const setView = (view: 'list' | 'grid' ) => {
         setPageView(view);
     }
 
-    const { isLoading, data, refetch } = useProductService();
+    const onViewEditRecord = (record: IService) => {
+        toggleAppModal(true);
+        setFormMode('update');
+        setSelectedRecord(record);
+    }
+
+    const { data, refetch } = useProductService();
+
+    const notify = (type: string, msg: string) => {
+        if (type === "success") {
+            toast.success(msg, {
+            // position: toast.POSITION.TOP_RIGHT
+            });
+        }else if (type === "error") {
+            toast.error(msg, {
+                // position: toast.POSITION.TOP_RIGHT,
+            });
+        } else {
+            toast.info(msg);
+        }
+    };
+
+    const onDeleteSuccess = (msg: string, data: any) => {
+        setSelectedRecord(null);
+        notify('info', msg);
+        refetch && refetch("");
+    }
 
     useEffect(() => {
         setProductServices(data || []);
@@ -78,12 +116,37 @@ const SettingsPage: FC = () => {
                 <div className="my-4">
                     {
                         pageView === 'list' && (
-                            <ListView services={productServices} />
+                            <ListView 
+                                services={productServices}
+                                onViewEditRecord={onViewEditRecord}
+                            />
                         )
                     }
                 </div>
-                
             </div>
+
+            <AppModalComp 
+                title={
+                    (formMode === 'update' && selectedRecord) 
+                        ? selectedRecord.title 
+                        : 'Add a Service'
+                }
+            >
+                {
+                    (formMode === 'create' || formMode === 'update') && (
+                        <AddProductService 
+                            formMode={formMode}
+                            selectedRecord={selectedRecord}
+                            onSuccess={() => refetch && refetch('')}
+                        />
+                    )
+                }
+            </AppModalComp>
+            <DeleteComp 
+                id={selectedRecord?._id} 
+                action={DeleteProductService}
+                onDeleteSuccess={onDeleteSuccess}
+            />
         </div>
     )
 }

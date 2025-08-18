@@ -164,7 +164,7 @@ const InputField: FC<Props> = ({
           {/* select options */}
 
         {
-          (isError && disableErrMsg) && 
+          (isError && errMsg) && 
           <p className="text-[#DD584F] my-2 text-xs font-semibold">{errMsg}</p>
         }
       </div>

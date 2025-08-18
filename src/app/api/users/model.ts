@@ -35,6 +35,19 @@ export const ValidateCreateCustomerProfile = Joi.object({
   updatedAt: Joi.date().optional(),
 });
 
+export const ValidateCreateContact = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).optional(),
+  role: Joi.string().valid('admin', 'user').optional(),
+  fullName: Joi.string().optional(),
+  phone: Joi.string().required(),
+  age: Joi.number().required(),
+  address: Joi.string().required(),
+  gender: Joi.string().valid('male', 'female', 'other').required(),
+  updatedBy: Joi.string().optional(),
+  updatedAt: Joi.date().optional(),
+});
+
 export const ValidateUpdateUserProfile = Joi.object({
   email: Joi.string().email().optional(),
   password: Joi.string().min(6).optional(),
@@ -62,13 +75,18 @@ const UserSchema = new Schema<IUser>({
   address: { type: String, default: '' },
   gender: { type: String, default: '' },
   phone: { type: String, default: '' },
-  createdAt: { type: Date, default: Date.now(), select: true },
-  updatedAt: { type: Date, default: Date.now(), select: true },
+  createdAt: { type: Date, default: Date.now, select: true },
+  updatedAt: { type: Date, default: Date.now, select: true },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: false },
   updatedBy: { type: Schema.Types.ObjectId, ref: 'User', required: false },
 });
 
 UserSchema.set("collection", "users");
 
-export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+// Delete the model if it exists to prevent OverwriteModelError
+delete mongoose.models.User;
+
+// Create and export the model
+const User = mongoose.model<IUser>('User', UserSchema);
+export default User;
 

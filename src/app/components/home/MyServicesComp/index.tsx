@@ -58,17 +58,32 @@ const services = [
 const MyServicesComp = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [productServices, setProductServices] = useState<IService[]>([]);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
 
-  const { data } = useProductService();
 
-  console.log('services =>', data);
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const { data } = useProductService('', true);
+
 
   useEffect(() => {
       setProductServices(data || []);
   }, [data]);
 
   return (
-    <section className="w-full px-4 py-12 text-center bg-white">
+    <section id="services" className="w-full px-4 py-12 text-center bg-white">
       <div className="w-full mx-auto md:w-11/12">
         <p className="text-lg sm:text-xl font-bold mb-2 text-black text-center font-montserrat">My services</p>
         <p className="text-4xl sm:text-5xl text-[#8D7B68] mb-4 font-style-script">
@@ -91,19 +106,19 @@ const MyServicesComp = () => {
                 // modules={[Pagination, Navigation]}
                 modules={[Pagination]}
                 spaceBetween={30}
-                slidesPerView={4}
-                // centeredSlides
+                slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
+                centeredSlides
                 loop={true}
                 pagination={{ clickable: true }}
                 className="mt-10"
-                breakpoints={{
-                  768: {
-                    slidesPerView: 2.3,
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                  },
-                }}
+                // breakpoints={{
+                //   768: {
+                //     slidesPerView: 2.3,
+                //   },
+                //   1024: {
+                //     slidesPerView: 3,
+                //   },
+                // }}
                 onSlideChange={(slide) => setActiveIndex(slide.realIndex)}
               >
                 {productServices.map((service: IService, index: number) => (

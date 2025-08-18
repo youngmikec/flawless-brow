@@ -2,6 +2,9 @@
   "name": "flawless-brows",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "rm -rf .next && next dev",
     "build": "next build",
@@ -11,6 +14,7 @@
   },
   "dependencies": {
     "@types/mongoose": "^5.11.97",
+    "api-query-params": "^6.0.1",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
@@ -23,15 +27,17 @@
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.0",
     "next": "13.5.11",
+    "postcss": "^8",
     "react": "^18",
+    "react-day-picker": "^9.8.1",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "react-toastify": "^11.0.5",
     "sharp": "^0.34.3",
     "swiper": "^11.2.10",
+    "tailwindcss": "^3",
     "yup": "^1.7.0",
-    "zustand": "^5.0.7",
-    "postcss": "^8",
-    "tailwindcss": "^3"
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.6",
@@ -39,6 +45,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
+    "cssnano": "^7.1.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.11",
     "typescript": "^5"

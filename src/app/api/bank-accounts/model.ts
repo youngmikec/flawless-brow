@@ -1,6 +1,6 @@
 // models/User.ts
 import mongoose, { Schema, Document } from 'mongoose';
-import Joi from 'joi';
+import Joi, { boolean } from 'joi';
 
 export interface IBankAccount extends Document {
     accountName: string;
@@ -9,6 +9,9 @@ export interface IBankAccount extends Document {
     branch: string;
     bankCountry: string;
     currency: string;
+    sortCode: string;
+    iban: string;
+    isActive: boolean;
     user: any; // Reference to the User model
     createdAt?: Date;
     updatedAt?: Date;
@@ -22,6 +25,8 @@ export const ValidateCreateBankAccount = Joi.object({
     bankName: Joi.string().required(),
     branch: Joi.string().required(),
     bankCountry: Joi.string().required(),
+    sortCode: Joi.string().required(),
+    iban: Joi.string().required(),
     currency: Joi.string().required(),
     user: Joi.string().required(), // Assuming user is a string ID
     createdBy: Joi.string().optional(),
@@ -32,9 +37,12 @@ export const ValidateUpdateBankAccount = Joi.object({
     accountNumber: Joi.string().optional(),
     bankName: Joi.string().optional(),
     branch: Joi.string().optional(),
+    sortCode: Joi.string().optional(),
+    iban: Joi.string().optional(),
+    isActive: Joi.boolean().optional(),
     bankCountry: Joi.string().optional(),
     currency: Joi.string().optional(),
-    updatedBy: Joi.string().optional()
+    updatedBy: Joi.string().optional(),
 });
 
 const BankAccountSchema = new Schema<IBankAccount>({
@@ -46,6 +54,9 @@ const BankAccountSchema = new Schema<IBankAccount>({
     currency: { type: String, required: true },
     createdAt: { type: Date, default: Date.now(), select: true },
     updatedAt: { type: Date, default: Date.now(), select: true },
+    sortCode: { type: String, select: true },
+    iban: { type: String, select: true },
+    isActive: { type: Boolean, default: false, select: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
     updatedBy: { type: Schema.Types.ObjectId, ref: 'User' }

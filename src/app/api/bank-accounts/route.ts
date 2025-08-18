@@ -3,7 +3,7 @@ import dbConnect from '../../../lib/mongodb';
 import BankAccount from './model';
 import { ValidateCreateBankAccount } from './model';
 import { FailureResponse, response } from '../../../utils/api-response';
-import { IsValidAdmin } from '../../../utils';
+import { getSearchParams, IsValidAdmin } from '../../../utils';
 
 export async function GET(req: Request) {
   try {
@@ -14,7 +14,8 @@ export async function GET(req: Request) {
       return FailureResponse(403, 'Unauthorized');
     }
 
-    const bankAccounts = await BankAccount.find()
+    const paramsObject = getSearchParams(req);
+    const bankAccounts = await BankAccount.find({ ...paramsObject })
                                 // .populate('user', 'createdBy')
                                 ; // Populate user field with email
     return response(200, 'Bank accounts retrieved successfully', bankAccounts);
@@ -36,10 +37,21 @@ export async function POST(req: Request) {
     const error = ValidateCreateBankAccount.validate(body);
 
     if(error.error) {
-        return FailureResponse(400, error.error.details[0].message);
+      return FailureResponse(400, error.error.details[0].message);
+    }
+
+    const activeBanks = await BankAccount.find({ isActive: true});
+
+    if(activeBanks && activeBanks.length > 0){
+      const updatedRecords = await BankAccount.updateMany({ isActive: true}, { isActive: false});
+      if(!updatedRecords){
+        return FailureResponse(500, 'Failed to create bank account');
+      }
     }
 
     body.createdBy = data.id; // Set the createdBy field to the admin's ID;
+    body.isActive = body.isActive ? true : false;
+
     const newBankAccount = new BankAccount(body);
     const result = await newBankAccount.save();
 

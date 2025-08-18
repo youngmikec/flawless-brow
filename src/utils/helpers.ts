@@ -42,7 +42,7 @@ export function generateObjectId(serial: string, baseId = "5c51bc91860d8b5bc0000
   return `${str}${serial}`;
 }
 
-export function setLimit(inputlimit: any) {
+export function setLimit(inputlimit: any): number {
   const limit = parseInt(inputlimit, 10);
   // eslint-disable-next-line no-restricted-globals
   return isNaN(limit) || limit == null || limit > 100 || limit === 0
@@ -170,7 +170,6 @@ export const getSearchParams = (req: Request): Record<string, string> => {
   for (const [key, value] of searchParams.entries()) {
       paramsObject[key] = value;
   }
-  
   return paramsObject;
 } 
 

@@ -31,7 +31,8 @@ const policies = [
 
 const BookingPolicies = () => {
   return (
-    <section className="relative w-full text-white">
+    <section id="booking-policies" className="relative w-full text-white">
+
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image

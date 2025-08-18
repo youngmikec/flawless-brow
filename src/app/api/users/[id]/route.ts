@@ -22,7 +22,6 @@ export async function PUT(
         return FailureResponse(400, error.error.details[0].message);
     }
 
-    console.log('body =>', body.password);
 
     if (body.password) body.password = hash(body.password);
 

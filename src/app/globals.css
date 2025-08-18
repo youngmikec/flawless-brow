@@ -1,147 +1,196 @@
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Third-party CSS imports */
 @import "swiper/css";
 @import "swiper/css/pagination";
 @import "swiper/css/navigation";
 @import "swiper/css/effect-coverflow";
 
-:root {
-  /* --foreground-rgb: 0, 0, 0; */
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+/* Custom styles layer */
+@layer base {
   :root {
-    /* --foreground-rgb: 255, 255, 255; */
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+    }
+  }
+
+  /* Font declarations */
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  /* Inter Font */
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("/fonts/Inter/Inter-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Style-Script";
+    src: url("/fonts/Inter/Inter-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  /* Style_Script font */
+  @font-face {
+    font-family: "Style-Script";
+    src: url("/fonts/Style_Script/StyleScript-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Source Sans font */
+  @font-face {
+    font-family: "Source-Sans";
+    src: url("/fonts/Source_Sans/SourceSans3-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Source Serif font */
+  @font-face {
+    font-family: "Source-Sans";
+    src: url("/fonts/Source_Serif/SourceSerif4_18pt-Bold.ttf")
+      format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Source-Sans";
+    src: url("/fonts/Source_Serif/SourceSerif4_18pt-ExtraBold.ttf")
+      format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    color: rgb(var(--foreground-rgb));
+    font-family: "Inter", "Montserrat", "Style-Script", "Source-Sans",
+      "Source-Serif", sans-serif;
   }
 }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
+/* Component styles */
+/* @layer components {
+  .swiper-slide {
+    @apply opacity-60 scale-95 transition-all duration-300 py-12;
+  }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
+  .swiper-slide.swiper-slide-active {
+    @apply opacity-100 scale-105 z-10;
+  }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat/Montserrat-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-}
+  .swiper-pagination-bullet {
+    @apply bg-gray-300 opacity-60 w-[10px] h-[10px] my-20 mx-1.5 transition-all duration-300 rounded-full;
+  }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat/Montserrat-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Inter Font */
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter/Inter-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter/Inter-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter/Inter-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "Style-Script";
-  src: url("/fonts/Inter/Inter-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* Style_Script font */
-@font-face {
-  font-family: "Style-Script";
-  src: url("/fonts/Style_Script/StyleScript-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* Source Sans font */
-@font-face {
-  font-family: "Source-Sans";
-  src: url("/fonts/Source_Sans/SourceSans3-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-/* Source Serif font */
-@font-face {
-  font-family: "Source-Sans";
-  src: url("/fonts/Source_Serif/SourceSerif4_18pt-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Source-Sans";
-  src: url("/fonts/Source_Serif/SourceSerif4_18pt-ExtraBold.ttf")
-    format("truetype");
-  font-weight: 900;
-  font-style: normal;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  font-family: "Inter", "Montserrat", "Style-Script", "Source-Sans",
-    "Source-Serif" sans-serif;
-}
+  .swiper-pagination-bullet-active {
+    @apply bg-[#f9a825] opacity-100 scale-130;
+  }
+} */
 
 .swiper-slide {
   opacity: 0.6;
   transform: scale(0.95);
-  transition: all 0.3s ease;
-  padding: 3rem 0 3rem 0;
+  transition: all 0.3s;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .swiper-slide.swiper-slide-active {
-  opacity: 1 !important;
-  transform: scale(1.05) !important;
-  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); */
+  opacity: 1;
+  transform: scale(1.05);
   z-index: 10;
 }
 
+.swiper-button-prev {
+  color: #f9a825 !important;
+  width: 2rem;
+  height: 2rem;
+}
+
+.swiper-button-next {
+  color: #f9a825 !important;
+  width: 2rem;
+  height: 2rem;
+}
+
 .swiper-pagination-bullet {
-  background-color: #ddd !important;
+  background-color: #d1d5db !important;
   opacity: 0.6;
   width: 10px;
   height: 10px;
-  margin: 5rem 6px 0 6px;
-  transition: all 0.3s ease;
-  border-radius: 50%;
+  margin: 5rem 0.375rem;
+  transition: all 0.3s;
+  border-radius: 9999px;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #f9a825 !important; /* e.g., golden */
+  background-color: #f9a825 !important;
+
   opacity: 1;
   transform: scale(1.3);
 }

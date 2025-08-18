@@ -1,10 +1,12 @@
 // components/TestimonialSlider.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
+import { useSwiper } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -13,6 +15,24 @@ import { Testimonials } from "../../../constants";
 
 const TestimonialSlider = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const swiper = useSwiper();
+
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
   return (
     <section className="bg-[#5A4B3D] text-white py-16 px-4 sm:px-8">
       <div className="max-w-5xl mx-auto text-center mb-10">
@@ -22,15 +42,20 @@ const TestimonialSlider = () => {
         </p>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 relative">
+        {/* <div className="absolute text-[#F48804] font-bold -bottom-3 left-80 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slidePrev()}>{'<'}</div>
+        <div className="absolute text-[#F48804] font-bold -bottom-3 right-28 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slideNext()}>{'>'}</div> */}
+
         <Swiper
           modules={[Pagination, Navigation]}
+          navigation
+          slideNextClass="text-[#F48804]"
+          slidePrevClass="text-[#F48804]"
           spaceBetween={30}
-          slidesPerView={3}
+          slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
           centeredSlides
           loop={true}
           pagination={{ clickable: true }}
-          navigation
           className="mt-10"
           breakpoints={{
             768: {
