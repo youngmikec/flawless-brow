@@ -5,4 +5,4 @@ export * from './user';
 export * from './appointments';
 export * from './upload-image';
 export * from './reports';
-
+export * from './schedule';

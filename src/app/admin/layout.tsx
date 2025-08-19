@@ -4,9 +4,9 @@ import { useState, FC, useEffect } from "react";
 import Sidebar from "./components/SideBar";
 import TopBar from "./components/TopBar";
 import LogoutComp from "./components/LogoutModal";
-import AppModalComp from "./components/AppModal";
+import AppScheduleModal from "./components/AppScheduleModal";
 import AddSchedule from './schedule/add-schedule';
-import { useAppStore } from '../../store/app-store';
+import { useScheduleStore } from "../../store/schedule-store";
 
 export interface AdminLayoutProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export interface AdminLayoutProps {
 
 
 const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
-  const { toggleAppModal } = useAppStore();
+  const { toggleScheduleModal } = useScheduleStore();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [windowWidth, setWindowWidth] = useState<number>(0);
 
@@ -27,7 +27,7 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   }
 
   const handleOpenScheduleModal = () => {
-    toggleAppModal(true);
+    toggleScheduleModal(true);
   }
 
   useEffect(() => {
@@ -63,14 +63,13 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
         <div className='w-full lg:flex-1'>
           <div className='mx-auto w-full'>
             <TopBar 
-              toggleSidebar={toggleSidebar}
               openScheduleModal={handleOpenScheduleModal}
             />
             <div className="p-4">
               { children }
-              <AppModalComp title="">
+              <AppScheduleModal title="Add or delete appointment">
                 <AddSchedule />
-              </AppModalComp>
+              </AppScheduleModal>
             </div>
           </div>
         </div>

@@ -35,16 +35,16 @@ const MyDatePicker: FC<Props> = ({ availableDates, onDateSelect }) => {
         navigator: { backgroundColor: '#1A1A1A', color: '#fff' },
 
       }}
-      disabled={
-        [
-          { before: new Date() },
-          (date) =>
-          !availableDates?.some(
-            (availableDate) =>
-              availableDate.toDateString() === date.toDateString()
-          )
-        ]
-      }
+      // disabled={
+      //   [
+      //     { before: new Date() },
+      //     (date) =>
+      //     !availableDates?.some(
+      //       (availableDate) =>
+      //         availableDate.toDateString() === date.toDateString()
+      //     )
+      //   ]
+      // }
       // footer={
       //   selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
       // }
