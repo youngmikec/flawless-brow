@@ -3,24 +3,24 @@
 import React, { ReactNode } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
-import { useAppStore } from '../../../../store/app-store';
+import { useScheduleStore } from '../../../../store/schedule-store';
 
 type Props = {
     children: ReactNode,
     title: string;
 }
 
-const AppModalComp = ({ children, title }: Props) => {
-  const { showAppModal, toggleAppModal } = useAppStore();
+const AppScheduleModal = ({ children, title }: Props) => {
+  const { showScheduleModal, toggleScheduleModal } = useScheduleStore();
   // close modal
   const closeModal = () => {
-    toggleAppModal(false)
+    toggleScheduleModal(false)
   }
 
   return (
     <>
       {
-        showAppModal &&
+        showScheduleModal &&
         <div className="fixed top-0 bottom-0 left-0 right-0 bg-[#4242428f] w-full h-full z-30 overflow-scroll">
           <div className='my-16'>
             <div className="bg-white pb-8 rounded-2xl mx-auto w-11/12 sm:w-11/12 md:w-7/12 lg:w-4/12 min-h-[50vh]">
@@ -50,4 +50,4 @@ const AppModalComp = ({ children, title }: Props) => {
   );
 }
 
-export default AppModalComp;
+export default AppScheduleModal;

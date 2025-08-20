@@ -13,7 +13,7 @@ const AdminPage = () => {
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <StatCard
             title={"TOTAL AMOUNT"}
-            value={data?.totalAmount || 0}
+            value={`£ ${data?.totalAmount || 0}`}
             icon={"/images/cart.png"}
             isLoading={isLoading}
           />

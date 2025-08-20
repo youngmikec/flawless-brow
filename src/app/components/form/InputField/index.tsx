@@ -14,12 +14,12 @@ type Props = {
   rightIcon?: JSX.Element;
   leftIcon?: JSX.Element;
   placeholder?: string;
-  isError: boolean;
   isLoading?: boolean;
+  isError: boolean;
   showBorder?: boolean;
+  errMsg?: string | any;
   disableErrMsg?: boolean;
   isChild?: boolean;
-  errMsg?: string | any;
   selectOptions?: SelectOption[] | any[];
   type: 'text' | 'email' | 'phone' | 'date' | 'number' | 'password' | 'checkbox' | 'radio' | 'hidden' | 'file' | 'url' | 'search' | 'color' | 'datetime-local' | 'time' | 'month' | 'week' | 'range' | 'image' | 'submit' | 'reset' | 'button'
   // onChange: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement> | any) => void;

@@ -4,6 +4,9 @@ import { useState, FC, useEffect } from "react";
 import Sidebar from "./components/SideBar";
 import TopBar from "./components/TopBar";
 import LogoutComp from "./components/LogoutModal";
+import AppScheduleModal from "./components/AppScheduleModal";
+import AddSchedule from './schedule/add-schedule';
+import { useScheduleStore } from "../../store/schedule-store";
 
 export interface AdminLayoutProps {
   children: React.ReactNode;
@@ -11,6 +14,7 @@ export interface AdminLayoutProps {
 
 
 const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
+  const { toggleScheduleModal } = useScheduleStore();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [windowWidth, setWindowWidth] = useState<number>(0);
 
@@ -20,6 +24,10 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
     } else {
       setSidebarOpen(!sidebarOpen);
     }
+  }
+
+  const handleOpenScheduleModal = () => {
+    toggleScheduleModal(true);
   }
 
   useEffect(() => {
@@ -42,17 +50,7 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   }, [windowWidth]);
 
 
-
   return (
-    // <div className="flex justify-start h-screen bg-[#FAF8F3]">
-    //   <div className={sidebarOpen ? 'block' : 'hidden md:block'}>
-    //     <Sidebar isOpen={sidebarOpen} toggle={toggleSidebar} />
-    //   </div>
-    //   <div className="w-full flex flex-col">
-    //     <Topbar toggleSidebar={toggleSidebar} />
-    //     <main className="p-4">{children}</main>
-    //   </div>
-    // </div>
     <>
       <div className='content-wrapper flex'>
         <div className='sm:w-5/12 lg:w-1/6 hidden min-h-screen
@@ -64,9 +62,14 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
         </div>
         <div className='w-full lg:flex-1'>
           <div className='mx-auto w-full'>
-            <TopBar toggleSidebar={toggleSidebar} />
+            <TopBar 
+              openScheduleModal={handleOpenScheduleModal}
+            />
             <div className="p-4">
               { children }
+              <AppScheduleModal title="Add or delete appointment">
+                <AddSchedule />
+              </AppScheduleModal>
             </div>
           </div>
         </div>
