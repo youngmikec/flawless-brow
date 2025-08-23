@@ -1,9 +1,11 @@
 "use client"
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import MyDatePicker from "../../../components/app/MyDatePicker";
 import TimeSlot from "../../../components/app/TimeSlot";
 import AppButton from "../../../components/app/AppButton";
 import { useAppointmentStore } from "../../../../store/appointment";
+import { ISchedule } from '../../../../interfaces';
+import { useSchedules } from '../../../hooks';
 
 
 
@@ -16,6 +18,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
 
   const [selectedDate, setSelectedDate] = useState<any | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [avialableSchedules, setAvailableSchedules]  = useState<ISchedule[]>([]);
 
 
   const { appendAppointData, createAppointment } = useAppointmentStore();
@@ -26,6 +29,11 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
     new Date(2025, 7, 20),
   ];
 
+  const { data, refetch } = useSchedules("", true);
+
+  useEffect(() => {
+    data && setAvailableSchedules(data);
+  }, [])
 
   const handleSeletTime = (data: string, type: 'time' | 'date') => {
     if(type === 'time') {
@@ -55,42 +63,21 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
         <div>
           <p className="text-sm text-[#192020] font-[300] text-center">Montag, 18. September</p>
 
-          <div className="my-4">
-            <TimeSlot 
-              isSelected={selectedTime === '5:30 PM'}
-              selectedTime={selectedTime}
-              time="5:30 PM" 
-              onClick={() => handleSeletTime('5:30 PM', 'time')} 
-
-            />
-          </div>
-          <div className="my-4">
-            <TimeSlot 
-              selectedTime={selectedTime}
-              isSelected={selectedTime === '6:00 PM'} 
-              time="6:00 PM" 
-              onClick={() => handleSeletTime('6:00 PM', 'time')} 
-
-            />
-          </div>
-          <div className="my-4">
-            <TimeSlot 
-              selectedTime={selectedTime}
-              isSelected={selectedTime === '6:30 PM'}
-              time="6:30 PM" 
-              onClick={() => handleSeletTime('6:30 PM', 'time')} 
-
-            />
-          </div>
-          <div className="my-4">
-            <TimeSlot 
-              selectedTime={selectedTime}
-              isSelected={selectedTime === '7:00 PM'}
-              time="7:00 PM" 
-              onClick={() => handleSeletTime('7:00 PM', 'time')} 
-
-            />
-          </div>
+          {
+            avialableSchedules.length && avialableSchedules.map((schedule: ISchedule, idx: number) => (
+              <div 
+                className="my-4"
+                key={idx}
+              >
+                <TimeSlot 
+                  isSelected={selectedTime === schedule.startTime}
+                  selectedTime={selectedTime}
+                  time={`${schedule.startTime} - ${schedule.endTime}`} 
+                  onClick={() => handleSeletTime(schedule.startTime, 'time')} 
+                />
+              </div>
+            ))
+          }
         </div>
       </div>
 

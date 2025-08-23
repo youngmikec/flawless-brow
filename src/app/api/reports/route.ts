@@ -23,7 +23,6 @@ export async function GET(req: Request) {
     }
 
     const appointmentCount = response.length;
-    console.log(response);
     let totalAmount = 0;
     response.forEach((a: any) => {
       totalAmount = a.amountPaid ? (totalAmount + parseInt(a?.amountPaid)) : (totalAmount + 0);

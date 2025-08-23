@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ISchedule } from '../../interfaces/';
 import { ApiResponse, IUseHookResponse } from '../../interfaces';
-import { GetSchedules } from '../providers';
+import { GetSchedules, GetPublicSchedules } from '../providers';
 
 export const useSchedules = (initialQuery: string = ''): IUseHookResponse => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -11,10 +11,11 @@ export const useSchedules = (initialQuery: string = ''): IUseHookResponse => {
     const [message, setMessage] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
 
-    const fetchSchedules = async (query: string = '') => {
+    const fetchSchedules = async (query: string = '', isPublic: boolean = false) => {
         setIsLoading(true);
         try {
-            const response = await GetSchedules(query);
+            const response = await (isPublic ? GetPublicSchedules(query) : GetSchedules(query));
+
             const responseData = response.data as ApiResponse;
             setData(responseData.data || null);
             setMessage(responseData.message || '');

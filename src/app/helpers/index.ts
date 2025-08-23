@@ -53,3 +53,29 @@ export const formatCurrency = (amount: number | undefined, currency: string | un
         return '0'
     }
 };
+
+export const getTimeDifferenceFormatted = (start: string, end: string): string => {
+  // Convert "HH:mm:ss" to Date objects (using today's date)
+  const today = new Date().toISOString().split('T')[0];
+  const startTime = new Date(`${today}T${start}`);
+  const endTime = new Date(`${today}T${end}`);
+
+  if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+    throw new Error('Invalid time format. Use HH:mm:ss.');
+  }
+
+  let diffMs = Math.abs(endTime.getTime() - startTime.getTime());
+  const diffSecs = Math.floor(diffMs / 1000);
+
+  if (diffSecs < 60) {
+    return `${diffSecs}sec${diffSecs !== 1 ? 's' : ''}`;
+  }
+
+  const diffMins = Math.floor(diffSecs / 60);
+  if (diffMins < 60) {
+    return `${diffMins}min${diffMins !== 1 ? 's' : ''}`;
+  }
+
+  const diffHrs = Math.floor(diffMins / 60);
+  return `${diffHrs}hr${diffHrs !== 1 ? 's' : ''}`;
+}
