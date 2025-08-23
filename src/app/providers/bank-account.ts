@@ -17,7 +17,7 @@ export const CreateBankAccount = async (data: {[key: string]: any}) => {
 };
 
 export const UpdateBankAccount = async (id: string, data: {[key: string]: any}) => {
-  return axios.post(`${BASE_URL}/api/bank-accounts/${id}`, data);
+  return axios.put(`${BASE_URL}/api/bank-accounts/${id}`, data);
 };
 
 export const DeleteBankAccount = async (id: string = '') => {

@@ -17,7 +17,7 @@ export const CreateSchedule = async (data: {[key: string]: any}) => {
 };
 
 export const UpdateSchedule = async (id: string, data: {[key: string]: any}) => {
-  return axios.post(`${BASE_URL}/api/schedules/${id}`, data);
+  return axios.put(`${BASE_URL}/api/schedules/${id}`, data);
 };
 
 export const DeleteSchedule = async (id: string = '') => {

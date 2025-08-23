@@ -2,72 +2,34 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import Joi from 'joi';
 
-export interface IAddOnService {
-    title: string;
-    description?: string;
-}
-
-export interface IProductService extends Document {
-    title: string;
-    description: string;
-    price: string;
-    duration: string;
-    currencySymbol: string;
-    serviceImage: string;
-    isFree: boolean;
-    addOnServices: IAddOnService[];
+export interface ScheduleService extends Document {
+    scheduleDate: string;
+    startTime: string;
+    endTime: string;
     createdAt?: Date;
     updatedAt?: Date;
     createdBy?: string;
     updatedBy?: string;
 }
 
-export const ValidateCreateProductService = Joi.object({
-    title: Joi.string().required(),
-    description: Joi.string().required(),
-    price: Joi.string().required(),
-    duration: Joi.string().required(),
-    currencySymbol: Joi.string().required(),
-    isFree: Joi.bool().optional(),
-    serviceImage: Joi.string().uri().optional(),
-    addOnServices: Joi.array().items(
-        Joi.object({
-            title: Joi.string().required(),
-            description: Joi.string().optional()
-        })
-    ).optional(),
+export const ValidateCreateSchedule = Joi.object({
+    scheduleDate: Joi.string().required(),
+    startTime: Joi.string().required(),
+    endTime: Joi.string().required(),
     createdBy: Joi.string().optional()
 });
 
-export const ValidateUpdateProductService = Joi.object({
-    title: Joi.string().required(),
-    description: Joi.string().required(),
-    price: Joi.string().required(),
-    duration: Joi.string().required(),
-    currencySymbol: Joi.string().required(),
-    serviceImage: Joi.string().uri().optional(),
-    isFree: Joi.bool().optional(),
-    addOnServices: Joi.array().items(
-        Joi.object({
-            title: Joi.string().required(),
-            description: Joi.string().optional()
-        })
-    ).optional(),
+export const ValidateUpdateSchedule = Joi.object({
+    scheduleDate: Joi.string().required(),
+    startTime: Joi.string().required(),
+    endTime: Joi.string().required(),
     updatedBy: Joi.string().optional()
 });
 
-const ProductServiceSchema = new Schema<IProductService>({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: String, required: true },
-    duration: { type: String, required: true },
-    currencySymbol: { type: String, required: true },
-    isFree: { type: Boolean, default: false, select: true, required: true},
-    serviceImage: { type: String, required: true },
-    addOnServices: [{
-        title: { type: String, required: true },
-        description: { type: String, default: '' }
-    }],
+const ScheduleSchema = new Schema<ScheduleService>({
+    scheduleDate: { type: String, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
     createdAt: { type: Date, default: Date.now(), select: true },
     updatedAt: { type: Date, default: Date.now(), select: true },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -75,6 +37,6 @@ const ProductServiceSchema = new Schema<IProductService>({
 
 });
 
-ProductServiceSchema.set("collection", "product_services");
+ScheduleSchema.set("collection", "schedules");
 
-export default mongoose.models.ProductService || mongoose.model<IProductService>('ProductService', ProductServiceSchema);
+export default mongoose.models.Schedule || mongoose.model<ScheduleService>('Schedule', ScheduleSchema);

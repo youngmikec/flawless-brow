@@ -16,7 +16,7 @@ export const CreateUserContact = async (data: {[key: string]: any}) => {
 };
 
 export const UpdateUser = async (id: string, data: {[key: string]: any}) => {
-  return axios.post(`${BASE_URL}/api/users/${id}`, data);
+  return axios.put(`${BASE_URL}/api/users/${id}`, data);
 };
 
 export const DeleteUser = async (id: string = '') => {

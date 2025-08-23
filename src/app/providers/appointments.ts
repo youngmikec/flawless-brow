@@ -12,7 +12,7 @@ export const CreateAppointment = async (data: {[key: string]: any}) => {
 };
 
 export const UpdateAppointment = async (id: string, data: {[key: string]: any}) => {
-  return axios.post(`${BASE_URL}/api/appointment/${id}`, data);
+  return axios.put(`${BASE_URL}/api/appointment/${id}`, data);
 };
 
 export const DeleteAppointment = async (id: string = '') => {
