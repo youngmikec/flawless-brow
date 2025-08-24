@@ -4,9 +4,11 @@ import { FC } from 'react';
 import * as Yup from 'yup'
 import { useFormik } from "formik";
 import { AxiosResponse } from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 import { ApiResponse } from '../../../../interfaces';
-
-
 import { CreateUserContact } from "../../../providers";
 import ContactInputField from "../../../components/form/ContactInputField";
 import AppButton from '../../../components/app/AppButton';
@@ -28,6 +30,20 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
       gender: Yup.string().required('Gender is required'),
       age: Yup.number().required('Age is required'),
     });
+
+    const notify = (type: string, msg: string) => {
+      if (type === "success") {
+        toast.success(msg, {
+        // position: toast.POSITION.TOP_RIGHT
+        });
+      }
+
+      if (type === "error") {
+        toast.error(msg, {
+          // position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
 
     const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
       initialValues: {
@@ -59,9 +75,8 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
           })
           .catch((err: any) => {
               setSubmitting(false);
-              // const { message } = err.response.data;
-              // notify err
-              // notify('error', message);
+              const { message } = err.response.data;
+              notify('error', message);
           })
       }
     });
@@ -163,6 +178,8 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
           />
         </div>
       </form>
+
+      <ToastContainer />
     </div>
   )
 }

@@ -6,6 +6,7 @@ import AppButton from "../../../components/app/AppButton";
 import { useAppointmentStore } from "../../../../store/appointment";
 import { ISchedule } from '../../../../interfaces';
 import { useSchedules } from '../../../hooks';
+import { formatDate } from "../../../../utils";
 
 
 
@@ -16,7 +17,7 @@ type Props = {
 
 const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
 
-  const [selectedDate, setSelectedDate] = useState<any | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<ISchedule | null>(null);
   const [availableSchedules, setAvailableSchedules]  = useState<ISchedule[]>([]);
   const [availableDates, setAvailableDates] = useState<any[]>([]);
@@ -31,6 +32,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
   const { data } = useSchedules("", true);
 
   const handleSeletTime = (data: string, type: 'time' | 'date') => {
+    console.log(data, type);
     if(type === 'time') {
       const time = availableSchedules.find((schedule: ISchedule) => schedule._id === data);
       if(time){
@@ -49,9 +51,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
       const dates = data.map((schedule: ISchedule) => new Date(schedule.scheduleDate));
       setAvailableDates(dates);
     }
-  }, [data])
-
-
+  }, [data]);
 
 
   return (
@@ -61,14 +61,17 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
           <MyDatePicker 
             availableDates={availableDates} 
             onDateSelect={(data) => handleSeletTime(data, 'date')}
-
             // selectedDate={selectedDate}
           />
 
 
         </div>
         <div>
-          <p className="text-sm text-[#192020] font-[300] text-center">Montag, 18. September</p>
+          {
+            selectedDate !== '' && (
+              <p className="text-sm text-[#192020] font-[300] text-center">{ formatDate(selectedDate) as string }</p>
+            )
+          }
 
           {
             availableSchedules.length && availableSchedules.map((schedule: ISchedule, idx: number) => (
@@ -79,7 +82,7 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
                 <TimeSlot 
                   selectedTime={selectedTime}
                   schedule={schedule}
-                  onClick={(scheduleResp) => handleSeletTime(scheduleResp._id, 'time')} 
+                  onClick={(scheduleResp) => handleSeletTime(scheduleResp?._id || '', 'time')} 
                 />
               </div>
             ))

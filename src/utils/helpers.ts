@@ -1,5 +1,6 @@
 import bcryptjs from "bcryptjs";
 import { JWT } from "../constant";
+import moment from 'moment';
 // import slugify from "slugify";
 
 // export const extractAccessToken = (req: Request): string | string[] | null => {
@@ -8,6 +9,18 @@ import { JWT } from "../constant";
 //   }
 //   return null;
 // };
+
+
+export const formatDate = (input: Date | string): string => {
+  const date = moment(input);
+
+  if (!date.isValid()) {
+    throw new Error('Invalid date input');
+  }
+
+  return date.format('dddd, D MMMM'); // e.g., "Monday, 25 August"
+}
+
 
 export const safeGet = (obj: any = {}, prop: string) => {
   return Object.assign({}, obj)[prop] || "";

@@ -11,6 +11,7 @@ import ContactForm from "./steps/contact-form";
 import PaymentStep from "./steps/payment-step";
 import AppButton from "../../components/app/AppButton";
 import { useAppointmentStore } from "../../../store/appointment";
+import { formatDate } from "../../../utils";
 
 
 const BookingPage: FC = () => {
@@ -73,7 +74,7 @@ const BookingPage: FC = () => {
   }, [accountsResponse])
 
   return (
-    <div className="w-full min-h-[100vh] max-h-full bg-[#FAF8F3] pt-20">
+    <div className="w-full min-h-[100vh] max-h-full bg-[#FAF8F3] pt-32">
       {
         step === 5 && (
           <div className="w-full h-full flex items-center justify-center">
@@ -98,7 +99,7 @@ const BookingPage: FC = () => {
                       />
                     </div>
                     <div>
-                      <p>{ appointmentData?.appointmentDay || "--" }</p>
+                      <p>{ formatDate(appointmentData?.appointmentDay)  || "--" }</p>
                     </div>
                   </div>
                   <div className="flex justify-start items-center gap-2">
@@ -139,7 +140,7 @@ const BookingPage: FC = () => {
 
       {
         step !== 5 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto w-11/12 md:w-9/12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto w-11/12 md:w-10/12">
             <div>
               <h1 className="text-3xl md:text-5xl font-bold font-montserrat mb-8">Services</h1>
 
@@ -150,7 +151,7 @@ const BookingPage: FC = () => {
                 <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Duration: {productService?.duration || "--"}</p>
 
 
-                <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Price: {productService?.price || "--"}</p>
+                <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Price: {productService?.price ? `£ ${productService.price}` : "--"}</p>
                 <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Working hours: Monday-Saturday </p>
 
                 <p className="font-inter text-sm font-normal text-[#1A1A1A] my-4">

@@ -40,15 +40,15 @@ export async function POST(req: Request) {
         return FailureResponse(400, error.error.details[0].message);
     }
 
-    if(body.serviceImage && typeof body.serviceImage === 'string') {
-      const { secure_url } = await UploadImageService(body.serviceImage);
-      if (!secure_url) {
-        return FailureResponse(400, 'Image upload failed');
-      }
-      body.serviceImage = secure_url;
-    }
+    // if(body.serviceImage && typeof body.serviceImage === 'string') {
+    //   const { secure_url } = await UploadImageService(body.serviceImage);
+    //   if (!secure_url) {
+    //     return FailureResponse(400, 'Image upload failed');
+    //   }
+    //   body.serviceImage = secure_url;
+    // }
 
-    
+    body.isFree = body.price === '0' ? true : false;
 
     body.createdBy = data.id; // Set the createdBy field to the admin's ID;
     const newRecord = new ProductService(body);

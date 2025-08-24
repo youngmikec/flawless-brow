@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ServiceCard from "./ServiceCard";
-import { useProductService } from "../../../hooks";
 import { IService } from "../../../../interfaces";
 
 const services = [
@@ -55,9 +54,12 @@ const services = [
   },
 ];
 
-const MyServicesComp = () => {
+type Props = {
+  productServices: IService[];
+}
+
+const MyServicesComp: FC<Props> = ({ productServices }: Props) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [productServices, setProductServices] = useState<IService[]>([]);
   const [windowWidth, setWindowWidth] = useState<number>(0);
 
 
@@ -75,15 +77,9 @@ const MyServicesComp = () => {
     };
   }, []);
 
-  const { data } = useProductService('', true);
-
-
-  useEffect(() => {
-      setProductServices(data || []);
-  }, [data]);
 
   return (
-    <section id="services" className="w-full px-4 py-12 text-center bg-white">
+    <section id="services" className="w-full px-4 py-12 text-center bg-white mt-40">
       <div className="w-full mx-auto md:w-11/12">
         <p className="text-lg sm:text-xl font-bold mb-2 text-black text-center font-montserrat">My services</p>
         <p className="text-4xl sm:text-5xl text-[#8D7B68] mb-4 font-style-script">

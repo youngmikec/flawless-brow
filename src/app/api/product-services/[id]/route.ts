@@ -22,11 +22,19 @@ export async function PUT(
     const error = ValidateUpdateProductService.validate(body);
 
     if(error.error) {
-        return FailureResponse(400, error.error.details[0].message);
+      return FailureResponse(400, error.error.details[0].message);
     }
 
-    if(body.serviceImage && typeof body.serviceImage === 'string') {
-        body.serviceImage = await UploadImageService(body.serviceImage);
+    // if(body.serviceImage && typeof body.serviceImage === 'string') {
+    //   const { secure_url } = await UploadImageService(body.serviceImage);
+    //   if (!secure_url) {
+    //     return FailureResponse(400, 'Image upload failed');
+    //   }
+    //   body.serviceImage = secure_url;
+    // }
+
+    if(body.price) {
+      body.isFree = body.price === '0' ? true : false;
     }
 
     body.updatedBy = data.id; // Set the updatedBy field to the admin's ID;

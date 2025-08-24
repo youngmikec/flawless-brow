@@ -62,6 +62,7 @@ const AddProductService: FC<Props> = ({ formMode, selectedRecord, onSuccess }) =
         ...values,
         addOnServices: productServices.map((item: IAddOnService) => ({ title: item.title })),
         serviceImage: productServiceImg,
+        isFree: values.price === '0' ? true : false,
       }
       setSubmitting(true);
       try {

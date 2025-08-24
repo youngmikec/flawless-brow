@@ -43,7 +43,7 @@ export const ValidateCreateAppointment = Joi.object({
     appointmentDay: Joi.string().required(),
     appointmentTime: Joi.string().required(),
     currencySymbol: Joi.string().required(),
-    proofOfPaymentImage: Joi.string().uri().required(),
+    proofOfPaymentImage: Joi.string().uri().optional(),
     status: Joi.string().valid(AppointStatusEnum).optional(),
     addOnServices: Joi.array().items(
         Joi.string().optional()
@@ -74,7 +74,7 @@ const AppointmentSchema = new Schema<IAppointment>({
     amountPaid: { type: Number, default: 0, required: true, select: true },
     balance: { type: Number, select: true },
     currencySymbol: { type: String, required: true },
-    proofOfPaymentImage: { type: String, required: true },
+    proofOfPaymentImage: { type: String, default: '', select: true },
     addOnServices: [{
         title: { type: String, required: true },
         description: { type: String, default: '' }

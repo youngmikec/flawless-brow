@@ -40,8 +40,10 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
         const payload = {
           ...values, 
           ...createAppointment,
-          proofOfPaymentImage: paymentProof,
           currencySymbol: 'EUR',
+        }
+        if(paymentProof) {
+          payload.proofOfPaymentImage = paymentProof;
         }
 
         setSubmitting(true);

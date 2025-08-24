@@ -73,7 +73,6 @@ const AddOnStep: FC<Props> = ({ addOnServices = [], toggleStep }) => {
           btnText={'Continue'}
           fill={'fill'}
           bgColor={'primary'}
-          disabled={!selectedServices.length}
           width={"max"}
           onClick={() => goToNext()}
 
