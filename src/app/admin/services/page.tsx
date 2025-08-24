@@ -15,13 +15,12 @@ import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import AddProductService from "./views/add-service";
 import DeleteComp from "../components/DeleteComp";
-import { DeleteProductService } from "@/app/providers";
+import { DeleteProductService } from "../../providers";
 
 
 const SettingsPage: FC = () => {
     const { toggleAppModal } = useAppStore();
     const [formMode, setFormMode] = useState<"create" | 'update'>('create');
-    const [modalMode, setModalMode] = useState<string>('');
     const [selectedRecord, setSelectedRecord] = useState<IService | null>(null);
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [productServices, setProductServices] = useState<IService[]>([]);
@@ -147,6 +146,7 @@ const SettingsPage: FC = () => {
                 action={DeleteProductService}
                 onDeleteSuccess={onDeleteSuccess}
             />
+            <ToastContainer />
         </div>
     )
 }

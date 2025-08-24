@@ -53,14 +53,14 @@ const AdminLayout: FC<AdminLayoutProps> = ({ children }) => {
   return (
     <>
       <div className='content-wrapper flex'>
-        <div className='sm:w-5/12 lg:w-1/6 hidden min-h-screen
+        <div className='sm:w-5/12 md:w-4/12 lg:w-3/12 hidden min-h-screen
           sm:hidden
           md:block
           lg:block'
         >
           <Sidebar />
         </div>
-        <div className='w-full lg:flex-1'>
+        <div className='w-full sm:w-7/12 md:w-8/12 lg:w-9/12'>
           <div className='mx-auto w-full'>
             <TopBar 
               openScheduleModal={handleOpenScheduleModal}

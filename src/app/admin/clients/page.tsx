@@ -2,22 +2,32 @@
 
 import { FC, useEffect, useState, } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import { User } from "../../../interfaces";
 import ClientsListView from "./views/client-list-view";
 import { useUser } from "../../hooks/users-hooks";
 import AppModalComp from "../components/AppModal";
+import { useAppStore } from "../../../store/app-store";
+import AddClient from "./views/add-client";
+import DeleteComp from "../components/DeleteComp";
+import { DeleteUser } from "../../providers";
 
 
 const ClientPage: FC = () => {
-    const router = useRouter();
+    const { toggleAppModal } = useAppStore();
+    const [formMode, setFormMode] = useState<"create" | 'update'>('create');
+    const [selectedRecord, setSelectedRecord] = useState<User | null>(null);
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [clients, setClients] = useState<User[]>([]);
 
     const goToAddPage = () => {
-        router.push('/admin/clients/add');
+        setFormMode('create');
+        toggleAppModal(true);
     }
 
     const setView = (view: 'list' | 'grid' ) => {
@@ -25,6 +35,32 @@ const ClientPage: FC = () => {
     }
 
     const { isLoading, data, refetch } = useUser("?role=user");
+
+    const notify = (type: string, msg: string) => {
+        if (type === "success") {
+            toast.success(msg, {
+            // position: toast.POSITION.TOP_RIGHT
+            });
+        }
+
+        if (type === "error") {
+            toast.error(msg, {
+            // position: toast.POSITION.TOP_RIGHT,
+            });
+        }
+    };
+
+    const onViewEditRecord = (record: User) => {
+        toggleAppModal(true);
+        setFormMode('update');
+        setSelectedRecord(record);
+    }
+
+    const onDeleteSuccess = (msg: string, data: any) => {
+        setSelectedRecord(null);
+        notify('info', msg);
+        refetch && refetch("");
+    }
 
     useEffect(() => {
         setClients(data || []);
@@ -79,28 +115,39 @@ const ClientPage: FC = () => {
                 <div className="my-4">
                     {
                         pageView === 'list' && (
-                            <ClientsListView clients={clients} />
+                            <ClientsListView 
+                                clients={clients} 
+                                onViewEditRecord={onViewEditRecord}
+                            />
                         )
                     }
                 </div>
                 
             </div>
 
-            <AppModalComp title=''>
-                <h1></h1>
-                {/* {
-                    modalMode === 'create' && <AirtimeForm />
+            <AppModalComp 
+                title={
+                    (formMode === 'update' && selectedRecord) 
+                        ? "View Client" 
+                        : 'Add a Client'
                 }
+            >
                 {
-                    modalMode === 'view' && <AirtimeDetailComp airtime={selectedAirtime} />
+                    (formMode === 'create' || formMode === 'update') && (
+                        <AddClient 
+                            formMode={formMode}
+                            selectedRecord={selectedRecord}
+                            onSuccess={() => refetch && refetch('')}
+                        />
+                    )
                 }
-                {
-                    modalMode === 'update' && <AirtimeUpdateForm airtime={selectedAirtime}  />
-                }
-                {
-                    modalMode === 'delete' && <DeleteComp id={selectedAirtime?.id} action={handleDeleteRecord} deleting={deleting} />
-                } */}
             </AppModalComp>
+            <DeleteComp 
+                id={selectedRecord?._id} 
+                action={DeleteUser}
+                onDeleteSuccess={onDeleteSuccess}
+            />
+            <ToastContainer />
         </div>
     )
 }
