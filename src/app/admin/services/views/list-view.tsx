@@ -26,10 +26,12 @@ const ListView: FC<Props> = ({ services, onViewEditRecord }) => {
                                 <td className="px-4 py-2 text-[#1E2134] text-xs font-inter">{service.price}</td>
                                 <td className="px-4 py-2 text-xs">
                                     <div 
-                                        className="border-[1px] px-4 py-1 cursor-pointer border-[#0000001F] text-[#1E2134] font-inter rounded-3xl flex justify-center items-center"  
+                                        className="border-[1px] px-4 py-1 cursor-pointer border-[#0000001F]
+                                         text-[#1E2134] font-inter rounded-3xl hover:bg-[#0000001F]
+                                         flex justify-center items-center"  
                                         onClick={() => onViewEditRecord(service)}
                                     >
-                                        View/Edit/Delete
+                                        View
                                     </div>
                                 </td>
                             </tr>

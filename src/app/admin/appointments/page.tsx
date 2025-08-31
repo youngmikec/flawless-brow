@@ -3,31 +3,59 @@
 import { FC, useEffect, useState, } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import AppButton from "../../components/app/AppButton";
+// import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import { Appointment } from "../../../interfaces";
 import AppointmentListView from "./views/appointment-list-view";
 import { useAppointment } from "../../hooks/appointment-hooks";
+import { useAppStore } from "../../../store/app-store";
+import AppModalComp from "../components/AppModal";
+import DeleteComp from "../components/DeleteComp";
+import { DeleteAppointment } from "@/app/providers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AddAppointment from "./views/add-appointment";
 
-
+const notify = (type: string, msg: string) => {
+    if (type === "success") {
+        toast.success(msg, {
+        // position: toast.POSITION.TOP_RIGHT
+        });
+    }else if (type === "error") {
+        toast.error(msg, {
+            // position: toast.POSITION.TOP_RIGHT,
+        });
+    } else {
+        toast.info(msg);
+    }
+}
 
 const AppointmentsPage: FC = () => {
     const router = useRouter();
-    const queryParams: string = `?filter=${JSON.stringify({ balance: 25 })}&populate=productService&sort=-1&limit=5`;
+    const { toggleAppModal } = useAppStore();
+    const queryParams: string = `?filter=&populate=productService,customer&sort=-1&limit=10`;
     const [pageView, setPageView] = useState<'list' | 'grid'>('list');
     const [appointments, setAppointments] = useState<Appointment[]>([]);
+    const [selectedRecord, setSelectedRecord] = useState<Appointment | null>(null);
+    const [formMode, setFormMode] = useState<'create' | 'update'>('create');
 
-    const goToAddPage = () => {
-        router.push('/admin/appointment/add');
+    // const goToAddPage = () => {
+    //     router.push('/admin/appointment/add');
+    // }
+
+    const onViewEditRecord = (record: Appointment) => {
+        toggleAppModal(true);
+        setFormMode('update');
+        setSelectedRecord(record);
     }
 
-    const setView = (view: 'list' | 'grid' ) => {
-        setPageView(view);
+    const { data, refetch } = useAppointment(queryParams);
+
+    const onDeleteSuccess = (msg: string) => {
+        setSelectedRecord(null);
+        notify('info', msg);
+        refetch && refetch(queryParams);
     }
-
-    
-
-    const { isLoading, data, refetch } = useAppointment(queryParams);
 
     useEffect(() => {
         setAppointments(data || []);
@@ -38,7 +66,7 @@ const AppointmentsPage: FC = () => {
         <div>
             <div className="flex justify-between">
                 <h1 className="text-lg font-semibold font-inter text-primary">Appointments</h1>
-                <AppButton
+                {/* <AppButton
                     btnText="Add"
                     bgColor="blue"
                     fill="fill"
@@ -46,7 +74,7 @@ const AppointmentsPage: FC = () => {
                     width={'max'}
                     type="button"
                     onClick={goToAddPage}
-                />
+                /> */}
             </div>
             <div 
                 className="mt-12 bg-white rounded-lg w-full border-[1px] border-[#0000001F]"
@@ -63,7 +91,7 @@ const AppointmentsPage: FC = () => {
 
                     <div>
                         <ListGridComp 
-                            onViewChange={setView}
+                            onViewChange={setPageView}
                         />
                     </div>
                     <div>
@@ -82,12 +110,39 @@ const AppointmentsPage: FC = () => {
                 <div className="my-4">
                     {
                         pageView === 'list' && (
-                            <AppointmentListView appointments={appointments} />
+                            <AppointmentListView 
+                                appointments={appointments} 
+                                onViewEditRecord={onViewEditRecord}
+                            />
                         )
                     }
                 </div>
                 
             </div>
+
+            <AppModalComp
+                title={
+                    (formMode === 'update' && selectedRecord) 
+                        ? `${selectedRecord?.productService?.title} Appointment` 
+                        : 'Add Appointment'
+                }
+            >
+                {
+                    (formMode === 'create' || formMode === 'update') && (
+                        <AddAppointment
+                            formMode={formMode}
+                            selectedRecord={selectedRecord}
+                            onSuccess={() => refetch && refetch(queryParams)}
+                        />
+                    )
+                }
+            </AppModalComp>
+            <DeleteComp 
+                id={selectedRecord?._id} 
+                action={DeleteAppointment}
+                onDeleteSuccess={onDeleteSuccess}
+            />
+            <ToastContainer />
         </div>
     )
 }

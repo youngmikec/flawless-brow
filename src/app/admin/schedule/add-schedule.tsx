@@ -90,8 +90,6 @@ const AddSchedule = () => {
   const { data, refetch } = useSchedules();
 
   const onAction = (schedule: ISchedule, action: 'update' | 'delete') => {
-    console.log('schedule', schedule);
-    console.log('action', action);
     if(action === 'update') {
       setFormMode('update');
       setSelectedRecord(schedule);

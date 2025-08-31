@@ -46,11 +46,10 @@ export const formatCurrency = (amount: number | undefined, currency: string | un
             currency: currency,
           }).format(amount);
     }else {
-        // return new Intl.NumberFormat(locale, {
-        //     style: 'currency',
-        //     currency: currency,
-        //   }).format(0);
-        return '0'
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+          }).format(0);
     }
 };
 
