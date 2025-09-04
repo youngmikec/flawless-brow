@@ -28,7 +28,7 @@ const Hero: FC = () => {
 
     return (
         <div
-            className="h-[65vh] w-full bg-center bg-cover transition-all ease-linear duration-3000 font-montserrat"
+            className="h-[40vh] md:h-[65vh] w-full bg-center bg-cover transition-all ease-linear duration-3000 font-montserrat"
             style={{ 
                 backgroundImage: `url(${HeroBackgroundImages[currentIndex]})`,
                 backgroundPosition: 'center',
@@ -37,11 +37,11 @@ const Hero: FC = () => {
             }}
         >
             <div className="bg-black bg-opacity-50 h-full flex items-center justify-center relative">
-                <div className="w-full md:w-4/12 h-max absolute bottom-[5rem] md:bottom-[7rem] lg:bottom-[10rem] left-10">
-                    <p className="text-2xl md:text-4xl text-black font-extrabold font-source-sans">
+                <div className="w-full md:w-6/12 h-max absolute bottom-[5rem] md:bottom-[3rem] lg:bottom-[10rem] left-10">
+                    <p className="text-3xl md:text-6xl text-black font-extrabold font-source-sans">
                         Fearfully <span className="font-style-script font-normal">made,</span>
                     </p>
-                    <p className="text-2xl md:text-4xl text-black font-extrabold font-source-sans mb-4">
+                    <p className="text-3xl md:text-6xl text-black font-extrabold font-source-sans mb-4">
                         Beautifully <span className="font-style-script font-normal">browed.</span>
                     </p>
                     <p className="text-sm sm:text-lg text-white font-inter mb-8 w-11/12">

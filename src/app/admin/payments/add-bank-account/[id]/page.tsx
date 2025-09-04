@@ -2,6 +2,8 @@
 
 import AppButton from "../../../../components/app/AppButton";
 import InputField from "../../../../components/form/InputField";
+import IsAuthenticatedPage from "../../../../components/auth/is-auth";
+
 // import SelectField from "../../../components/form/SelectField";
 
 
@@ -104,4 +106,4 @@ const AddBankAccountPage = () => {
   );
 }
 
-export default AddBankAccountPage;
+export default IsAuthenticatedPage(AddBankAccountPage);

@@ -14,12 +14,7 @@ const Faq: FC = () => {
               Everything You Need to Know
             </h3>
             <p className="text-gray-700 leading-relaxed w-full md:w-7/12 mb-4">
-              Lorem ipsum dolor sit amet consectetur. Urna convallis malesuada et. 
-              Con convallis malesuada et.
-            </p>
-            <p className="text-gray-700 leading-relaxed w-full md:w-7/12 mb-4">
-              Vallis malesuada et. Semper eget sed amet malesuada. 
-              Massa nunc leo tincidunt curabitur.
+              Here are answers to the questions we get asked the most.
             </p>
           </div>
 

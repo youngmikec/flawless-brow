@@ -51,56 +51,49 @@ export const Testimonials = [
         name: "KYLE MERWIN",
         role: "Co-owner",
         image: "/images/male.png",
-        message:
-        "Aut nihil mollitia deserunt quia sed rem. Quibusdam enim veniam rerum id rerum beatae. Quae rerum iste necessitatibus...",
+        message: "I absolutely love my lashes! They look so natural yet glamorous. Everyone keeps asking where I got them done.",
     },
     {
         name: "LENA WILSON",
         role: "Client",
         image: "/images/female.png",
-        message:
-        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
     },
     {
         name: "TOMMY SANDERS",
         role: "Client",
         image: "/images/male.png",
-        message:
-        "Exercitationem delectus ut accusamus. Consequatur repellendus nulla error iste? Inventore reiciendis commodi ea velit nihil.",
+        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
     },
     {
         name: "LENA WILSON",
         role: "Client",
         image: "/images/female.png",
-        message:
-        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+        message: "They really know how to bring out your natural beauty. My friends couldn’t stop complimenting me after my appointment."
     },
     {
         name: "KYLE MERWIN",
         role: "Co-owner",
         image: "/images/male.png",
-        message:
-        "Aut nihil mollitia deserunt quia sed rem. Quibusdam enim veniam rerum id rerum beatae. Quae rerum iste necessitatibus...",
+        message: "I absolutely love my lashes! They look so natural yet glamorous. Everyone keeps asking where I got them done.",
     },
     {
         name: "LENA WILSON",
         role: "Client",
         image: "/images/female.png",
-        message:
-        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
     },
     {
         name: "TOMMY SANDERS",
         role: "Client",
         image: "/images/male.png",
-        message:
-        "Exercitationem delectus ut accusamus. Consequatur repellendus nulla error iste? Inventore reiciendis commodi ea velit nihil.",
+        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
     },
     {
         name: "LENA WILSON",
         role: "Client",
         image: "/images/female.png",
-        message:
-        "Ante corporis fugiat consequatur impedit. Cumque deleniti doloribus odio consectetur dicta laborum soluta unde!",
+        message: "They really know how to bring out your natural beauty. My friends couldn’t stop complimenting me after my appointment."
     },
+    
 ];

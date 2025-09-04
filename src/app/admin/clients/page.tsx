@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 import AppButton from "../../components/app/AppButton";
 import ListGridComp from "../../components/app/ListGridComp";
 import { User } from "../../../interfaces";
@@ -16,6 +15,7 @@ import { useAppStore } from "../../../store/app-store";
 import AddClient from "./views/add-client";
 import DeleteComp from "../components/DeleteComp";
 import { DeleteUser } from "../../providers";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
 
 
 const ClientPage: FC = () => {
@@ -152,4 +152,4 @@ const ClientPage: FC = () => {
     )
 }
 
-export default ClientPage;
+export default IsAuthenticatedPage(ClientPage);

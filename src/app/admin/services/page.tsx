@@ -16,6 +16,7 @@ import ListGridComp from "../../components/app/ListGridComp";
 import AddProductService from "./views/add-service";
 import DeleteComp from "../components/DeleteComp";
 import { DeleteProductService } from "../../providers";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
 
 
 const SettingsPage: FC = () => {
@@ -151,4 +152,4 @@ const SettingsPage: FC = () => {
     )
 }
 
-export default SettingsPage;
+export default IsAuthenticatedPage(SettingsPage);

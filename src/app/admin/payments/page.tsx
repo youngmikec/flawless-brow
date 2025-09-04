@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import AppButton from "../../components/app/AppButton";
 import { useBankAccounts } from '../../hooks/bank-account-hooks';
 import { BankAccount } from "../../../interfaces";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
+
 
 const BankPropertyItem = ({ label, value }: { label: string; value: string }) => (
     <div className="flex justify-between items-center mb-3">
@@ -131,4 +133,4 @@ const PaymentsPage = () => {
     )
 }
 
-export default PaymentsPage;
+export default IsAuthenticatedPage(PaymentsPage);

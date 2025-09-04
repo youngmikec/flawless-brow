@@ -50,8 +50,7 @@ const BookingPolicies = () => {
           <h4 className="text-sm font-semibold uppercase tracking-wide font-montserrat">Booking Policies</h4>
           <h2 className="text-4xl sm:text-5xl font-extrabold mt-2 leading-tight">A Few Things to Know</h2>
           <p className="mt-6 text-gray-200 leading-relaxed font-inter">
-            Lorem ipsum dolor sit amet consectetur. Urna convallis malesuada et. Semper eget sed amet malesuada.
-            Massa nunc leo tincidunt curabitur.
+            A quick guide to help you understand how we work while you relax and be served
           </p>
         </div>
 

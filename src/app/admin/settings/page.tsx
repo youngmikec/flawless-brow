@@ -13,6 +13,7 @@ import TextAreaField from "../../components/form/TextAreaField";
 import { getItem } from '../../helpers';
 import { ApiResponse } from "../../../interfaces";
 import { UpdateUser } from "../../providers";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
 
 
 const ProfileSettingsPage: FC = () => {
@@ -163,4 +164,4 @@ const ProfileSettingsPage: FC = () => {
     )
 }
 
-export default ProfileSettingsPage;
+export default IsAuthenticatedPage(ProfileSettingsPage);

@@ -15,6 +15,8 @@ import { DeleteAppointment } from "@/app/providers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddAppointment from "./views/add-appointment";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
+
 
 const notify = (type: string, msg: string) => {
     if (type === "success") {
@@ -147,4 +149,4 @@ const AppointmentsPage: FC = () => {
     )
 }
 
-export default AppointmentsPage;
+export default IsAuthenticatedPage(AppointmentsPage);

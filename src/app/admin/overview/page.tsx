@@ -3,6 +3,7 @@
 import StatCard from "../components/StatCard";
 import { formatCurrency } from "../../helpers";
 import { useReportStatistics } from "../../hooks/report-statistics-hooks";
+import IsAuthenticatedPage from "../../components/auth/is-auth";
 
 
 const AdminPage = () => {
@@ -37,4 +38,4 @@ const AdminPage = () => {
   )
 }
 
-export default AdminPage;
+export default IsAuthenticatedPage(AdminPage);

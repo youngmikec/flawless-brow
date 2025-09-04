@@ -11,6 +11,7 @@ import { CreateBankAccount } from '../../../providers';
 import { ApiResponse } from '../../../../interfaces';
 import { useUser } from '../../../../store/user';
 import { getItem } from '../../../helpers';
+import IsAuthenticatedPage from "../../../components/auth/is-auth";
 
 // import SelectField from "../../../components/form/SelectField";
 
@@ -176,4 +177,4 @@ const AddBankAccountPage = () => {
   );
 }
 
-export default AddBankAccountPage;
+export default IsAuthenticatedPage(AddBankAccountPage);

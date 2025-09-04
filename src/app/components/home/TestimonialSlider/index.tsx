@@ -38,14 +38,11 @@ const TestimonialSlider = () => {
       <div className="max-w-5xl mx-auto text-center mb-10">
         <h2 className="text-2xl sm:text-3xl font-bold">What Our Client Says</h2>
         <p className="mt-2 text-sm text-[#9CA3AF] text-center w-full md:w-6/12 mx-auto">
-          Cras tincidunt, sapien eget scelerisque tincidunt, est urna aliquet ex, a pretium elit nulla a lacus. 
+          Don’t just take our word for it, see what our clients say.
         </p>
       </div>
 
       <div className="mt-10 relative">
-        {/* <div className="absolute text-[#F48804] font-bold -bottom-3 left-80 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slidePrev()}>{'<'}</div>
-        <div className="absolute text-[#F48804] font-bold -bottom-3 right-28 transform -translate-y-1/2 cursor-pointer" onClick={() => swiper.slideNext()}>{'>'}</div> */}
-
         <Swiper
           modules={[Pagination, Navigation]}
           navigation
