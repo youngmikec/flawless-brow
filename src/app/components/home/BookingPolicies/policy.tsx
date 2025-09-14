@@ -33,7 +33,7 @@ const Policy: FC<Props> = ({ policy }) => {
           />
         </div>
         <p className="text-sm text-gray-100 mb-4">{policy.description}</p>
-        <button className="text-sm font-semibold text-white">Learn more</button>
+        {/* <button className="text-sm font-semibold text-white">Learn more</button> */}
       </div>
     </>
   )
