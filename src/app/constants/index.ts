@@ -63,13 +63,13 @@ export const Testimonials = [
         name: "TOMMY SANDERS",
         role: "Client",
         image: "/images/male.png",
-        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
+        message: "They really know how to bring out your natural beauty. My friends couldn’t stop complimenting me after my appointment."
     },
     {
         name: "LENA WILSON",
         role: "Client",
         image: "/images/female.png",
-        message: "They really know how to bring out your natural beauty. My friends couldn’t stop complimenting me after my appointment."
+        message: "⁠Professional, friendly, and talented team. My brows have never looked this perfect before. Highly recommend."
     },
     {
         name: "KYLE MERWIN",
