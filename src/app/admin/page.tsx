@@ -1,9 +1,10 @@
 "use client";
 
+import { FC } from "react";
 import StatCard from "./components/StatCard";
 
 
-const AdminPage = () => {
+const AdminPage: FC = () => {
   const reportStats = [
     {
       title: "TOTAL AMOUNT",

@@ -163,7 +163,7 @@ const BookingPage: FC = () => {
               {
                 (bankAccount && step === 4) && (
                   <div className="my-5">
-                    <p className="font-inter text-sm font-normal text-[#1A1A1A] mb-4">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
+                    <p className="font-inter text-sm font-normal text-[#FF0000] mb-4">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
                     <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Bank name: {bankAccount?.bankName || "--"}</p>
                     <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Account name: {bankAccount?.accountName || "--"}</p>
                     <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Account Number: {bankAccount?.accountNumber || "--"}</p>
