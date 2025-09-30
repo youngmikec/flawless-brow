@@ -83,7 +83,6 @@ const AddAppointment: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
             delete payload[payload['currencySymbol']];
             delete payload[payload['appointmentDay']];
             delete payload[payload['appointmentTime']];
-            console.log('Payload =>', payload);
             setSubmitting(true);
             try {
                 const response = (formMode === 'update' && selectedRecord) ? await UpdateAppointment(selectedRecord?._id, payload) : await CreateAppointment(payload); 
@@ -153,9 +152,6 @@ const AddAppointment: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
                 label: `${item.startTime} - ${item.endTime}`,
                 value: item.startTime,
             }));
-            console.log('SelectedRecord =>', selectedRecord);
-            console.log('Schedule dates =>', scheduleDates);
-            console.log('Schedule times =>', scheduleTimes);
             setAvailableDateOptions(scheduleDates);
             setAvailableTimeOptions(scheduleTimes);
         }

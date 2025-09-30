@@ -32,7 +32,6 @@ const TimePickerComp: FC<Props> = ({ step, toggleStep }) => {
   const { data } = useSchedules("", true);
 
   const handleSeletTime = (data: string, type: 'time' | 'date') => {
-    console.log(data, type);
     if(type === 'time') {
       const time = availableSchedules.find((schedule: ISchedule) => schedule._id === data);
       if(time){

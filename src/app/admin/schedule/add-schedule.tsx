@@ -58,7 +58,6 @@ const AddSchedule = () => {
       const payload = {
         ...values,
       }
-      console.log('payload', payload);
       setSubmitting(true);
       try {
         const response = (formMode === 'update' && selectedRecord) ? await UpdateSchedule(selectedRecord?._id, payload) : await CreateSchedule(payload); 

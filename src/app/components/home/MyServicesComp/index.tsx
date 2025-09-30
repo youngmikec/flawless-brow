@@ -103,18 +103,9 @@ const MyServicesComp: FC<Props> = ({ productServices }: Props) => {
                 modules={[Pagination]}
                 spaceBetween={30}
                 slidesPerView={ windowWidth > 1024 ? 3 : windowWidth < 768 ? 1 : 2.3}
-                centeredSlides
                 loop={true}
                 pagination={{ clickable: true }}
                 className="mt-10"
-                // breakpoints={{
-                //   768: {
-                //     slidesPerView: 2.3,
-                //   },
-                //   1024: {
-                //     slidesPerView: 3,
-                //   },
-                // }}
                 onSlideChange={(slide) => setActiveIndex(slide.realIndex)}
               >
                 {productServices.map((service: IService, index: number) => (

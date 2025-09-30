@@ -97,3 +97,35 @@ export const Testimonials = [
     },
     
 ];
+
+export interface IPolicy {
+    title: string;
+    description: string;
+    icon: string;
+}
+
+export const Policies: IPolicy[] = [
+  {
+    title: "Appointment",
+    description: "Appointments are released on the 1st and 15th of every month",
+    icon: '/svgs/dart.svg',
+  },
+  {
+    title: "Late arrival",
+    description:
+    "Please allow enough time for your journey. A 10-minute grace period is allowed. After that, a £10 late fee will apply. If you are more than 20 minutes late, your appointment will be cancelled.",
+    icon: '/svgs/scroll-paper.svg',
+  },
+  {
+    title: "Deposit",
+    description:
+    "All services require a £10 non-refundable deposit. The remaining balance must be paid in cash at your appointment.",
+    icon: '/svgs/dart.svg',
+  },
+  {
+    title: "Cancellation",
+    description:
+    "Please note that a minimum of 48 hours’ notice is required to reschedule an appointment. Deposits are non-refundable in the event of cancellation. Your understanding and cooperation are greatly appreciated.",
+    icon: '/svgs/star.svg',
+  },
+];

@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     }
 
     if (body.password) {
-        body.password = hash(body.password);
+      body.password = hash(body.password);
     }
 
     body.createdBy = data.id; // Set the createdBy field to the admin's ID;

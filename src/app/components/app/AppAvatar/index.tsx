@@ -11,7 +11,7 @@ type Props = {
     showProfileName?: boolean;
 }
 
-const AppAvatar: FC<Props> = ({ userProfile, showProfileName = true }) => {
+const AppAvatar: FC<Props> = ({ showProfileName = true }) => {
   const userStore = useUser();
   const user = userStore.loggedInUser ? userStore.loggedInUser : getItem('clientD');
 
@@ -52,9 +52,9 @@ const AppAvatar: FC<Props> = ({ userProfile, showProfileName = true }) => {
                 (showProfileName) ? (
                     <div>
                         <p className="text-sm font-medium">
-                            { user?.fullName ? user.fullName : `${user?.firstName} ${user?.lastName}`}
+                            { user ? `${user?.firstName} ${user?.lastName}` : ""}
                         </p>
-                        <p className="text-xs">{user?.email}</p>
+                        <p className="text-xs">{user?.email || ""}</p>
                     </div>
                 ) : null
             }

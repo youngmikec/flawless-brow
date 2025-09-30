@@ -13,6 +13,7 @@ import { ApiResponse } from '../../interfaces';
 import AppButton from "../components/app/AppButton";
 import InputField from "../components/form/InputField";
 import { useUser } from '../../store/user';
+import { _notifyError, _notifySuccess } from '../helpers/alerts';
 
 
 
@@ -39,6 +40,7 @@ const LoginPage = () => {
             const { success, message, data } = res.data;
             if(success){
               setSubmitting(false);
+              _notifySuccess(message);
               setItem('clientToken', data.token);
               setItem('clientD', data.user);
               userStore.setLoggedInUser(data.user);
@@ -47,9 +49,8 @@ const LoginPage = () => {
         })
         .catch((err: any) => {
             setSubmitting(false);
-            // const { message } = err.response.data;
-            // notify err
-            // notify('error', message);
+            const { message } = err.response.data;
+            _notifyError(message);
         })
     }
   });

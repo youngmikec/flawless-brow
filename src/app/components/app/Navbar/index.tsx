@@ -53,7 +53,7 @@ const Navbar: FC = () => {
                         <div className="hidden md:block">
                             <div className="flex justify-start gap-4">
                                 <div>
-                                    <Link href="https://www.gmail.com/">
+                                    <Link href="mailto:Benny.c-2000@hotmail.co.uk?subject=Hello%20B.Browstudio" target="_blank">
                                         <Image 
                                             src="/svgs/email-primary.svg"
                                             alt="email"
@@ -63,7 +63,7 @@ const Navbar: FC = () => {
                                     </Link>
                                 </div>
                                 <div>
-                                    <Link href="https://www.instagram.com/">
+                                    <Link href="https://www.instagram.com/b.browstudio?igsh=MXV1Z2NqcnowOXVudQ%3D%3D&utm_source=qr" target="_blank">
                                         <Image 
                                             src="/svgs/instagram-primary.svg"
                                             alt="instagram"

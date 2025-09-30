@@ -19,9 +19,8 @@ export async function PUT(
     const error = ValidateUpdateUserProfile.validate(body);
 
     if(error.error) {
-        return FailureResponse(400, error.error.details[0].message);
+      return FailureResponse(400, error.error.details[0].message);
     }
-
 
     if (body.password) body.password = hash(body.password);
 

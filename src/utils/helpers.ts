@@ -314,12 +314,7 @@ export function titleCase(str: string) {
     .join(" ");
 }
 
-// export const slugit = (str: string) =>
-//   slugify(str, {
-//     replacement: "-", // replace spaces with replacement character, defaults to `-`
-//     remove: /[*+~.,()'"!:@]/g, // remove characters that match regex, defaults to `undefined`
-//     lower: true, // convert to lower case, defaults to `false`
-//     strict: true, // strip special characters except replacement, defaults to `false`
-//     locale: "en", // language code of the locale to use
-//     trim: true, // trim leading and trailing replacement chars, defaults to `true`
-//   });
+export const textLimit = (text: string, limit: number = 30): string => {
+  const truncatedText: string = text.slice(0, limit);
+  return text.length > limit ? `${truncatedText}...` : truncatedText;
+}

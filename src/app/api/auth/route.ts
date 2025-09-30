@@ -12,21 +12,17 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const dbconnected = await dbConnect(); // Connect to MongoDB
+    await dbConnect(); // Connect to MongoDB
     const body = await req.json();
     const { password } = body;
 
     const email = body.email.trim().toLowerCase();
-    const admin = await User.findOne({ email });
+    const admin = await User.findOne({ email, role: 'admin' });
 
     //Logic to check for when the user is an admin.
     if(!admin) {
       return FailureResponse(401, 'User not found');
     }
-
-    // if (admin.password !== password) {
-    //   return FailureResponse(401, 'Invalid credentials');
-    // }
 
     const isValid = bcryptjs.compareSync(password, admin.password);
 

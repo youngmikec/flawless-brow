@@ -103,12 +103,6 @@ const DatePickerDialog: FC<Props> = ({
 
   useEffect(() => {
     if(value){
-      // const parsedDate = parse(value, "MM/dd/yyyy", new Date());
-      // console.log('parsedDate', parsedDate);
-      // if (isValid(parsedDate)) {
-      //   setSelectedDate(parsedDate);
-      //   setMonth(parsedDate);
-      // }
       setInputValue(value);
     }
   }, [value]);

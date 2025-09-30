@@ -30,14 +30,11 @@ export default function Home() {
     <HomeLayout>
       <Hero />
       <MeetBrowTech />
-      {
-        freeService && <FreeService service={freeService} />
-      }
       <MyServicesComp 
         productServices={productServices}
       />
       <BookingPolicies />
-      <Gallery />
+      {/* <Gallery /> */}
       <TestimonialSlider />
       <Faq />
     </HomeLayout>

@@ -1,13 +1,94 @@
 "use client";
 
+import * as Yup from 'yup'
+import { useFormik } from "formik";
+import { useParams, useRouter } from 'next/navigation';
+
 import AppButton from "../../../../components/app/AppButton";
 import InputField from "../../../../components/form/InputField";
+import { CreateBankAccount, UpdateBankAccount } from '../../../../providers';
+import { useUser } from '../../../../../store/user';
+import { getItem } from '../../../../helpers';
 import IsAuthenticatedPage from "../../../../components/auth/is-auth";
+import { _notifyError, _notifySuccess } from '../../../../helpers/alerts';
+import { useBankAccounts } from '../../../../hooks';
+import { useEffect, useState } from 'react';
+import { IBankAccount } from '../../../../api/bank-accounts/model';
 
-// import SelectField from "../../../components/form/SelectField";
+
+const UpdateBankAccountPage = () => {
+  const router = useRouter();
+  const userStore = useUser();
+  const params = useParams();
+  const bankId: any = params['id'] || '';
+  const formMode = bankId !== '' ? 'update' : 'create';
+
+  const [bankAccount, setBankAccount] = useState<IBankAccount | null>(null);
+
+  const validateForm = () => Yup.object({
+    accountName: Yup.string().required('Account name is required'),
+    accountNumber: Yup.string().required('Account number is required'),
+    bankName: Yup.string().required('Bank name is required'),
+    branch: Yup.string().required('Branch is required'),
+    bankCountry: Yup.string().required('Bank country is required'),
+    currency: Yup.string().required('Currency is required'),
+    user: Yup.string().optional(),
+  });
 
 
-const AddBankAccountPage = () => {
+  const { isLoading, data: bankAccounts } = useBankAccounts(`?_id=${bankId}&isActive=true`);
+
+  const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      accountName: bankAccount ? bankAccount?.accountName : "",
+      accountNumber: bankAccount ? bankAccount?.accountNumber : "",
+      bankName: bankAccount ? bankAccount?.bankName : "",
+      branch: bankAccount ? bankAccount?.branch : "",
+      bankCountry: bankAccount ? bankAccount?.bankCountry : "",
+      currency: bankAccount ? bankAccount?.currency : "",
+      user: bankAccount ? bankAccount?.user : "",
+      isActive: true,
+    },
+    validationSchema: validateForm(),
+    onSubmit: async (values) => {
+      try {
+        setSubmitting(true);
+        const payload = {...values};
+        (userStore.loggedInUser) ? 
+        payload.user = userStore.loggedInUser?._id :
+        payload.user = getItem('clientD')?.id;
+        
+        const response = formMode === 'create' ? 
+        await CreateBankAccount(payload) :
+        await UpdateBankAccount(bankId, payload);
+        const { success, message } = response.data;
+        if(success){
+          setSubmitting(false);
+          _notifySuccess(message);
+          router.push('/admin/payments');
+        }
+      } catch (error: any) {
+        setSubmitting(false);
+        const { message } = error;
+        _notifyError(message);
+      }
+    }
+  });
+
+  const handleInputChange = (value: any, name: string) => {
+      const event = {
+        target: { name, value }
+      };
+      handleChange(event);
+  };
+
+  useEffect(() => {
+    if(bankAccounts?.length){
+      setBankAccount(bankAccounts[0]);
+    }
+  }, [bankAccounts]);
+
   return (
     <div className="">
         <h1 className="text-lg font-semibold font-inter text-primary">Payment</h1>
@@ -16,94 +97,101 @@ const AddBankAccountPage = () => {
         >
             <h1 className="text-sm font-semibold font-inter text-primary">Bank Details</h1>
 
-            <div className="w-full sm:w-10/12 md:w-8/12 lg:w-8/12">
-              <div className="my-4">
-                <InputField
-                  label="Cardholder’s name"
-                  placeholder="Seen on your card"
-                  type="text"
-                  name="accountName"
-                  value={""}
-                  isError={false}
-                  onChange={() => {}}
-                />
-              </div>
-              <div className="my-4">
-                <InputField
-                  label="Account Number"
-                  placeholder="Account Number"
-                  type="text"
-                  name="accountNumber"
-                  value={""}
-                  isError={false}
-                  onChange={() => {}}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="">
+            <form onSubmit={handleSubmit}>
+              <div className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12">
+                <div className="my-4">
                   <InputField
-                    label="Bank Name"
-                    placeholder=""
+                    label="Account name"
+                    placeholder="Account Name"
+                    type="text"
+                    name="accountName"
+                    value={values.accountName}
+                    isError={(touched.accountName && errors.accountName) ? true : false}
+                    errMsg={errors && errors.accountName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="my-4">
+                  <InputField
+                    label="Account Number"
+                    placeholder="Account Number"
                     type="text"
                     name="accountNumber"
-                    value={""}
-                    isError={false}
-                    onChange={() => {}}
-                  />
-                </div>
-                <div className="">
-                  <InputField
-                    label="Branch Name"
-                    placeholder="bank branch name"
-                    type="text"
-                    name="branchName"
-                    value={""}
-                    isError={false}
-                    onChange={() => {}}
-                  />
-                </div>
-                <div className="">
-                  <InputField
-                    label="Bank Country"
-                    placeholder=""
-                    type="text"
-                    name="bankCountry"
-                    value={""}
-                    isError={false}
-                    onChange={() => {}}
-                  />
-                </div>
-                <div className="">
-                  <InputField
-                    label="Currency"
-                    name=""
-                    value={""}
-                    errMsg={""}
-                    isError={false}
-                    placeholder="Select Currency"
-                    type="text"
-                    onChange={() => {}}
+                    value={values.accountNumber}
+                    isError={(touched.accountNumber && errors.accountNumber) ? true : false}
+                    errMsg={errors && errors.accountNumber}
+                    onChange={handleInputChange}
                   />
                 </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="">
+                    <InputField
+                      label="Bank Name"
+                      placeholder=""
+                      type="text"
+                      name="bankName"
+                      value={values.bankName}
+                      isError={(touched.bankName && errors.bankName) ? true : false}
+                      errMsg={errors && errors.bankName}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="">
+                    <InputField
+                      label="Branch Name"
+                      placeholder="bank branch name"
+                      type="text"
+                      name="branch"
+                      value={values.branch}
+                      isError={(touched.branch && errors.branch) ? true : false}
+                      errMsg={errors && errors.branch}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="">
+                    <InputField
+                      label="Bank Country"
+                      placeholder=""
+                      type="text"
+                      name="bankCountry"
+                      value={values.bankCountry}
+                      isError={(touched.bankCountry && errors.bankCountry) ? true : false}
+                      errMsg={errors && errors.bankCountry}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="">
+                    <InputField
+                      label="Currency"
+                      type="text"
+                      placeholder="Select Currency"
+                      name="currency"
+                      value={values.currency}
+                      isError={(touched.currency && errors.currency) ? true : false}
+                      errMsg={errors && errors.currency}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                </div>
               </div>
-            </div>
 
-            <div className="my-4">
-                <AppButton
+              <div className="my-4">
+                  <AppButton
+                    type="submit"
                     btnText="Save Changes"
                     width="max"
                     bgColor="primary"
                     fill="fill"
-                    type="button"
-                    onClick={() => console.log("Add Bank Account Clicked")}
-                />
-            </div>
+                    loading={isSubmitting}
+                  />
+              </div>
+            </form>
             
         </div>
     </div>
   );
 }
 
-export default IsAuthenticatedPage(AddBankAccountPage);
+export default IsAuthenticatedPage(UpdateBankAccountPage);

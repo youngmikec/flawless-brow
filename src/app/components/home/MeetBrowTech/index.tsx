@@ -10,10 +10,11 @@ const MeetBrowTech = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div>
               <Image
-                src="/images/female-hair-stylist.png"
+                src="/images/bbrows_ceo.jpeg"
                 alt="meet-browtech"
                 width={500}
                 height={500}
+                className="rounded-md"
               />
             </div>
             <div>

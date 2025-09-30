@@ -2,23 +2,27 @@
 
 import * as Yup from 'yup'
 import { useFormik } from "formik";
-import { AxiosResponse } from 'axios';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import AppButton from "../../../components/app/AppButton";
 import InputField from "../../../components/form/InputField";
-import { CreateBankAccount } from '../../../providers';
-import { ApiResponse } from '../../../../interfaces';
+import { CreateBankAccount, UpdateBankAccount } from '../../../providers';
 import { useUser } from '../../../../store/user';
 import { getItem } from '../../../helpers';
 import IsAuthenticatedPage from "../../../components/auth/is-auth";
-
-// import SelectField from "../../../components/form/SelectField";
+import { _notifyError, _notifySuccess } from '../../../helpers/alerts';
+import { useBankAccounts } from '../../../hooks';
 
 
 const AddBankAccountPage = () => {
-  const userStore = useUser();
   const router = useRouter();
+  const userStore = useUser();
+  const params = useParams();
+
+  const bankId: any = params['id'] || '';
+
+  const formMode = bankId !== '' ? 'update' : 'create';
+
   const validateForm = () => Yup.object({
     accountName: Yup.string().required('Account name is required'),
     accountNumber: Yup.string().required('Account number is required'),
@@ -27,50 +31,56 @@ const AddBankAccountPage = () => {
     bankCountry: Yup.string().required('Bank country is required'),
     currency: Yup.string().required('Currency is required'),
     user: Yup.string().optional(),
-    });
+  });
 
-    const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
-      initialValues: {
-        accountName: "",
-        accountNumber: "",
-        bankName: "",
-        branch: "",
-        bankCountry: "",
-        currency: "",
-        user: "",
-        isActive: true,
-      },
-      validationSchema: validateForm(),
-      onSubmit: (values) => {
+
+  const { isLoading, data: bankAccount } = useBankAccounts(`?_id=${bankId}&isActive=true`);
+
+  const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      accountName: bankAccount?.accountName || "",
+      accountNumber: bankAccount?.accountNumber || "",
+      bankName: bankAccount?.bankName || "",
+      branch: bankAccount?.branch || "",
+      bankCountry: bankAccount?.bankCountry || "",
+      currency: bankAccount?.currency || "",
+      user: bankAccount?.user || "",
+      isActive: true,
+    },
+    validationSchema: validateForm(),
+    onSubmit: async (values) => {
+      try {
         setSubmitting(true);
         const payload = {...values};
         (userStore.loggedInUser) ? 
         payload.user = userStore.loggedInUser?._id :
         payload.user = getItem('clientD')?.id;
         
-        CreateBankAccount(payload)
-        .then((res: AxiosResponse<ApiResponse>) => {
-            const { success } = res.data;
-            if(success){
-                setSubmitting(false);
-                router.push('/admin/payments');
-            }
-        })
-        .catch((err: any) => {
-            setSubmitting(false);
-            // const { message } = err.response.data;
-            // notify err
-            // notify('error', message);
-        })
+        const response = formMode === 'create' ? 
+        await CreateBankAccount(payload) :
+        await UpdateBankAccount(bankId, payload);
+        const { success, message } = response.data;
+        if(success){
+          setSubmitting(false);
+          _notifySuccess(message);
+          router.push('/admin/payments');
+        }
+      } catch (error: any) {
+        setSubmitting(false);
+        const { message } = error;
+        _notifyError(message);
       }
-    });
+    }
+  });
 
-    const handleInputChange = (value: any, name: string) => {
-        const event = {
-          target: { name, value }
-        };
-        handleChange(event);
-    };
+  const handleInputChange = (value: any, name: string) => {
+      const event = {
+        target: { name, value }
+      };
+      handleChange(event);
+  };
+
 
   return (
     <div className="">
@@ -81,11 +91,11 @@ const AddBankAccountPage = () => {
             <h1 className="text-sm font-semibold font-inter text-primary">Bank Details</h1>
 
             <form onSubmit={handleSubmit}>
-              <div className="w-full sm:w-10/12 md:w-8/12 lg:w-8/12">
+              <div className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12">
                 <div className="my-4">
                   <InputField
-                    label="Cardholder’s name"
-                    placeholder="Seen on your card"
+                    label="Account name"
+                    placeholder="Account Name"
                     type="text"
                     name="accountName"
                     value={values.accountName}

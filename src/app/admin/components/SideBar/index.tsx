@@ -17,58 +17,10 @@ const Sidebar: FC = () => {
     toggleLogoutModal(true);
   }
 
-  // return (
-  //   <>
-  //     <aside className="relative h-full w-full z-50 bg-[#5a4b3d4d]">
-  //       <div
-  //         style={{
-  //           background: `url('/images/sidebar-pattern.png')`,
-  //           backgroundColor: "#5a4b3d",
-  //           backgroundSize: "cover",
-  //           backgroundPosition: "center",
-  //           backgroundRepeat: "no-repeat",
-  //           backgroundBlendMode: "color",
-  //         }}
-  //         className={`h-full w-max text-white transform transition-transform duration-300  lg:translate-x-0 ${
-  //           isOpen ? "translate-x-0 z-50" : "-translate-x-0"
-  //         }`}
-  //       >
-  //         <div className="mb-6">
-  //           <div className="text-2xl font-bold px-4 py-2 bg-[#5A4B3D] flex justify-center items-center">
-              // <Image
-              //   src="/images/logo-white.png"
-              //   alt="logo"
-              //   width={40}
-              //   height={40}
-              //   className="rounded-full"
-              // />
-  //           </div>
-  //         </div>
-  //         <nav className="space-y-6 p-4">
-  //           {navItems.map((item, index) => (
-  //               <div key={index} onClick={() => toggle(false)}>
-  //                 <NavItem  
-  //                   icon={item.icon} 
-  //                   label={item.label} 
-  //                   path={item.path}
-  //                 />
-  //               </div>
-  //           ))}
-  //         </nav>
-  //         <div className="absolute bottom-6 left-4 p-4">
-  //           <AppAvatar 
-  //             userProfile={undefined}
-  //           />
-  //         </div>
-  //       </div>
-  //     </aside>
-  //   </>
-  // );
-
     return (
       <>
           <div 
-            className="bg-[#5a4b3d4d] min-h-screen max-h-fit px-4 py-5 relative w-full"
+            className="bg-[#5a4b3d4d] h-full px-4 py-5 relative w-full"
             style={{
               background: `url('/images/sidebar-pattern.png')`,
               backgroundColor: "#5a4b3d",
@@ -112,21 +64,11 @@ const Sidebar: FC = () => {
                   </li>
                 ))
               }
-{/* 
-                  <div key={index} onClick={() => toggle(false)}>
-                    <NavItem  
-                      icon={item.icon} 
-                      label={item.label} 
-                      path={item.path}
-                    />
-                  </div> */}
                 
             </ul>
 
             <div className="absolute bottom-6 left-4">
-              <AppAvatar 
-                userProfile={undefined}
-              />
+              <AppAvatar />
               <ul className="list-none">
                 <li 
                   className={`

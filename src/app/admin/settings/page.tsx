@@ -10,45 +10,60 @@ import { AxiosResponse } from "axios";
 import AppButton from "../../components/app/AppButton";
 import InputField from "../../components/form/InputField";
 import TextAreaField from "../../components/form/TextAreaField";
-import { getItem } from '../../helpers';
+import { getItem, setItem } from '../../helpers';
 import { ApiResponse } from "../../../interfaces";
 import { UpdateUser } from "../../providers";
 import IsAuthenticatedPage from "../../components/auth/is-auth";
+import { _notifyError, _notifySuccess } from "../../helpers/alerts";
+import { useUser } from "../../../store/user";
 
 
 const ProfileSettingsPage: FC = () => {
+    const { setLoggedInUser } = useUser();
     const userDetails = getItem('clientD');
 
     const validateForm = () => Yup.object({
         email: Yup.string().email('Invalid email address').optional(),
-        fullName: Yup.string().optional(),
+        firstName: Yup.string().optional(),
+        lastName: Yup.string().optional(),
         phone: Yup.string().optional(),
         bio: Yup.string().optional(),
+        password: Yup.string().optional(),
+        confirmPassword: Yup.string().optional().test('passwords-match', 'Passwords must match', function (value) {
+            return this.parent.password === value;
+        }),
     });
 
     const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
       initialValues: {
         email: userDetails ? userDetails.email : '',
-        fullName: userDetails ? (userDetails.fullName || `${userDetails.firstName} ${userDetails.lastName}`) : '',
+        firstName: userDetails ? userDetails.firstName : '',
+        lastName: userDetails ? userDetails.lastName : '',
         phone: userDetails ? userDetails.phone : '',
+        password: '',
+        confirmPassword: '',
         bio: userDetails ? userDetails.bio : '',
       },
       validationSchema: validateForm(),
       onSubmit: (values) => {
-          const payload = {...values}
           setSubmitting(true);
-          UpdateUser(userDetails.id, payload)
+          const payload: any = {...values};
+          payload.password === '' && delete payload.password;
+          delete payload.confirmPassword;
+          UpdateUser(userDetails._id, payload)
           .then((res: AxiosResponse<ApiResponse>) => {
               const { success, message, data } = res.data;
               if(success){
                 setSubmitting(false);
+                _notifySuccess(message);
+                setLoggedInUser(data);
+                setItem('clientD', data);
               }
           })
           .catch((err: any) => {
               setSubmitting(false);
-              // const { message } = err.response.data;
-              // notify err
-              // notify('error', message);
+              const { message } = err.response.data;
+              _notifyError(message);
           })
       }
     });
@@ -92,22 +107,34 @@ const ProfileSettingsPage: FC = () => {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div className="w-full sm:w-10/12 md:w-8/12 lg:w-8/12">
-                        <div className="my-4">
-                            <InputField
-                                label="Full name"
-                                placeholder="John Doe"
-                                type="text"
-                                name="fullName"
-                                value={values.fullName}
-                                isError={(touched.fullName && errors.fullName) ? true : false}
-                                errMsg={errors && errors.fullName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
+                    <div className="w-full sm:w-10/12 md:w-10/12 lg:w-8/12">
 
         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="">
+                                <InputField
+                                    label="First name"
+                                    placeholder="John Doe"
+                                    type="text"
+                                    name="firstName"
+                                    value={values.firstName}
+                                    isError={(touched.firstName && errors.firstName) ? true : false}
+                                    errMsg={errors && errors.firstName}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="">
+                                <InputField
+                                    label="Last name"
+                                    placeholder="John Doe"
+                                    type="text"
+                                    name="lastName"
+                                    value={values.lastName}
+                                    isError={(touched.lastName && errors.lastName) ? true : false}
+                                    errMsg={errors && errors.lastName}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
                             <div className="">
                                 <InputField
                                     label="Email Address"
@@ -129,6 +156,30 @@ const ProfileSettingsPage: FC = () => {
                                     value={values.phone}
                                     isError={(touched.phone && errors.phone) ? true : false}
                                     errMsg={errors && errors.phone}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="">
+                                <InputField
+                                    label="Password"
+                                    placeholder="Enter your password"
+                                    type="password"
+                                    name="password"
+                                    value={values.password}
+                                    isError={(touched.password && errors.password) ? true : false}
+                                    errMsg={errors && errors.password}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="">
+                                <InputField
+                                    label="Confirm Password"
+                                    placeholder="Enter your password"
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={values.confirmPassword}
+                                    isError={(touched.confirmPassword && errors.confirmPassword) ? true : false}
+                                    errMsg={errors && errors.confirmPassword}
                                     onChange={handleInputChange}
                                 />
                             </div>
