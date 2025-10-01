@@ -9,50 +9,6 @@ import "swiper/css/navigation";
 import ServiceCard from "./ServiceCard";
 import { IService } from "../../../../interfaces";
 
-const services = [
-  {
-    title: "Henna Brows",
-    price: "£35",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/eye-brow-carve.png",
-  },
-  {
-    title: "Wax, brow lamination and tint",
-    price: "£45",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/eye-brow.png",
-  },
-  {
-    title: "Wax and brow lamination",
-    price: "£40",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/Column.png",
-  },
-  {
-    title: "Wax",
-    price: "£12",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/Hand-in-jaw.png",
-  },
-  {
-    title: "Wax and tint",
-    price: "£25",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/Column.png",
-  },
-  {
-    title: "Wax",
-    price: "£12",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/Hand-in-jaw.png",
-  },
-  {
-    title: "Wax and tint",
-    price: "£25",
-    description: "Write an amazing description in this dedicated card section. Each word counts.",
-    imageUrl: "/images/Column.png",
-  },
-];
 
 type Props = {
   productServices: IService[];
@@ -79,21 +35,15 @@ const MyServicesComp: FC<Props> = ({ productServices }: Props) => {
 
 
   return (
-    <section id="services" className="w-full px-4 py-12 text-center bg-white mt-40">
+    <section id="services" className="w-full px-4 py-12 text-center bg-white mt-10 md:mt-20">
       <div className="w-full mx-auto md:w-11/12">
         <p className="text-lg sm:text-xl font-bold mb-2 text-black text-center font-montserrat">My services</p>
         <p className="text-4xl sm:text-5xl text-[#8D7B68] mb-4 font-style-script">
           Luxury beauty services crafted just for you.
         </p>
         <p className="text-[#52525B] max-w-3xl mx-auto mb-10 font-inter">
-          At B-Brows, we specialize in enhancing your natural beauty with expertly crafted brow treatments, precision permanent makeup, and luxurious lash services. Each session is tailored to you, ensuring flawless, long-lasting results in a calm, welcoming space.
+          At B-Brows, we specialize in enhancing your natural beauty with expertly crafted brow treatments. Each session is tailored to you, ensuring flawless, long-lasting results in a calm, welcoming space.
         </p>
-
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 flex-nowrap overflow-x-auto gap-6">
-          {services.map((service, index) => (
-            <ServiceCard key={index} title={service.title} price={service.price} description={service.description} imageUrl={service.imageUrl} />
-          ))}
-        </div> */}
 
         <div className="mt-10">
           {

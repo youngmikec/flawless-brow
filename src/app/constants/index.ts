@@ -129,3 +129,48 @@ export const Policies: IPolicy[] = [
     icon: '/svgs/star.svg',
   },
 ];
+
+export const services = [
+  {
+    title: "Henna Brows",
+    price: "£35",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/eye-brow-carve.png",
+  },
+  {
+    title: "Wax, brow lamination and tint",
+    price: "£45",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/eye-brow.png",
+  },
+  {
+    title: "Wax and brow lamination",
+    price: "£40",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/Column.png",
+  },
+  {
+    title: "Wax",
+    price: "£12",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/Hand-in-jaw.png",
+  },
+  {
+    title: "Wax and tint",
+    price: "£25",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/Column.png",
+  },
+  {
+    title: "Wax",
+    price: "£12",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/Hand-in-jaw.png",
+  },
+  {
+    title: "Wax and tint",
+    price: "£25",
+    description: "Write an amazing description in this dedicated card section. Each word counts.",
+    imageUrl: "/images/Column.png",
+  },
+];
