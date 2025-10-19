@@ -35,6 +35,20 @@ export const ValidateCreateCustomerProfile = Joi.object({
   updatedAt: Joi.date().optional(),
 });
 
+export const ValidateCreateAdminProfile = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).optional(),
+  role: Joi.string().valid('admin').required(),
+  fullName: Joi.string().optional(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  phone: Joi.string().required(),
+  address: Joi.string().required(),
+  gender: Joi.string().valid('male', 'female', 'other').required(),
+  updatedBy: Joi.string().optional(),
+  updatedAt: Joi.date().optional(),
+});
+
 export const ValidateCreateContact = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).optional(),

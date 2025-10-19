@@ -7,8 +7,17 @@ export const GetUsers = async (query: string = '') => {
   return await axios.get(url);
 }
 
+export const GetAdmins = async (query: string = '') => {
+  const url: string = `${BASE_URL}/api/users/admins/${query}`;
+  return await axios.get(url);
+}
+
 export const CreateUser = async (data: {[key: string]: any}) => {
   return axios.post(`${BASE_URL}/api/users`, data);
+};
+
+export const CreateAdmin = async (data: {[key: string]: any}) => {
+  return axios.post(`${BASE_URL}/api/users/admins`, data);
 };
 
 export const CreateUserContact = async (data: {[key: string]: any}) => {
@@ -19,6 +28,14 @@ export const UpdateUser = async (id: string, data: {[key: string]: any}) => {
   return axios.put(`${BASE_URL}/api/users/${id}`, data);
 };
 
+export const UpdateAdmin = async (id: string, data: {[key: string]: any}) => {
+  return axios.put(`${BASE_URL}/api/users/admins/${id}`, data);
+};
+
 export const DeleteUser = async (id: string = '') => {
   return axios.delete(`${BASE_URL}/api/users/${id}`);
+};
+
+export const DeleteAdmin = async (id: string = '') => {
+  return axios.delete(`${BASE_URL}/api/users/admins/${id}`);
 };

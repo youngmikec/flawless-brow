@@ -64,10 +64,10 @@ const SelectField: FC<Props> = ({
 
   return (
     <>
-      <div className={`w-full`}>
+      <div className={`w-full my-2`}>
         {
           label && 
-          <div className={`w-full flex text-left mb-1 ${labelPosition === 'left' ? 'md:text-left lg:text-left' : 'md:text-right lg:text-right'}`}>
+          <div className={`w-full flex text-left mb-2 ${labelPosition === 'left' ? 'md:text-left lg:text-left' : 'md:text-right lg:text-right'}`}>
             <label htmlFor={name} className="block w-full text-sm md:text-[13px] lg:text-[14px] font-montserrat text-[#263238] font-[500]">
               {label}
             </label>
