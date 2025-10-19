@@ -36,7 +36,7 @@ const TestimonialSlider = () => {
   return (
     <section className="bg-[#5A4B3D] text-white py-16 px-4 sm:px-8">
       <div className="max-w-5xl mx-auto text-center mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold">What Our Client Says</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold font-style-script">What Our Client Says</h2>
         <p className="mt-2 text-sm text-[#9CA3AF] text-center w-full md:w-6/12 mx-auto">
           Don’t just take our word for it, see what our clients say.
         </p>

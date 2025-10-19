@@ -9,13 +9,13 @@ export const GET = async (req: Request) => {
 
         const { isAuthenticated } = IsValidAdmin(req);
         if (!isAuthenticated) {
-            return FailureResponse(403, 'Unauthorized');
+          return FailureResponse(403, 'Unauthorized');
         }
 
         const paramsObject = getSearchParams(req);
 
-        const resutl = await User.find({ ...paramsObject }); // Populate user field with email
-        return SuccessResponse(resutl, 'Users retrieved successfully');
+        const result = await User.find({ ...paramsObject }); // Populate user field with email
+        return SuccessResponse(result, 'Users retrieved successfully');
 
     } catch (error: any) {
         return FailureResponse(500, 'Internal Server Error: ' + error.message);

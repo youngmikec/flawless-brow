@@ -56,7 +56,7 @@ export const ValidateCreateContact = Joi.object({
   fullName: Joi.string().optional(),
   phone: Joi.string().required(),
   age: Joi.number().required(),
-  address: Joi.string().required(),
+  address: Joi.string().optional(),
   gender: Joi.string().valid('male', 'female', 'other').required(),
   updatedBy: Joi.string().optional(),
   updatedAt: Joi.date().optional(),

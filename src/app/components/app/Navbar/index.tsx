@@ -57,7 +57,7 @@ const Navbar: FC = () => {
                         <div className="hidden md:block">
                             <div className="flex justify-start items-center gap-4">
                                 <div>
-                                    <Link href="mailto:Benny.c-2000@hotmail.co.uk?subject=Hello%20B.Browstudio" target="_blank">
+                                    <Link href="mailto:B-Browstudio@outlook.com?subject=Hello%20B.Browstudio" target="_blank">
                                         <Image 
                                             src="/svgs/email-primary.svg"
                                             alt="email"

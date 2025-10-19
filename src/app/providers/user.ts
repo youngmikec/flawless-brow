@@ -1,10 +1,20 @@
 import axios, { url } from './config';
 
 const BASE_URL: any = process.env.NEXT_PUBLIC_BASE_URL;
+const UI_AUTH_KEY: any = process.env.NEXT_PUBLIC_UI_AUTH_KEY;
 
 export const GetUsers = async (query: string = '') => {
   const url: string = `${BASE_URL}/api/users/${query}`;
   return await axios.get(url);
+}
+
+export const GetUsersPublic = async (query: string = '') => {
+  const url: string = `${BASE_URL}/api/users/public${query}`;
+  return await axios.get(url, {
+    headers: {
+      "UiAuth": UI_AUTH_KEY ?? "",
+    }
+  });
 }
 
 export const GetAdmins = async (query: string = '') => {

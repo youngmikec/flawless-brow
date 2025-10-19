@@ -29,7 +29,7 @@ const Footer: FC = () => {
 
                 <div className="flex justify-center items-center gap-8 my-10">
                     <div>
-                        <Link href="mailto:Benny.c-2000@hotmail.co.uk?subject=Hello%20B.Browstudio" target="_blank">
+                        <Link href="mailto:B-Browstudio@outlook.com?subject=Hello%20B.Browstudio" target="_blank">
                             <Image 
                                 src="/svgs/email-white.svg"
                                 alt="email"
