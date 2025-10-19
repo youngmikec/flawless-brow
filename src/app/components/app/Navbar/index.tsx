@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 
 const Navbar: FC = () => {
     // const { toggleSideMenu } = useStore();
+    const router = useRouter();
     const links: { name: string; href: string }[] = [
         { name: "Home", href: "/" },
         { name: "About", href: "#tech-brow" },
@@ -15,6 +17,8 @@ const Navbar: FC = () => {
         { name: "Policies", href: "#booking-policies" },
         { name: "Contact", href: "#contact" }
     ];
+    const goToLogin = () => router.push('/login');
+
     return (
         <>
             {/* fixed top-0 z-20 */}
@@ -51,7 +55,7 @@ const Navbar: FC = () => {
 
                     <div>
                         <div className="hidden md:block">
-                            <div className="flex justify-start gap-4">
+                            <div className="flex justify-start items-center gap-4">
                                 <div>
                                     <Link href="mailto:Benny.c-2000@hotmail.co.uk?subject=Hello%20B.Browstudio" target="_blank">
                                         <Image 
@@ -71,6 +75,15 @@ const Navbar: FC = () => {
                                             height={25}
                                         />
                                     </Link>
+                                </div>
+                                <div>
+                                    <button 
+                                        className="text-white text-center cursor-pointer bg-primary py-2 px-4 rounded-md" 
+                                        type="button" 
+                                        onClick={goToLogin}
+                                    >
+                                        Admin Login
+                                    </button>
                                 </div>
                             </div>
                         </div>

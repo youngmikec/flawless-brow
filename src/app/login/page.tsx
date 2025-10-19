@@ -66,14 +66,15 @@ const LoginPage = () => {
     <>
       <div className="w-full h-screen bg-[#fff9ef] flex justify-center items-center">
         <div className="w-10/12 md:w-5/12 lg:w-4/12 min-h-[60vh] flex flex-col gap-6">
-          <div className="flex justify-center items-center">
+          <Link href={'/'} className="flex justify-center items-center">
             <Image 
               src="/images/logo.png"
               alt="logo"
+              className="cursor-pointer"
               width={80}
               height={80}
             />
-          </div>
+          </Link>
           <p className="text-center text-black text-lg md:text-xl">Login Details</p>
 
           <div>
