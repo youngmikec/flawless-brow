@@ -40,7 +40,7 @@ const AppAvatar: FC<Props> = ({ showProfileName = true }) => {
                         />
                     ) : (
                         <div className="w-10 h-10 rounded-full p-2 bg-black flex items-center justify-center">
-                            <span className="text-white text-xl font-bold">
+                            <span className="text-white text-sm font-bold">
                                 { user ? getInitials(user as User) : 'JD' }
                             </span>
                         </div>

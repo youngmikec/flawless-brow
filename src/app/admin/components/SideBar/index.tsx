@@ -30,7 +30,7 @@ const Sidebar: FC = () => {
               backgroundBlendMode: "color",
             }}
           >
-            <div className="my-5 px-4 flex justify-center items-center">
+            <div className="my-4 px-4 flex justify-center items-center">
               <Image
                 src="/images/logo-white.png"
                 alt="logo"
@@ -45,14 +45,14 @@ const Sidebar: FC = () => {
                   <li
                     key={index}
                     className={`
-                      my-6 py-3 px-4 text-center rounded-md
+                      my-6 py-2 px-4 text-center rounded-md
                       hover:bg-[#8c8c8c2a] hover:text-white
                       ${(pathname.includes(item.path) && pathname !== '/') ? 'bg-[#8c8c8c2a] text-white' : ''}
                       `} 
                     title={item.label}
                   >
                       <Link href={item.path}>
-                          <div className='flex justify-start items-center space-x-3'>
+                          <div className='flex justify-start items-center space-x-3 text-sm'>
                               <div>
                                 <span>
                                   { item.icon }
@@ -67,20 +67,20 @@ const Sidebar: FC = () => {
                 
             </ul>
 
-            <div className="absolute bottom-6 left-4">
+            <div className="absolute bottom-4 left-4">
               <AppAvatar />
               <ul className="list-none">
                 <li 
                   className={`
-                    cursor-pointer my-6 py-3 px-4 text-center rounded-md hover:bg-[#8652A4] hover:text-gray-300
+                    cursor-pointer my-4 py-2 text-center rounded-md hover:bg-[#8c8c8c2a] hover:text-gray-300
                     ` 
                   }
                   title="account"
                   onClick={openLogoutModal}
                 >
-                    <div className='flex justify-start'>
-                        <div><span><CgLogOff className='text-xl'/></span></div>
-                        <div className='mx-2'>Log Out</div>
+                    <div className='flex justify-start px-2'>
+                      <div><span><CgLogOff className='text-xl'/></span></div>
+                      <div className='mx-2'>Log Out</div>
                     </div>           
                 </li>
               </ul>
