@@ -1,6 +1,6 @@
 import { FailureResponse, IsValidAdmin, SuccessResponse } from "../../../utils";
 import dbConnect from '../../../lib/mongodb';
-import { hash, getSearchParams } from '../../../utils/helpers';
+import { hash, getSearchParams, parseSortQuery } from '../../../utils/helpers';
 import User, { ValidateCreateCustomerProfile } from "./model";
 
 export const GET = async (req: Request) => {
@@ -12,9 +12,14 @@ export const GET = async (req: Request) => {
           return FailureResponse(403, 'Unauthorized');
         }
 
+        const { searchParams } = new URL(req.url);
+        const sortParam = searchParams.get("sort") || "";
+        const sortObj = parseSortQuery(sortParam) || { createdAt: 1 };
         const paramsObject = getSearchParams(req);
+        delete paramsObject.sort;
 
-        const result = await User.find({ ...paramsObject }); // Populate user field with email
+        const result = await User.find({ ...paramsObject })
+                                        .sort(sortObj); // Populate user field with email
         return SuccessResponse(result, 'Users retrieved successfully');
 
     } catch (error: any) {

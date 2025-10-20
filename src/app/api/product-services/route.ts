@@ -2,8 +2,7 @@
 import dbConnect from '../../../lib/mongodb';
 import ProductService, { ValidateCreateProductService } from './model';
 import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
-import { getSearchParams, IsValidAdmin } from '../../../utils';
-import { UploadImageService } from '../../../services';
+import { getSearchParams, IsValidAdmin, parseSortQuery } from '../../../utils';
 
 export async function GET(req: Request) {
   try {
@@ -14,10 +13,15 @@ export async function GET(req: Request) {
       return FailureResponse(403, 'Unauthorized');
     }
 
-     const paramsObject = getSearchParams(req);
+    const { searchParams } = new URL(req.url);
+    const sortParam = searchParams.get("sort") || "";
+    const sortObj = parseSortQuery(sortParam) || { createdAt: 1 };
+    const paramsObject = getSearchParams(req);
+    delete paramsObject.sort;
     const services = await ProductService.find({ ...paramsObject })
-                                .populate('createdBy');
-                                ; // Populate user field with email
+                                .populate('createdBy')
+                                .sort(sortObj);
+                                 // Populate user field with email
     return SuccessResponse(services, 'Services retrieved successfully');
   } catch (error: any) {
     return FailureResponse(500, 'Internal Server Error: ' + error.message);

@@ -123,8 +123,8 @@ const AdminsPage: FC = () => {
             <AppModalComp 
                 title={
                     (formMode === 'update' && selectedRecord) 
-                        ? "View Client" 
-                        : 'Add a Client'
+                        ? "View Admin" 
+                        : 'Create Admin'
                 }
             >
                 {

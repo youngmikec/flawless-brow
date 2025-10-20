@@ -39,27 +39,27 @@ const SelectField: FC<Props> = ({
   showEmptyOption = true
 }) => {
 
-  const [selectedOption, setSelectedOption] = useState<SelectOption>({label: '', value: ''});
   const [currentOption, setCurrentOption] = useState<SelectOption>({label: '', value: ''});
   const [showOptions, setShowOptions] = useState<boolean>(false);
 
   const handleSelect = (option: SelectOption) => {
-    setSelectedOption(option);
-    onChange && onChange(name, option.value);
+    setCurrentOption(option);
     setShowOptions(false);
+    onChange && onChange(option.value, name);
   }
 
-  useEffect(() => {
-    if(selectOptions.length > 0){
-      setCurrentOption(selectOptions[0]);
-    }
-  }, [selectOptions]);
+  // useEffect(() => {
+  //   if(selectOptions.length > 0){
+  //     setSelectedOption(selectOptions[0]);
+  //     setCurrentOption(selectOptions[0]);
+  //   }
+  // }, [selectOptions]);
 
-  useEffect(() => {
-    if(selectedOption){
-      setCurrentOption(selectedOption);
-    }
-  }, [selectedOption]);
+  // useEffect(() => {
+  //   if(selectedOption){
+  //     setCurrentOption(selectedOption);
+  //   }
+  // }, [selectedOption]);
 
 
   return (
@@ -118,7 +118,7 @@ const SelectField: FC<Props> = ({
         
         {
           isError && 
-          <p className="text-red my-2 text-xs font-semibold">{errMsg}</p>
+          <p className="text-red-500 my-2 text-xs font-semibold">{errMsg}</p>
         }
       </div>
     </>

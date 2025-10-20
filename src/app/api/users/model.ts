@@ -29,7 +29,7 @@ export const ValidateCreateCustomerProfile = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   phone: Joi.string().required(),
-  address: Joi.string().required(),
+  address: Joi.string().optional(),
   gender: Joi.string().valid('male', 'female', 'other').required(),
   updatedBy: Joi.string().optional(),
   updatedAt: Joi.date().optional(),
@@ -43,7 +43,8 @@ export const ValidateCreateAdminProfile = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   phone: Joi.string().required(),
-  address: Joi.string().required(),
+  age: Joi.number().optional(),
+  address: Joi.string().optional(),
   gender: Joi.string().valid('male', 'female', 'other').required(),
   updatedBy: Joi.string().optional(),
   updatedAt: Joi.date().optional(),
@@ -63,6 +64,20 @@ export const ValidateCreateContact = Joi.object({
 });
 
 export const ValidateUpdateUserProfile = Joi.object({
+  email: Joi.string().email().optional(),
+  password: Joi.string().min(6).optional(),
+  role: Joi.string().valid('admin', 'user').optional(),
+  bio: Joi.string().optional(),
+  fullName: Joi.string().optional(),
+  firstName: Joi.string().optional(),
+  lastName: Joi.string().optional(),
+  profileImage: Joi.string().uri().optional(),
+  phone: Joi.string().optional(),
+  updatedBy: Joi.string().optional(),
+  updatedAt: Joi.date().optional(),
+});
+
+export const ValidateUpdateAdminProfile = Joi.object({
   email: Joi.string().email().optional(),
   password: Joi.string().min(6).optional(),
   role: Joi.string().valid('admin', 'user').optional(),

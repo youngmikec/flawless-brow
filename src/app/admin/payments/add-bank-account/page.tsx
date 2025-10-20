@@ -68,7 +68,7 @@ const AddBankAccountPage = () => {
         }
       } catch (error: any) {
         setSubmitting(false);
-        const { message } = error;
+        const { message } = error?.response?.data;
         _notifyError(message);
       }
     }

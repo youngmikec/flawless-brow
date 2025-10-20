@@ -1,6 +1,6 @@
 import dbConnect from '../../../../../lib/mongodb';
 import { FailureResponse, IsValidAdmin, SuccessResponse } from "../../../../../utils";
-import User, { ValidateUpdateUserProfile } from "../../model";
+import User, { ValidateUpdateAdminProfile } from "../../model";
 import { hash } from '../../../../../utils/helpers';
 
 export async function PUT(
@@ -16,7 +16,7 @@ export async function PUT(
     }
 
     const body = await req.json();
-    const error = ValidateUpdateUserProfile.validate(body);
+    const error = ValidateUpdateAdminProfile.validate(body);
 
     if(error.error) {
       return FailureResponse(400, error.error.details[0].message);

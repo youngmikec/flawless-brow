@@ -41,7 +41,7 @@ const SettingsPage: FC = () => {
         setSelectedRecord(record);
     }
 
-    const { data, refetch } = useProductService();
+    const { data, refetch } = useProductService('?sort=-createdAt');
 
     const notify = (type: string, msg: string) => {
         if (type === "success") {

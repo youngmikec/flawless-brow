@@ -1,16 +1,15 @@
 "use client"
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import * as Yup from 'yup'
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { User } from "../../../../interfaces";
-import { CreateUser, UpdateUser } from "../../../providers";
+import { CreateAdmin, UpdateAdmin } from "../../../providers";
 import InputField from "../../../components/form/InputField";
 import AppButton from "../../../components/app/AppButton";
 import { useAppStore } from "../../../../store/app-store";
-import ContactInputField from "../../../components/form/ContactInputField";
 import Image from "next/image";
 import SelectField from "@/app/components/form/SelectField";
 
@@ -31,8 +30,10 @@ const AddAdmin: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
     email: Yup.string().required('First Name is required'),
     age: Yup.number().required('Age is required'),
     phone: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
+    // address: Yup.string().required('Address is required'),
     gender: Yup.string().required('Gender is required'),
+    password: Yup.string().required('Password is required'),
+    confirmPassword: Yup.string().required('Confirm Password is required'),
   });
 
   const notify = (type: string, msg: string) => {
@@ -51,22 +52,24 @@ const AddAdmin: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
 
   const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
     initialValues: {
-        firstName: selectedRecord ? selectedRecord.firstName : '',
-        lastName: selectedRecord ? selectedRecord.lastName : '',
-        email: selectedRecord ? selectedRecord.email : '',
-        age: selectedRecord ? selectedRecord.age : '',
-        role: selectedRecord ? selectedRecord.role : 'user',
-        phone: selectedRecord ? selectedRecord.phone : '',
-        address: selectedRecord ? selectedRecord.address : '',
-        gender: selectedRecord ? selectedRecord.gender : '',
+      firstName: selectedRecord ? selectedRecord.firstName : '',
+      lastName: selectedRecord ? selectedRecord.lastName : '',
+      email: selectedRecord ? selectedRecord.email : '',
+      age: selectedRecord ? selectedRecord.age : '',
+      role: 'admin',
+      phone: selectedRecord ? selectedRecord.phone : '',
+      // address: selectedRecord ? selectedRecord.address : '',
+      gender: selectedRecord ? selectedRecord.gender : '',
+      password: '',
+      confirmPassword: '',
     },
     enableReinitialize: true,
-    validationSchema: validateForm(),
+    validationSchema: formMode === 'create' && validateForm(),
     onSubmit: async (values) => {
-      const payload = {...values};
+      const { confirmPassword, ...payload } = values;
       setSubmitting(true);
       try {
-        const response = (formMode === 'update' && selectedRecord) ? await UpdateUser(selectedRecord?._id, payload) : await CreateUser(payload); 
+        const response = (formMode === 'update' && selectedRecord) ? await UpdateAdmin(selectedRecord?._id, payload) : await CreateAdmin(payload); 
         if(response) {
           const { success, message, data } = response.data;
           if(success){
@@ -78,7 +81,7 @@ const AddAdmin: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
         }
       } catch (err: any) {
         setSubmitting(false);
-        const { message } = err;
+        const { message } = err?.response?.data;
         notify('error', message);
       }
     }
@@ -184,17 +187,28 @@ const AddAdmin: FC<Props> = ({ formMode, selectedRecord, onSuccess }) => {
                 ]}
                 onChange={handleInputChange}
             />
+            <InputField 
+                type={'password'}
+                name='password'
+                label='Password *'
+                value={values.password}
+                isError={(touched.password && errors.password) ? true : false}
+                errMsg={errors && errors.password}
+                placeholder='Enter your password'
+                onChange={handleInputChange}
+            />
+
+            <InputField 
+                type={'password'}
+                name='confirmPassword'
+                label='Confirm Password *'
+                value={values.confirmPassword}
+                isError={(touched.confirmPassword && errors.confirmPassword) ? true : false}
+                errMsg={errors && errors.confirmPassword}
+                placeholder='Confirm your password'
+                onChange={handleInputChange}
+            />
           </div>
-          <InputField 
-              type={'text'}
-              name='address'
-              label='Address *'
-              value={values.address}
-              isError={(touched.address && errors.address) ? true : false}
-              errMsg={errors && errors.address}
-              placeholder='Enter your email'
-              onChange={handleInputChange}
-          />
 
 
           <div className="flex justify-end gap-4 mb-4 border-t-[1px] border-gray-light mt-8 pt-4">

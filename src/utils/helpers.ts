@@ -318,3 +318,24 @@ export const textLimit = (text: string, limit: number = 30): string => {
   const truncatedText: string = text.slice(0, limit);
   return text.length > limit ? `${truncatedText}...` : truncatedText;
 }
+
+ // utils/parseSortQuery.ts
+export const parseSortQuery = (sortQuery?: string): Record<string, 1 | -1> => {
+  if (!sortQuery) return {};
+
+  // split by comma (e.g., "-createdAt,name" => ["-createdAt", "name"])
+  const fields = sortQuery.split(",").map((f) => f.trim());
+
+  // convert into { field: 1 | -1 } object
+  const sortObject: Record<string, 1 | -1> = {};
+  for (const field of fields) {
+    if (!field) continue;
+    if (field.startsWith("-")) {
+      sortObject[field.substring(1)] = -1; // descending
+    } else {
+      sortObject[field] = 1; // ascending
+    }
+  }
+
+  return sortObject;
+}
