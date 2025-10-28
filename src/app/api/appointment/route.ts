@@ -1,12 +1,16 @@
 // app/api/auth/route.tsimport aqp from "api-query-params";
 import aqp from "api-query-params";
-import { SortOrder } from "mongoose";
 
 import dbConnect from '../../../lib/mongodb';
 import ProductService from '../product-services/model';
+import User from '../users/model';
 import { IsValidAdmin, getSearchParams, setLimit } from '../../../utils';
 import Appointment, { AppointStatusEnum, ValidateCreateAppointment } from './model';
 import { FailureResponse, response, SuccessResponse } from '../../../utils/api-response';
+import { sendEmail } from "../email-service";
+import { Recipient } from "mailersend";
+import { appointmentEmailTemplate } from "@/constant/email-template";
+import { EMAIL_DETAILS } from "@/constant";
 
 
 const getAppointmentStatusDescription = (value: AppointStatusEnum): string => {
@@ -88,15 +92,21 @@ export async function POST(req: Request) {
     const error = ValidateCreateAppointment.validate(body);
 
     if(error.error) {
-        return FailureResponse(400, error.error.details[0].message);
+      return FailureResponse(400, error.error.details[0].message);
     }
 
-    const { productService, amountPaid } = body;
+    const { productService, amountPaid, customer } = body;
+
+    const customerRes = await User.findOne({ _id: customer });
+
+    if(!customerRes) {
+      return FailureResponse(400, "Customer not found!");
+    }
 
     const serviceRes = await ProductService.findOne({ _id: productService });
 
     if(!serviceRes) {
-        return FailureResponse(400, "Service not found!");
+      return FailureResponse(400, "Service not found!");
     }
 
     if(amountPaid === 0 && !serviceRes.isFree){
@@ -137,8 +147,31 @@ export async function POST(req: Request) {
     const result = await newRecord.save();
 
     if (!result) {
-        return FailureResponse(500, 'Failed to create appointment');
+      return FailureResponse(500, 'Failed to create appointment');
     }
+
+
+    const userAppointmentEmailResponse = sendEmail({
+      recipients: [new Recipient('michaelozor15@gmail.com', `${customerRes.firstName} ${customerRes.lastName}`)],
+      subject: 'Appointment Confirmation',
+      html: appointmentEmailTemplate(result, customer, false),
+      text: ``,
+    })
+    
+    if(!userAppointmentEmailResponse){
+      return FailureResponse(400, 'Email not sent');
+    }
+
+    // const adminAppointmentEmailResponse = sendEmail({
+    //   recipients: [new Recipient(EMAIL_DETAILS?.senderEmail, EMAIL_DETAILS?.senderName)],
+    //   subject: 'Appointment Confirmation',
+    //   html: appointmentEmailTemplate(result, customer, true),
+    //   text: ``,
+    // })
+    
+    // if(!adminAppointmentEmailResponse){
+    //   return FailureResponse(400, 'Email not sent');
+    // }
 
     return response(201, 'Appointment created successfully', result);
   } catch (error: any) {

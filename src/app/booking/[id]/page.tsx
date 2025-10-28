@@ -76,7 +76,7 @@ const BookingPage: FC = () => {
   return (
     <div className="w-full min-h-[100vh] max-h-full bg-[#FAF8F3] pt-32">
       {
-        step === 5 && (
+        step === 4 && (
           <div className="w-full h-full flex items-center justify-center">
               <div className="flex flex-col gap-8">
                 <div className="flex justify-center items center">
@@ -139,7 +139,7 @@ const BookingPage: FC = () => {
       }
 
       {
-        step !== 5 && (
+        step !== 4 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto w-11/12 md:w-10/12">
             <div>
               <h1 className="text-3xl md:text-5xl font-bold font-montserrat mb-8">Services</h1>
@@ -161,7 +161,7 @@ const BookingPage: FC = () => {
               </div>
 
               {
-                (bankAccount && step === 4) && (
+                (bankAccount && step === 3) && (
                   <div className="my-5">
                     <p className="font-inter text-sm font-normal text-[#FF0000] mb-4">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
                     <p className="font-inter text-sm font-semibold text-[#1A1A1A]"> Bank name: {bankAccount?.bankName || "--"}</p>
@@ -181,18 +181,10 @@ const BookingPage: FC = () => {
 
               }
               {
-                step === 2 && 
-                <AddOnStep 
-                  addOnServices={addOnServices} 
-                  toggleStep={toggleStep}
-                />
-
+                step === 2 && <ContactForm toggleStep={toggleStep} />
               }
               {
-                step === 3 && <ContactForm toggleStep={toggleStep} />
-              }
-              {
-                step === 4 && <PaymentStep toggleStep={toggleStep} />
+                step === 3 && <PaymentStep toggleStep={toggleStep} />
 
               }
 

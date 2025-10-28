@@ -4,6 +4,8 @@ import Appointments from '../appointment/model';
 import { FailureResponse, SuccessResponse } from '../../../utils/api-response';
 import { getSearchParams, IsValidAdmin } from '../../../utils';
 import User from '../users/model';
+import { sendEmail } from '../email-service';
+import { Recipient } from 'mailersend';
 
 export async function GET(req: Request) {
   try {
@@ -28,6 +30,17 @@ export async function GET(req: Request) {
       totalAmount = a.amountPaid ? (totalAmount + parseInt(a?.amountPaid)) : (totalAmount + 0);
     });
 
+    const emailResponse = sendEmail({
+      recipients: [new Recipient('michaelozor15@gmail.com', 'Michael Ozor')],
+      subject: 'Report Statistics',
+      html: `<p>Total Amount: ${totalAmount}</p><p>Number of Appointments: ${appointmentCount}</p><p>Number of Clients: ${usersCount}</p>`,
+      text: `Total Amount: ${totalAmount}\nNumber of Appointments: ${appointmentCount}\nNumber of Clients: ${usersCount}`,
+    })
+    
+    if(!emailResponse){
+      return FailureResponse(400, 'Email not sent');
+    }
+    
     return SuccessResponse({
       totalAmount,
       numOfAppointments: appointmentCount,
