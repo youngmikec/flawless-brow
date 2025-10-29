@@ -29,17 +29,6 @@ export async function GET(req: Request) {
     response.forEach((a: any) => {
       totalAmount = a.amountPaid ? (totalAmount + parseInt(a?.amountPaid)) : (totalAmount + 0);
     });
-
-    const emailResponse = sendEmail({
-      recipients: [new Recipient('michaelozor15@gmail.com', 'Michael Ozor')],
-      subject: 'Report Statistics',
-      html: `<p>Total Amount: ${totalAmount}</p><p>Number of Appointments: ${appointmentCount}</p><p>Number of Clients: ${usersCount}</p>`,
-      text: `Total Amount: ${totalAmount}\nNumber of Appointments: ${appointmentCount}\nNumber of Clients: ${usersCount}`,
-    })
-    
-    if(!emailResponse){
-      return FailureResponse(400, 'Email not sent');
-    }
     
     return SuccessResponse({
       totalAmount,

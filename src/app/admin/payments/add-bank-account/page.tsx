@@ -11,7 +11,8 @@ import { useUser } from '../../../../store/user';
 import { getItem } from '../../../helpers';
 import IsAuthenticatedPage from "../../../components/auth/is-auth";
 import { _notifyError, _notifySuccess } from '../../../helpers/alerts';
-import { useBankAccounts } from '../../../hooks';
+import SelectField from '../../../components/form/SelectField';
+import { COUNTRIES } from '../../../constants/currency';
 
 
 const AddBankAccountPage = () => {
@@ -29,23 +30,35 @@ const AddBankAccountPage = () => {
     bankName: Yup.string().required('Bank name is required'),
     branch: Yup.string().required('Branch is required'),
     bankCountry: Yup.string().required('Bank country is required'),
+    sortCode: Yup.string().required('Sort Code is required'),
+    iban: Yup.string().required('IBan is required'),
     currency: Yup.string().required('Currency is required'),
     user: Yup.string().optional(),
   });
 
+  const countriesOptions = COUNTRIES.map(c => ({ label: c.name, value: c.name}));
 
-  const { isLoading, data: bankAccount } = useBankAccounts(`?_id=${bankId}&isActive=true`);
-
-  const { values, errors, touched, handleSubmit, handleChange, setSubmitting, isSubmitting, } = useFormik({
+  const { 
+    values, 
+    errors, 
+    touched, 
+    handleSubmit, 
+    handleChange, 
+    setSubmitting, 
+    isSubmitting, 
+    setValues
+  } = useFormik({
     enableReinitialize: true,
     initialValues: {
-      accountName: bankAccount?.accountName || "",
-      accountNumber: bankAccount?.accountNumber || "",
-      bankName: bankAccount?.bankName || "",
-      branch: bankAccount?.branch || "",
-      bankCountry: bankAccount?.bankCountry || "",
-      currency: bankAccount?.currency || "",
-      user: bankAccount?.user || "",
+      accountName: "",
+      accountNumber: "",
+      bankName: "",
+      branch: "",
+      bankCountry: "",
+      currency: "",
+      sortCode: "",
+      user: "",
+      iban: "",
       isActive: true,
     },
     validationSchema: validateForm(),
@@ -79,6 +92,17 @@ const AddBankAccountPage = () => {
         target: { name, value }
       };
       handleChange(event);
+
+      if (name === "bankCountry") {
+        const selectedCountry = COUNTRIES.find(c => c.name === value);
+        if (selectedCountry) {
+          setValues(prev => ({
+            ...prev,
+            bankCountry: selectedCountry.name,
+            currency: selectedCountry.currency, // updates the currency field
+          }));
+        }
+      }
   };
 
 
@@ -143,14 +167,13 @@ const AddBankAccountPage = () => {
                     />
                   </div>
                   <div className="">
-                    <InputField
-                      label="Bank Country"
-                      placeholder=""
-                      type="text"
-                      name="bankCountry"
+                    <SelectField
+                      label='Bank Country'
+                      name='bankCountry'
                       value={values.bankCountry}
                       isError={(touched.bankCountry && errors.bankCountry) ? true : false}
                       errMsg={errors && errors.bankCountry}
+                      selectOptions={countriesOptions}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -163,6 +186,30 @@ const AddBankAccountPage = () => {
                       value={values.currency}
                       isError={(touched.currency && errors.currency) ? true : false}
                       errMsg={errors && errors.currency}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="">
+                    <InputField
+                      label="Bank Sort Code"
+                      type="text"
+                      placeholder="sort code"
+                      name="sortCode"
+                      value={values.sortCode}
+                      isError={(touched.sortCode && errors.sortCode) ? true : false}
+                      errMsg={errors && errors.sortCode}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="">
+                    <InputField
+                      label="IBan"
+                      type="text"
+                      placeholder="IBan Code"
+                      name="iban"
+                      value={values.iban}
+                      isError={(touched.iban && errors.iban) ? true : false}
+                      errMsg={errors && errors.iban}
                       onChange={handleInputChange}
                     />
                   </div>

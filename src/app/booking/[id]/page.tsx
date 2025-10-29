@@ -32,7 +32,7 @@ const BookingPage: FC = () => {
 
 
    const { data } = useProductService(`?_id=${serviceId}`, true);
-   const { data: accountsResponse } = useBankAccounts('', true);
+   const { data: accountsResponse } = useBankAccounts('?isActive=true', true);
 
 
 

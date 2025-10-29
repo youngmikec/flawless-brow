@@ -77,7 +77,7 @@ const InputField: FC<Props> = ({
     if(value){
       setLocalValue(value);
     }
-  }, []);
+  }, [value]);
   useEffect(() => {
     if(selectOptions.length > 0){
       setShowOptions(true);

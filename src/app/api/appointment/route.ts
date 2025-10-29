@@ -10,7 +10,6 @@ import { FailureResponse, response, SuccessResponse } from '../../../utils/api-r
 import { sendEmail } from "../email-service";
 import { Recipient } from "mailersend";
 import { appointmentEmailTemplate } from "@/constant/email-template";
-import { EMAIL_DETAILS } from "@/constant";
 
 
 const getAppointmentStatusDescription = (value: AppointStatusEnum): string => {
@@ -152,9 +151,9 @@ export async function POST(req: Request) {
 
 
     const userAppointmentEmailResponse = sendEmail({
-      recipients: [new Recipient('michaelozor15@gmail.com', `${customerRes.firstName} ${customerRes.lastName}`)],
+      recipients: [new Recipient('michaelozor15@gmail.com', `${'Michael'} ${'Ozor'}`)],
       subject: 'Appointment Confirmation',
-      html: appointmentEmailTemplate(result, customer, false),
+      html: appointmentEmailTemplate(result, customerRes, false),
       text: ``,
     })
     

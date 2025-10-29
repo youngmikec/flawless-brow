@@ -1,6 +1,7 @@
 "use client";
-import Image from "next/image";
 import { FC } from "react";
+import Image from "next/image";
+import AppLoader from "../../../components/app/Loaders/AppLoader";
 
 interface StatCardProps {
     // Define any props needed for the StatCard component
@@ -24,7 +25,13 @@ const StatCard: FC<StatCardProps> = ({ title, value, icon, isLoading = false}) =
             </div>
             <div>
                 <p className="text-xs font-inter text-gray mb-4">{title}</p>
-                <p className="text-lg font-inter font-semibold text-primary">{ isLoading ? 'loading' : value }</p>
+                <p className="text-lg font-inter font-semibold text-primary">
+                    { 
+                        isLoading ? 
+                        <AppLoader color={"#5A4A3F"} /> : 
+                        value 
+                    }
+                </p>
             </div>
         </div>
     )

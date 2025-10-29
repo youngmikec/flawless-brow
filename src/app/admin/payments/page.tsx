@@ -31,8 +31,8 @@ const BankDetail: FC<{ bankAccount: BankAccount }> = ({ bankAccount }) => {
                 </div>
 
                 <div>
-                    <BankPropertyItem label="Bank Country" value={bankAccount.bankCountry} />
-                    <BankPropertyItem label="Currency" value={bankAccount.currency} />
+                    <BankPropertyItem label="Bank Country" value={bankAccount?.bankCountry || "--"} />
+                    <BankPropertyItem label="Currency" value={bankAccount?.currency || "--"} />
                 </div>   
 
             </div>
@@ -49,10 +49,12 @@ const BankDetail: FC<{ bankAccount: BankAccount }> = ({ bankAccount }) => {
                 </div>
 
                 <div>
-                    <BankPropertyItem label="Bank Name" value={bankAccount.bankName} />
-                    <BankPropertyItem label="Branch Name" value={bankAccount.branch} />
-                    <BankPropertyItem label="Account Holder Name" value={bankAccount.accountName} />
-                    <BankPropertyItem label="Account Number" value={bankAccount.accountNumber} />
+                    <BankPropertyItem label="Bank Name" value={bankAccount?.bankName || "--"} />
+                    <BankPropertyItem label="Branch Name" value={bankAccount?.branch || "--"} />
+                    <BankPropertyItem label="Account Holder Name" value={bankAccount?.accountName || "--"} />
+                    <BankPropertyItem label="Account Number" value={bankAccount?.accountNumber || "--"} />
+                    <BankPropertyItem label="Sort Code" value={bankAccount?.sortCode || "--"} />
+                    <BankPropertyItem label="IBan" value={bankAccount?.iban || "--"} />
                 </div>                    
 
             </div>
@@ -64,7 +66,7 @@ const BankDetail: FC<{ bankAccount: BankAccount }> = ({ bankAccount }) => {
                     </div>
 
                     <div>
-                        <p className="text-black">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
+                        <p className="text-black text-xs">Please kindly make an initial deposit of 10% of the price to confirm your booking. The remaining balance would be paid in cash.</p>
                     </div>   
                 </div>
             </div>
