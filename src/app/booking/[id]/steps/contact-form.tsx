@@ -139,7 +139,15 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
             </div>
           )}
 
-          <div>
+          <div className="flex flex-start items-center gap-4">
+            <AppButton
+              btnText={"Back"}
+              fill={"outline"}
+              bgColor={"gray"}
+              width={"max"}
+              type={"button"}
+              onClick={() => toggleStep("prev")}
+            />
             <AppButton
               btnText={"Search"}
               fill={"fill"}
@@ -159,7 +167,7 @@ const ContactForm: FC<Props> = ({ toggleStep }) => {
                 className="text-primary"
                 onClick={() => setShowForm(true)}
               >
-                Cant find your info? Create new contact
+                Cant find your info? <span className="hover:text-danger">Create new contact</span>
               </button>
             </div>
           )}

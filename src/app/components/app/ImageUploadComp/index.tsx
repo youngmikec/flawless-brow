@@ -5,11 +5,16 @@ import { FaTimes } from "react-icons/fa";
 import { UploadImageToServer } from "../../../providers";
 
 type Props = {
+  onUploading?: (isUploading: boolean) => void,
   onImageUploadComplete: (imageUrl: string) => void,
   imgUrl?: string; 
 }
 
-const ImageUploadComp: FC<Props> = ({ onImageUploadComplete, imgUrl = '' }) => {
+const ImageUploadComp: FC<Props> = ({ 
+  onImageUploadComplete, 
+  imgUrl = '',
+  onUploading
+}) => {
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
   const [imageString, setImageString] = useState<string>('');
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -17,6 +22,7 @@ const ImageUploadComp: FC<Props> = ({ onImageUploadComplete, imgUrl = '' }) => {
 
   const handleFileRead = async (event: any) => {
     setIsUploading(true);
+    onUploading && onUploading(true);
     setUploadProgress(0);
     try {
       const file = event.target.files[0];
@@ -34,9 +40,11 @@ const ImageUploadComp: FC<Props> = ({ onImageUploadComplete, imgUrl = '' }) => {
       setImageString(imageUrl);
       onImageUploadComplete && onImageUploadComplete(imageUrl);
       setIsUploading(false);
+      onUploading && onUploading(false);
 
     } catch (error: any) {
       setIsUploading(false);
+      onUploading && onUploading(false);
       setUploadProgress(0);
     }
   }

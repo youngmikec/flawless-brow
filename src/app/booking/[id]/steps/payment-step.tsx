@@ -25,6 +25,7 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
   } = useAppointmentStore();
 
   const [paymentProof, setPaymentProof] = useState<string>('');
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const validateForm = () => Yup.object({
     amountPaid: Yup.number().required('Amount Paid is required'),
@@ -91,7 +92,8 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
                 onChange={handleInputChange}
               />
             </div>
-            <ImageUploadComp 
+            <ImageUploadComp
+              onUploading={(loading) => setIsUploading(loading)}
               onImageUploadComplete={setPaymentProof}
             />
 
@@ -109,6 +111,7 @@ const PaymentStep: FC<Props> = ({ toggleStep }) => {
                 fill={'fill'}
                 bgColor={'primary'}
                 width={"max"}
+                disabled={isSubmitting || isUploading}
                 loading={isSubmitting}
               />
             </div>

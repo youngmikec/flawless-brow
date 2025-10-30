@@ -12,6 +12,7 @@ import PaymentStep from "./steps/payment-step";
 import AppButton from "../../components/app/AppButton";
 import { useAppointmentStore } from "../../../store/appointment";
 import { formatDate } from "../../../utils";
+import Link from "next/link";
 
 
 const BookingPage: FC = () => {
@@ -142,7 +143,16 @@ const BookingPage: FC = () => {
         step !== 4 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto w-11/12 md:w-10/12">
             <div>
-              <h1 className="text-3xl md:text-5xl font-bold font-montserrat mb-8">Services</h1>
+              <Link href={'/'} className="mb-10">
+                <Image
+                  src="/images/logo.png"
+                  alt="logo"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+              </Link>
+              <h1 className="text-3xl md:text-5xl font-bold font-montserrat mt-8 mb-8">Services</h1>
 
               <div>
                 <p className="text-3xl font-bold font-style-script text-[#5A4A3F] mb-4">{productService?.title || "--"}</p>

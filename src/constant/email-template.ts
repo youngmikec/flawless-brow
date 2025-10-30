@@ -22,7 +22,7 @@ const populateMail = (content: any) => {
                             padding: .5rem;
                             min-height: 150px;
                             border-radius: 5px;
-                            font-family: Raleway;
+                            font-family: 'Montserrat';
                         }
                         
                         .content {
@@ -49,8 +49,8 @@ const populateMail = (content: any) => {
                         }
                         
                         .title {
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 600;
@@ -59,7 +59,7 @@ const populateMail = (content: any) => {
                         
                         .emailText {
                             color: #55A9F8;
-                            font-family: Raleway;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 500;
@@ -114,7 +114,7 @@ const populateMail = (content: any) => {
                             >
                                 <img 
                                     src="https://www.b-browstudio.uk/_next/image?url=%2Fimages%2Flogo.png&w=128&q=75" 
-                                    width="100px" 
+                                    width="50px" 
                                     height="40px" 
                                     alt="logo" 
                                     style="margin: 0 auto;" 
@@ -160,8 +160,8 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
         <div>
             <p 
                 style="
-                    color: #585858;
-                    font-family: Raleway;
+                    color: #18181B;
+                    font-family: 'Montserrat';
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 600;
@@ -173,8 +173,8 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
             
             <p 
                 style="
-                    color: #585858;
-                    font-family: Raleway;
+                    color: #18181B;
+                    font-family: 'Montserrat';
                     font-size: 12px;
                     font-style: normal;
                     font-weight: 600;
@@ -187,8 +187,8 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                 <table>
                     <tr 
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -196,38 +196,51 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Service:</th>
-                        <td style="font-size: 12px;">${ appointment ? appointment?.productService?.name : '--'}</td>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? appointment?.productService?.title : '--'}</td>
                     </tr>
                     <tr     
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 150%;
                         "
                     >
-                        <th style="text-align: left; font-size: 12px;">Appointment day:</th>
-                        <td style="font-size: 12px;">${ appointment ? moment(appointment.appointmentDay).format('DD/MM/YYYY') : '--'}</td>
+                        <th style="text-align: left; font-size: 12px;">Appointment Day:</th>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.appointmentDay).format('DD/MM/YYYY') : '--'}</td>
                     </tr>
-                    <tr 
+                    <tr     
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 150%;
                         "
-                    style="font-size: 12px;">
-                        <th style="text-align: left; font-size: 12px;">Amount:</th>
-                        <td style="font-size: 12px;">${appointment.currencySymbol || '$'} ${ appointment ? appointment.amountPaid : '--'}</td>
+                    >
+                        <th style="text-align: left; font-size: 12px;">Appointment Time:</th>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.appointmentTime) : '--'}</td>
                     </tr>
                     <tr 
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 150%;
+                        "
+                    style="font-size: 12px; color: #5A4A3F;">
+                        <th style="text-align: left; font-size: 12px;">Amount:</th>
+                        <td style="font-size: 12px; color: #5A4A3F;">${appointment.currencySymbol || '$'} ${ appointment ? appointment.amountPaid : '--'}</td>
+                    </tr>
+                    <tr 
+                        style="
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -235,24 +248,25 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Appointment Created On:</th>
-                        <td style="font-size: 12px;">${ appointment ? moment(appointment.createdAt).format('DD/MM/YYYY HH:mm:ss') : '--'}</td>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.createdAt).format('DD/MM/YYYY HH:mm:ss') : '--'}</td>
                     </tr>
                 </table>
             </div>
             
-            <p style="color: #585858;">We are excited to have you with us!</p>
+            <p style="color: #18181B;">We are excited to have you with us!</p>
             
-            <p style="color: #585858;">
-                contact us via our email <span 
+            <p style="color: #18181B;">
+                contact us via our email 
+            <span 
                 style="
                     color: #55A9F8;
-                    font-family: Raleway;
+                    font-family: 'Montserrat';
                     font-size: 12px;
                     font-style: normal;
                     font-weight: 500;
                     margin: .5rem 0;
                 "
-            >admin@b-browstudio.uk </span> if you have any issues with this transaction or Click on the link below to chat with our admin
+            >B-Browstudio@outlook.com</span> if you have any issues with this transaction or Click on the link below to chat with our admin
             </p>
             
             <br/>
@@ -260,7 +274,7 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
             <div style="display: flex; justify-content: center; width: 100%; margin: .85rem 0;">
                 <a href="https://wa.me/2347031625759" target="_blank" class="btn" 
                     style="
-                        background-color: #8652A4;
+                        background-color: #5A4A3F;
                         padding: .7rem 0;
                         border-radius: 50px;
                         color: #ffffff;
@@ -286,8 +300,8 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                 <table>
                     <tr 
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -295,15 +309,15 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Client:</th>
-                        <td style="font-size: 12px;">
+                        <td style="font-size: 12px; color: #5A4A3F;">
                             ${ recipient ? 
                                 recipient?.firstName + ' ' + recipient?.lastName : '--'}
                         </td>
                     </tr>
                     <tr 
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -311,25 +325,38 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Service:</th>
-                        <td style="font-size: 12px;">${ appointment ? appointment?.productService?.name : '--'}</td>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? appointment?.productService?.title : '--'}</td>
                     </tr>
                     <tr     
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 150%;
                         "
                     >
-                        <th style="text-align: left; font-size: 12px;">Appointment day:</th>
-                        <td style="font-size: 12px;">${ appointment ? moment(appointment.appointmentDay).format('DD/MM/YYYY') : '--'}</td>
+                        <th style="text-align: left; font-size: 12px;">Appointment Day:</th>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.appointmentDay).format('DD/MM/YYYY') : '--'}</td>
+                    </tr>
+                    <tr     
+                        style="
+                            color: #18181B;
+                            font-family: 'Montserrat';
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 150%;
+                        "
+                    >
+                        <th style="text-align: left; font-size: 12px;">Appointment Time:</th>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.appointmentTime) : '--'}</td>
                     </tr>
                     <tr
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -337,12 +364,12 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Amount:</th>
-                        <td style="font-size: 12px;">${appointment.currencySymbol || '$'} ${ appointment ? appointment.amountPaid : '--'}</td>
+                        <td style="font-size: 12px; color: #5A4A3F;">${appointment.currencySymbol || '$'} ${ appointment ? appointment.amountPaid : '--'}</td>
                     </tr>
                     <tr
                         style="
-                            color: #585858;
-                            font-family: Raleway;
+                            color: #18181B;
+                            font-family: 'Montserrat';
                             font-size: 12px;
                             font-style: normal;
                             font-weight: 600;
@@ -350,12 +377,12 @@ export const appointmentEmailTemplate = (appointment: any, recipient: any, isAdm
                         "
                     >
                         <th style="text-align: left; font-size: 12px;">Date/Time:</th>
-                        <td style="font-size: 12px;">${ appointment ? moment(appointment.createdAt).format('DD/MM/YYYY HH:mm:ss') : '--'}</td>
+                        <td style="font-size: 12px; color: #5A4A3F;">${ appointment ? moment(appointment.createdAt).format('DD/MM/YYYY HH:mm:ss') : '--'}</td>
                     </tr>
                 </table>
             </div>
         
-            <p style="color: #585858; font-size: 12px;">Please, proceed to your dashboard to confirm this appointment. Thank you.</p>
+            <p style="color: #18181B; font-size: 12px;">Please, proceed to your dashboard to confirm this appointment. Thank you.</p>
         
         </div>
     `
