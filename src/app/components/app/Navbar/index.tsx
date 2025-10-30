@@ -76,7 +76,7 @@ const Navbar: FC = () => {
                                         />
                                     </Link>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <button 
                                         className="text-white text-center cursor-pointer bg-primary py-2 px-4 rounded-md" 
                                         type="button" 
@@ -84,7 +84,7 @@ const Navbar: FC = () => {
                                     >
                                         Admin Login
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <button 
